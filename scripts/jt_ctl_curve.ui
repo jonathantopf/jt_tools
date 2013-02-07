@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>jt_ctl_curve</class>
+ <widget class="QMainWindow" name="jt_ctl_curve">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>315</width>
+    <height>309</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>JT_ctl_curve</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QListWidget" name="jt_ctl_curve_ui_list"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Connect attributes</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QCheckBox" name="jt_ctl_curve_ui_rotX">
+        <property name="text">
+         <string>rotateX</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="jt_ctl_curve_ui_rotY">
+        <property name="text">
+         <string>rotateY</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="jt_ctl_curve_ui_rotZ">
+        <property name="text">
+         <string>rotateZ</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QCheckBox" name="jt_ctl_curve_ui_scaleX">
+        <property name="text">
+         <string>scaleX</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="jt_ctl_curve_ui_scaleY">
+        <property name="text">
+         <string>scaleY</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="jt_ctl_curve_ui_scaleZ">
+        <property name="text">
+         <string>scaleZ</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QCheckBox" name="jt_ctl_curve_ui_transformX">
+        <property name="text">
+         <string>transformX</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="jt_ctl_curve_ui_transformY">
+        <property name="text">
+         <string>transformY</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="jt_ctl_curve_ui_transformZ">
+        <property name="text">
+         <string>transformZ</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="jt_ctl_curve_ui_parent_curve">
+      <property name="text">
+       <string>parent curve to selection</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>create</string>
+      </property>
+      <property name="+c" stdset="0">
+       <string>'import jt_ctl_curve;jt_ctl_curve.create_from_ui()'</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

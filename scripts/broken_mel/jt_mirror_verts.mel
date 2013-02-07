@@ -1,0 +1,94 @@
+
+/***************************************************************************************************
+
+# JT_mirrorVerts.mel
+
+# www.jonathantopf.com 2012
+
+# mirrors a symetrical (or nearly semetrical) mesh with history, useful for stetting up mirrored corrective blendshapes
+    
+# Copyright (c) 2012 Jonathan Topf
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
+
+***************************************************************************************************/
+
+
+global proc string JT_mirrorVerts(){
+
+    string $selection[] = `ls- sl`;
+
+    string $R_name = $selection[0];
+    
+    string $L_name = `substitute "R_" $R_name "L_"`;
+    
+    string $L_passthrough_name = $L_name + "_passthrough";
+    
+    select -r $R_name;
+    
+    float $bounding_box[] = `xform -q -boundingBox`;
+    
+    float $width = $bounding_box[3] - $bounding_box[0];
+    
+    duplicate -n $L_passthrough_name;
+    
+    select -r $R_name;
+    
+    duplicate -n $L_name;
+    
+    select -r $R_name $L_passthrough_name;
+    
+    string $new_blendshape = $R_name + "_passthrough_blendshape";
+    
+    blendShape -n $new_blendshape;
+    
+    string $blendshape_attribute = $new_blendshape + "." + $R_name;
+    
+    setAttr $blendshape_attribute 1;
+        
+    string $L_passthrough_xscale_param = $L_passthrough_name + ".scaleX";
+    
+    setAttr $L_passthrough_xscale_param -1;
+    
+    select -r $L_name $L_passthrough_name;
+    
+    CreateWrap; 
+    
+    // CreateWrap creates a 'base' transform that the influence object is attached to
+    string $passthrough_base = $L_passthrough_name + "Base";
+    
+    //parent hide passthrough object and parent it to $L_name
+    select -r $L_name $L_passthrough_name;
+
+    parentConstraint -mo -weight 1;
+
+    select -r $L_name $passthrough_base;
+    
+    parentConstraint -mo -weight 1;
+    
+    select -r $L_passthrough_name; 
+    
+    hide;
+
+    select -r $L_name;
+
+    return $L_name;
+        
+}

@@ -1,0 +1,169 @@
+/*********************************************************************
+
+	jt_curve_text_gen.mel
+
+    www.jonathantopf.com 2011
+
+    creates simple curve based text for light weight rig labels etc
+    
+
+**********************************************************************/
+
+// load qt ui and check maya version
+
+global proc jt_curve_text_gen() {
+	if (getApplicationVersionAsFloat() >= 2011){
+	
+		string $currentScriptsDirectory = python("import os;import inspect;os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))");
+        print $currentScriptsDirectory;
+
+		string $objectCreatorWindow = `loadUI -uiFile ($currentScriptsDirectory+"/jt_curve_text_gen_window.ui")`;
+		showWindow $objectCreatorWindow;
+	
+	} else {
+	
+	error "you are using a verion of maya that is too old";
+	
+	}
+
+}
+
+
+global proc jt_curve_text_gen_proc(){
+
+	string $inputText = `textField -q -text jt_curve_text_gen_inputText`; //get text from input text box
+	string $colorID = `textField -q -text jt_curve_text_gen_colorID`; //get text from input ID box
+	
+	int $overrideID = $colorID;
+
+    int $str_length = size($inputText);
+    int $i = 1;
+    int $ilegal_char = 0;
+    
+    if ($str_length < 1){
+        error "no valid string \n";  
+    
+    } else {
+        curve -d 1 -p 0 0 0 -p (($str_length * 0.5) - 0.1666666666) 0 0 -k 0 -k 1 ; //create text underscore 
+        xform -cp;
+         
+        string $parent_curve[] = `ls -sl`; //store the name of the underscore
+        setAttr ".overrideEnabled" 1;
+        setAttr ".overrideColor" $overrideID; //set override color
+    
+        
+        while ($i < $str_length + 1) { //itterate over each letter
+        
+            string $current_letter = `substring $inputText $i $i`; //get letters between $i and $i;
+            int $space = 0;
+        
+            if ($current_letter == "a") {
+                curve -d 1 -p 0 0 0 -p 0 1 0 -p 0.333333 1 0 -p 0.333333 0 0 -p 0.333333 0.666667 0 -p 0 0.666667 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 ;
+            } else if ($current_letter == "b"){
+                curve -d 1 -p 0 0 0 -p 0 1 0 -p 0.333333 1 0 -p 0.333333 0.777778 0 -p 0.222222 0.666667 0 -p 0 0.666667 0 -p 0.222222 0.666667 0 -p 0.333333 0.555556 0 -p 0.333333 0 0 -p 0 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 -k 7 -k 8 -k 9 ;
+            }else if ($current_letter == "c"){
+                curve -d 1 -p 0.333333 1 0 -p 0 1 0 -p 0 0 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 ;
+            }else if ($current_letter == "d"){
+                curve -d 1 -p 0 1 0 -p 0 0 0 -p 0.222222 0 0 -p 0.333333 0.111111 0 -p 0.333333 0.888889 0 -p 0.222222 1 0 -p 0 1 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 ;
+            }else if ($current_letter == "e"){
+                curve -d 1 -p 0.333333 1 0 -p 0 1 0 -p 0 0.666667 0 -p 0.333333 0.666667 0 -p 0 0.666667 0 -p 0 0 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 ;        
+            }else if ($current_letter == "f"){
+                curve -d 1 -p 0.333333 1 0 -p 0 1 0 -p 0 0.666667 0 -p 0.333333 0.666667 0 -p 0 0.666667 0 -p 0 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 ;
+            }else if ($current_letter == "g"){
+                curve -d 1 -p 0.333333 1 0 -p 0 1 0 -p 0 0 0 -p 0.333333 0 0 -p 0.333333 0.333333 0 -p 0.222222 0.333333 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 ;
+            }else if ($current_letter == "h"){
+                curve -d 1 -p 0 1 0 -p 0 0 0 -p 0 0.666667 0 -p 0.333333 0.666667 0 -p 0.333333 1 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 ;    
+            }else if ($current_letter == "i"){
+                curve -d 1 -p 0 1 0 -p 0.333333 1 0 -p 0.166667 1 0 -p 0.166667 0 0 -p 0 0 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 ;
+            }else if ($current_letter == "j"){
+                curve -d 1 -p 0 1 0 -p 0.333333 1 0 -p 0.222222 1 0 -p 0.222222 0 0 -p 0 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 ;
+            }else if ($current_letter == "k"){
+                curve -d 1 -p 0 0 0 -p 0 1 0 -p 0 0.666667 0 -p 0.333333 1 0 -p 0 0.666667 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 ;
+            }else if ($current_letter == "l"){
+                curve -d 1 -p 0 1 0 -p 0 0 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 ;
+            }else if ($current_letter == "m"){
+                curve -d 1 -p 0 0 0 -p 0 1 0 -p 0.166667 0.666667 0 -p 0.333333 1 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 ;
+            }else if ($current_letter == "n"){
+                curve -d 1 -p 0 0 0 -p 0 1 0 -p 0.333333 0 0 -p 0.333333 1 0 -k 0 -k 1 -k 2 -k 3 ;
+            }else if ($current_letter == "o"){
+                curve -d 1 -p 0 0 0 -p 0 1 0 -p 0.375 1 0 -p 0.375 0 0 -p 0 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 ;
+            }else if ($current_letter == "p"){
+                curve -d 1 -p 0 0 0 -p 0 1 0 -p 0.333333 1 0 -p 0.333333 0.666667 0 -p 0 0.666667 0 -k 0 -k 1 -k 2 -k 3 -k 4 ;
+            }else if ($current_letter == "q"){
+                curve -d 1 -p 0 1 0 -p 0 0 0 -p 0.166667 0 0 -p 0.333333 0.166667 0 -p 0.333333 1 0 -p 0 1 0 -p 0.333333 1 0 -p 0.333333 0.166667 0 -p 0.25 0.0833333 0 -p 0.166667 0.166667 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 -k 7 -k 8 -k 9 -k 10 ;
+            }else if ($current_letter == "r"){
+                curve -d 1 -p 0 0 0 -p 0 1 0 -p 0.333333 1 0 -p 0.333333 0.666667 0 -p 0 0.666667 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 ;
+            }else if ($current_letter == "s"){
+                curve -d 1 -p 0.333333 1 0 -p 0 1 0 -p 0 0.666667 0 -p 0.333333 0.666667 0 -p 0.333333 0 0 -p 0 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 ;
+            }else if ($current_letter == "t"){
+                curve -d 1 -p 0 1 0 -p 0.333333 1 0 -p 0.166667 1 0 -p 0.166667 0 0 -k 0 -k 1 -k 2 -k 3 ;
+            }else if ($current_letter == "u"){
+                curve -d 1 -p 0 1 0 -p 0 0 0 -p 0.333333 0 0 -p 0.333333 1 0 -k 0 -k 1 -k 2 -k 3 ;
+            }else if ($current_letter == "v"){
+                curve -d 1 -p 0 1 0 -p 0.166667 0 0 -p 0.333333 1 0 -k 0 -k 1 -k 2 ;
+            }else if ($current_letter == "w"){
+                curve -d 1 -p 0 1 0 -p 0.0555556 0 0 -p 0.166667 1 0 -p 0.277778 0 0 -p 0.333333 1 0 -k 0 -k 1 -k 2 -k 3 -k 4 ;
+            }else if ($current_letter == "x"){
+                curve -d 1 -p 0 1 0 -p 0.333333 0 0 -p 0.166667 0.5 0 -p 0.333333 1 0 -p 0 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 ;
+            }else if ($current_letter == "y"){
+                curve -d 1 -p 0 1 0 -p 0.166667 0.666667 0 -p 0.333333 1 0 -p 0.166667 0.666667 0 -p 0.166667 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 ;
+            }else if ($current_letter == "z"){
+                curve -d 1 -p 0 1 0 -p 0.333333 1 0 -p 0 0 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 ;
+            }else if ($current_letter == "0"){
+                curve -d 1 -p 0 1 0 -p 0.333333 1 0 -p 0.333333 0 0 -p 0 0 0 -p 0 1 0 -k 0 -k 1 -k 2 -k 3 -k 4 ;
+            }else if ($current_letter == "1"){
+                curve -d 1 -p 0 0.833333 0 -p 0.166667 1 0 -p 0.166667 0 0 -p 0 0 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 ;
+            }else if ($current_letter == "2"){
+                curve -d 1 -p 0 1 0 -p 0.333333 1 0 -p 0.333333 0.333333 0 -p 0 0 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 ;
+            }else if ($current_letter == "3"){
+                curve -d 1 -p 0 1 0 -p 0.333333 1 0 -p 0.333333 0.666667 0 -p 0 0.666667 0 -p 0.333333 0.666667 0 -p 0.333333 0 0 -p 0 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 ;
+            }else if ($current_letter == "4"){
+                curve -d 1 -p 0 1 0 -p 0 0.666667 0 -p 0.333333 0.666667 0 -p 0.333333 1 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 ;
+            }else if ($current_letter == "5"){
+                curve -d 1 -p 0.333333 1 0 -p 0 1 0 -p 0 0.666667 0 -p 0.166667 0.666667 0 -p 0.333333 0.5 0 -p 0.333333 0 0 -p 0 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 ;
+            }else if ($current_letter == "6"){
+                curve -d 1 -p 0.333333 1 0 -p 0 1 0 -p 0 0 0 -p 0.333333 0 0 -p 0.333333 0.666667 0 -p 0 0.666667 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 ;
+            }else if ($current_letter == "7"){
+                curve -d 1 -p 0 1 0 -p 0.333333 1 0 -p 0 0 0 -k 0 -k 1 -k 2 ;
+            }else if ($current_letter == "8"){
+                curve -d 1 -p 0 1 0 -p 0.333333 1 0 -p 0.333333 0.666667 0 -p 0 0.666667 0 -p 0 1 0 -p 0 0 0 -p 0.333333 0 0 -p 0.333333 0.666667 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 -k 7 ;
+            }else if ($current_letter == "9"){
+                curve -d 1 -p 0.333333 1 0 -p 0 1 0 -p 0 0.666667 0 -p 0.333333 0.666667 0 -p 0.333333 1 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 ;
+            }else if ($current_letter == "."){
+                curve -d 1 -p 0 0.111111 0 -p 0 0 0 -p 0.111111 0 0 -p 0.111111 0.111111 0 -p 0 0.111111 0 -p 0.111111 0 0 -p 0.0555556 0.0555556 0 -p 0.111111 0.111111 0 -p 0 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 -k 7 -k 8 ;
+            }else if ($current_letter == ","){
+                curve -d 1 -p 0 0.111111 0 -p 0 0 0 -k 0 -k 1 ;
+            }else if ($current_letter == "/"){
+                curve -d 1 -p 0 0 0 -p 0.333333 1 0 -k 0 -k 1 ;
+            }else if ($current_letter == "-"){
+                curve -d 1 -p 0 0.666667 0 -p 0.333333 0.666667 0 -k 0 -k 1 ;
+            }else if ($current_letter == "&"){
+                curve -d 1 -p 0 0 0 -p 0.333333 0.333333 0 -p 0.333333 0.666667 0 -p 0 0.666667 0 -p 0 0.333333 0 -p 0.333333 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 ;
+            }else if ($current_letter == " "){ 
+                $space = 1;       
+            } else {
+                $ilegal_char++; //if character has no curve xymbol defined incriment illegal character counter
+            }
+                    
+            if ($space == 0) {  
+                
+                move (($i - 1) * 0.5) .1 0;
+                
+                string $child_curve[] = `ls -sl`; //store name of current letter
+
+                parent $child_curve[0] $parent_curve[0]; //parent current letter to underscore 
+                
+            }  
+            $i++;
+        
+        }
+        
+        select -r $parent_curve[0];
+    }
+        
+    if ($ilegal_char){
+    error ($ilegal_char + " illegal characters encountered\n");
+    }
+    
+
+}

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>jt_weight_slider</class>
+ <widget class="QMainWindow" name="jt_weight_slider">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>544</width>
+    <height>121</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Weight Slider</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QPushButton" name="JT_WeightSlider_subtract_3">
+        <property name="text">
+         <string>---</string>
+        </property>
+        <property name="+c" stdset="0">
+         <string>'import  jt_weight_slider; jt_weight_slider.modify_weights(-0.5)'</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="JT_WeightSlider_subtract_2">
+        <property name="text">
+         <string>--</string>
+        </property>
+        <property name="+c" stdset="0">
+         <string>'import  jt_weight_slider;  jt_weight_slider.modify_weights(-0.1)'</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="JT_WeightSlider_subtract">
+        <property name="text">
+         <string>-</string>
+        </property>
+        <property name="+c" stdset="0">
+         <string>'import  jt_weight_slider;  jt_weight_slider.modify_weights(-0.05)'</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="JT_WeightSlider_add">
+        <property name="text">
+         <string>+</string>
+        </property>
+        <property name="+c" stdset="0">
+         <string>'import  jt_weight_slider;  jt_weight_slider.modify_weights(0.05)'</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="JT_WeightSlider_add_2">
+        <property name="text">
+         <string>++</string>
+        </property>
+        <property name="+c" stdset="0">
+         <string>'import  jt_weight_slider;  jt_weight_slider.modify_weights(0.1)'</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="JT_WeightSlider_add_3">
+        <property name="text">
+         <string>+++</string>
+        </property>
+        <property name="+c" stdset="0">
+         <string>'import  jt_weight_slider;   jt_weight_slider.modify_weights(0.5)'</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QSlider" name="jt_weight_slider_slider">
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="+dc" stdset="0">
+         <string>'import  jt_weight_slider;  jt_weight_slider.set_weights()'</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
