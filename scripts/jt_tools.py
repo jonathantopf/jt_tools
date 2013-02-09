@@ -45,6 +45,15 @@ reload(jt_weight_slider)
 jt_weight_slider.load_ui()
 """])
 
+#--------------------------------------------------------------------------------------------------
+# jt_locator_at_selection.
+#--------------------------------------------------------------------------------------------------
+button_list.append(['jt_locator_at_selection', 'jt_locator_at_selection.png', 'python', """
+import jt_locator_at_selection
+reload(jt_locator_at_selection)
+jt_locator_at_selection.create()
+"""])
+
 
 def add_shelf_buton(shelf_name, button_name, icon, type, command):
 
