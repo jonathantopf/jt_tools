@@ -46,6 +46,15 @@ jt_weight_slider.load_ui()
 """])
 
 #--------------------------------------------------------------------------------------------------
+# jt_pass_through_bs.
+#--------------------------------------------------------------------------------------------------
+button_list.append(['jt_pass_through_bs', 'jt_pass_through_bs.png', 'python', """
+import jt_pass_through_bs
+reload(jt_pass_through_bs)
+jt_pass_through_bs.load_ui()
+"""])
+
+#--------------------------------------------------------------------------------------------------
 # jt_locator_at_selection.
 #--------------------------------------------------------------------------------------------------
 button_list.append(['jt_locator_at_selection', 'jt_locator_at_selection.png', 'python', """
