@@ -87,6 +87,15 @@ reload(jt_locator_at_selection)
 jt_locator_at_selection.create()
 """])
 
+#--------------------------------------------------------------------------------------------------
+# jt_copy_skin.
+#--------------------------------------------------------------------------------------------------
+button_list.append(['jt_copy_skin', 'jt_copy_skin.png', 'python', """
+import jt_copy_skin
+reload(jt_copy_skin)
+jt_copy_skin.load_ui()
+"""])
+
 
 def add_shelf_buton(shelf_name, button_name, icon, type, command):
 
