@@ -38,6 +38,8 @@ def load_ui():
     # set node list select change command
     cmds.textScrollList('jt_y_slider_node_list', e=True, sc='import jt_y_slider;jt_y_slider.ui_refresh_attributes()', allowMultiSelection=False)
     
+    cmds.textScrollList('jt_y_slider_attr_list', e=True, allowMultiSelection=True)
+
     ui_refresh_attributes()
 
     cmds.showWindow(window)
@@ -83,24 +85,28 @@ def ui_create():
     nodes = cmds.textScrollList('jt_y_slider_node_list', q=True, si=True)
     attrs = cmds.textScrollList('jt_y_slider_attr_list', q=True, si=True)
 
-    attribute_name = None
+    attribute_names = []
 
     if nodes:
+
         if attrs is not None:
-            attribute_name = nodes[0] + '.' + attrs[0]
+            for attr in attrs:
+                attribute_names.append(nodes[0] + '.' + attr)
 
     name = cmds.textField('jt_y_slide_name_field', q=True, tx=True)
-
-    if (str(name) == 'auto') and (attribute_name is not None):
-        name = attribute_name
 
     high        = float(cmds.textField('jt_y_slide_high_field', q=True, tx=True))
     low         = float(cmds.textField('jt_y_slide_low_field', q=True, tx=True))
     init_value  = float(cmds.textField('jt_y_slide_init_value_field', q=True, tx=True))
 
 
-    if attribute_name is not None:
-        create_y_slider(name, low, high, init_value, attribute_name) 
+    if attribute_names is not []:
+        move_incriment = 0
+        for i in range(len(attribute_names)):
+            slider_group = create_y_slider(attrs[i], low, high, init_value, attribute_names[i]) 
+            cmds.move(move_incriment, 0,0, slider_group, r=True)
+            move_incriment += 3
+
     else:
         create_y_slider(name, low, high, init_value) 
 
@@ -139,7 +145,6 @@ def create_y_slider(name, low=0, high=1, init=0, attribute=False):
     cmds.setAttr(text + '.scaleY', 0.26)
     cmds.setAttr(text + '.scaleZ', 0.26)
     text_length = cmds.xform(text, q=True, bb=True)[3]
-    print text_length
     if text_length > 1.0:
         cmds.scale( 1/text_length, 1, 1, r=True)
     cmds.setAttr(text + '.translateX', 0.13)
@@ -183,5 +188,5 @@ def create_y_slider(name, low=0, high=1, init=0, attribute=False):
     if attribute:
         cmds.connectAttr(slider + '.translateY', attribute, f=True)
 
-    return slider
+    return slider_group
     
