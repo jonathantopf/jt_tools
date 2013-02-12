@@ -23,6 +23,8 @@ jt_weight_slider.py
 
 jt_y_slider.py
 
+jt_wire_text.py
+
 
 plugins
 =======
