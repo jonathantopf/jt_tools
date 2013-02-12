@@ -25,6 +25,7 @@
 import maya.cmds as cmds
 import os
 import inspect
+import jt_wire_text
 
 
 def load_ui():
@@ -117,7 +118,6 @@ def create_y_slider(name, low=0, high=1, init=0, attribute=False):
     low = float(low)
     
     length = high - low
-    print length
     
     rail_points  = [(0, 0 , 0),
                     (0, 1, 0)]
