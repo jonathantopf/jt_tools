@@ -13,7 +13,7 @@ scripts
 
 jt_autorig.py
 
-jt_copy_script.py
+jt_copy_skin.py
 
 jt_ctl_curve.py
 
