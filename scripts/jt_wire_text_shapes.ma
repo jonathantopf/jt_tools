@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: jt_wire_text_shapes.ma
-//Last modified: Tue, Feb 12, 2013 12:24:44 PM
+//Last modified: Tue, Feb 12, 2013 01:21:41 PM
 //Codeset: UTF-8
 requires maya "2013";
 requires "stereoCamera" "10.0";
@@ -39,12 +39,12 @@ createNode camera -s -n "topShape" -p "top";
 	setAttr ".o" yes;
 createNode transform -s -n "front";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 16.531286096706474 -5.9209507634135594 100.1 ;
+	setAttr ".t" -type "double3" 10.334958568811999 -3.0431584805839069 100.1 ;
 createNode camera -s -n "frontShape" -p "front";
 	setAttr -k off ".v" no;
 	setAttr ".rnd" no;
 	setAttr ".coi" 100.1;
-	setAttr ".ow" 40.0260901296705;
+	setAttr ".ow" 28.726070715092391;
 	setAttr ".imn" -type "string" "front";
 	setAttr ".den" -type "string" "front_depth";
 	setAttr ".man" -type "string" "front_mask";
@@ -84,21 +84,20 @@ createNode nurbsCurve -n "aShape" -p "a";
 		0.5 0.5 0
 		;
 createNode transform -n "b" -p "group2";
-	setAttr ".rp" -type "double3" 1 0 0 ;
-	setAttr ".sp" -type "double3" 1 0 0 ;
 createNode nurbsCurve -n "bShape" -p "b";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		1 2 0
-		1 0 0
-		1.5 0 0
-		1.5 1 0
-		1 1 0
+		0 2 0
+		0 0 0
+		0.5 0 0
+		0.5 1 0
+		0 1 0
 		;
 createNode transform -n "c" -p "group2";
+	setAttr ".t" -type "double3" -2 0 0 ;
 	setAttr ".rp" -type "double3" 2 0 0 ;
 	setAttr ".sp" -type "double3" 2 0 0 ;
 createNode nurbsCurve -n "cShape" -p "c";
@@ -113,601 +112,504 @@ createNode nurbsCurve -n "cShape" -p "c";
 		2.5 0 0
 		;
 createNode transform -n "d" -p "group2";
-	setAttr ".rp" -type "double3" 3 0 0 ;
-	setAttr ".sp" -type "double3" 3 0 0 ;
 createNode nurbsCurve -n "dShape" -p "d";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		3.5 1 0
-		3 1 0
-		3 0 0
-		3.5 0 0
-		3.5 2 0
+		0.5 1 0
+		0 1 0
+		0 0 0
+		0.5 0 0
+		0.5 2 0
 		;
 createNode transform -n "e" -p "group2";
-	setAttr ".rp" -type "double3" 4 0 0 ;
-	setAttr ".sp" -type "double3" 4 0 0 ;
 createNode nurbsCurve -n "eShape" -p "e";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 5 0 no 3
 		6 0 1 2 3 4 5
 		6
-		4 0.5 0
-		4.5 0.5 0
-		4.5 1 0
-		4 1 0
-		4 0 0
-		4.5 0 0
+		0 0.5 0
+		0.5 0.5 0
+		0.5 1 0
+		0 1 0
+		0 0 0
+		0.5 0 0
 		;
 createNode transform -n "f" -p "group2";
-	setAttr ".rp" -type "double3" 5 0 0 ;
-	setAttr ".sp" -type "double3" 5 0 0 ;
 createNode nurbsCurve -n "fShape" -p "f";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		5.5 1 0
-		5 1 0
-		5 -1 0
-		5 0 0
-		5.5 0 0
+		0.5 1 0
+		0 1 0
+		0 -1 0
+		0 0 0
+		0.5 0 0
 		;
 createNode transform -n "g" -p "group2";
-	setAttr ".rp" -type "double3" 6 0 0 ;
-	setAttr ".sp" -type "double3" 6 0 0 ;
 createNode nurbsCurve -n "gShape" -p "g";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 5 0 no 3
 		6 0 1 2 3 4 5
 		6
-		6.5 0 0
-		6 0 0
-		6 1 0
-		6.5 1 0
-		6.5 -1 0
-		6 -1 0
+		0.5 0 0
+		0 0 0
+		0 1 0
+		0.5 1 0
+		0.5 -1 0
+		0 -1 0
 		;
 createNode transform -n "h" -p "group2";
-	setAttr ".rp" -type "double3" 7 0 0 ;
-	setAttr ".sp" -type "double3" 7 0 0 ;
 createNode nurbsCurve -n "hShape" -p "h";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		7 2 0
-		7 0 0
-		7 1 0
-		7.5 1 0
-		7.5 0 0
+		0 2 0
+		0 0 0
+		0 1 0
+		0.5 1 0
+		0.5 0 0
 		;
 createNode transform -n "i" -p "group2";
-	setAttr ".rp" -type "double3" 8 0 0 ;
-	setAttr ".sp" -type "double3" 8 0 0 ;
 createNode nurbsCurve -n "iShape" -p "i";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 1 0 no 3
 		2 0 1
 		2
-		8 0 0
-		8 1 0
+		0 0 0
+		0 1 0
 		;
 createNode transform -n "j" -p "group2";
-	setAttr ".t" -type "double3" 0.5 0 0 ;
-	setAttr ".rp" -type "double3" 8.5 0 0 ;
-	setAttr ".sp" -type "double3" 8.5 0 0 ;
 createNode nurbsCurve -n "jShape" -p "j";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 2 0 no 3
 		3 0 1 2
 		3
-		8.5240642060558347 -0.47856933218949427 0
-		9 0 0
-		9 1 0
+		0.024064206055834703 -0.47856933218949427 0
+		0.5 0 0
+		0.5 1 0
 		;
 createNode transform -n "l" -p "group2";
-	setAttr ".t" -type "double3" 0.5 0 0 ;
-	setAttr ".rp" -type "double3" 10.5 0 0 ;
-	setAttr ".sp" -type "double3" 10.5 0 0 ;
 createNode nurbsCurve -n "lShape" -p "l";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 1 0 no 3
 		2 0 1
 		2
-		10.5 2 0
-		10.5 0 0
+		0 2 0
+		0 0 0
 		;
 createNode transform -n "m" -p "group2";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 11 0 0 ;
-	setAttr ".sp" -type "double3" 11 0 0 ;
 createNode nurbsCurve -n "mShape" -p "m";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		11 0 0
-		11 1 0
-		11.25 0 0
-		11.5 1 0
-		11.5 0 0
+		0 0 0
+		0 1 0
+		0.25 0 0
+		0.5 1 0
+		0.5 0 0
 		;
 createNode transform -n "n" -p "group2";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 12 0 0 ;
-	setAttr ".sp" -type "double3" 12 0 0 ;
 createNode nurbsCurve -n "nShape" -p "n";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 3 0 no 3
 		4 0 1 2 3
 		4
-		12 0 0
-		12 1 0
-		12.5 0 0
-		12.5 1 0
+		0 0 0
+		0 1 0
+		0.5 0 0
+		0.5 1 0
 		;
 createNode transform -n "o" -p "group2";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 13 0 0 ;
-	setAttr ".sp" -type "double3" 13 0 0 ;
 createNode nurbsCurve -n "oShape" -p "o";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		13 1 0
-		13 0 0
-		13.5 0 0
-		13.5 1 0
-		13 1 0
+		0 1 0
+		0 0 0
+		0.5 0 0
+		0.5 1 0
+		0 1 0
 		;
 createNode transform -n "p" -p "group2";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 14 0 0 ;
-	setAttr ".sp" -type "double3" 14 0 0 ;
 createNode nurbsCurve -n "pShape" -p "p";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		14 -1 0
-		14 1 0
-		14.5 1 0
-		14.5 0 0
-		14 0 0
+		0 -1 0
+		0 1 0
+		0.5 1 0
+		0.5 0 0
+		0 0 0
 		;
 createNode transform -n "q" -p "group2";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 15 0 0 ;
-	setAttr ".sp" -type "double3" 15 0 0 ;
 createNode nurbsCurve -n "qShape" -p "q";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		15.5 -1 0
-		15.5 1 0
-		15 1 0
-		15 0 0
-		15.5 0 0
+		0.5 -1 0
+		0.5 1 0
+		0 1 0
+		0 0 0
+		0.5 0 0
 		;
 createNode transform -n "r" -p "group2";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 16 0 0 ;
-	setAttr ".sp" -type "double3" 16 0 0 ;
 createNode nurbsCurve -n "rShape" -p "r";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 2 0 no 3
 		3 0 1 2
 		3
-		16 0 0
-		16 1 0
-		16.5 1 0
+		0 0 0
+		0 1 0
+		0.5 1 0
 		;
 createNode transform -n "s" -p "group2";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 17 0 0 ;
-	setAttr ".sp" -type "double3" 17 0 0 ;
 createNode nurbsCurve -n "sShape" -p "s";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 5 0 no 3
 		6 0 1 2 3 4 5
 		6
-		17.5 1 0
-		17 1 0
-		17 0.5 0
-		17.5 0.5 0
-		17.5 0 0
-		17 0 0
+		0.5 1 0
+		0 1 0
+		0 0.5 0
+		0.5 0.5 0
+		0.5 0 0
+		0 0 0
 		;
 createNode transform -n "t" -p "group2";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 18 0 0 ;
-	setAttr ".sp" -type "double3" 18 0 0 ;
 createNode nurbsCurve -n "tShape" -p "t";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 5 0 no 3
 		6 0 1 2 3 4 5
 		6
-		18 2 0
-		18 0 0
-		18.5 0 0
-		18 0 0
-		18 1 0
-		18.5 1 0
+		0 2 0
+		0 0 0
+		0.5 0 0
+		0 0 0
+		0 1 0
+		0.5 1 0
 		;
 createNode transform -n "u" -p "group2";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 19 0 0 ;
-	setAttr ".sp" -type "double3" 19 0 0 ;
 createNode nurbsCurve -n "uShape" -p "u";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 3 0 no 3
 		4 0 1 2 3
 		4
-		19 1 0
-		19 0 0
-		19.5 0 0
-		19.5 1 0
+		0 1 0
+		0 0 0
+		0.5 0 0
+		0.5 1 0
 		;
 createNode transform -n "v" -p "group2";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 20 0 0 ;
-	setAttr ".sp" -type "double3" 20 0 0 ;
 createNode nurbsCurve -n "vShape" -p "v";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 2 0 no 3
 		3 0 1 2
 		3
-		20 1 0
-		20.25 0 0
-		20.5 1 0
+		0 1 0
+		0.25 0 0
+		0.5 1 0
 		;
 createNode transform -n "w" -p "group2";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 21 0 0 ;
-	setAttr ".sp" -type "double3" 21 0 0 ;
 createNode nurbsCurve -n "wShape" -p "w";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		21 1 0
-		21.25 0 0
-		21.5 1 0
-		21.75 0 0
-		22 1 0
+		0 1 0
+		0.25 0 0
+		0.5 1 0
+		0.75 0 0
+		1 1 0
 		;
 createNode transform -n "x" -p "group2";
-	setAttr ".t" -type "double3" 1.5 0 0 ;
-	setAttr ".rp" -type "double3" 22.5 0 0 ;
-	setAttr ".sp" -type "double3" 22.5 0 0 ;
 createNode nurbsCurve -n "xShape" -p "x";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		22.5 0 0
-		23 1 0
-		22.75 0.5 0
-		22.5 1 0
-		23 0 0
+		0 0 0
+		0.5 1 0
+		0.25 0.5 0
+		0 1 0
+		0.5 0 0
 		;
 createNode transform -n "y" -p "group2";
-	setAttr ".t" -type "double3" 1.5 0 0 ;
-	setAttr ".rp" -type "double3" 23.5 0 0 ;
-	setAttr ".sp" -type "double3" 23.5 0 0 ;
 createNode nurbsCurve -n "yShape" -p "y";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 5 0 no 3
 		6 0 1 2 3 4 5
 		6
-		23.5 1 0
-		23.5 0 0
-		24 0 0
-		24 1 0
-		24 -1 0
-		23.5 -1 0
+		0 1 0
+		0 0 0
+		0.5 0 0
+		0.5 1 0
+		0.5 -1 0
+		0 -1 0
 		;
 createNode transform -n "z" -p "group2";
-	setAttr ".t" -type "double3" 2.5 0 0 ;
-	setAttr ".rp" -type "double3" 24.5 0 0 ;
-	setAttr ".sp" -type "double3" 24.5 0 0 ;
 createNode nurbsCurve -n "zShape" -p "z";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 3 0 no 3
 		4 0 1 2 3
 		4
-		24.5 1 0
-		25 1 0
-		24.5 0 0
-		25 0 0
+		0 1 0
+		0.5 1 0
+		0 0 0
+		0.5 0 0
 		;
 createNode transform -n "k" -p "group2";
-	setAttr ".t" -type "double3" 0.5 0 0 ;
-	setAttr ".rp" -type "double3" 9.5 0 0 ;
-	setAttr ".sp" -type "double3" 9.5 0 0 ;
 createNode nurbsCurve -n "kShape" -p "k";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 6 0 no 3
 		7 0 1 2 3 4 5 6
 		7
-		9.5 0 0
-		9.5 2 0
-		9.5 1 0
-		10 1 0
-		10 0.5 0
-		9.5 0.5 0
-		10 0 0
+		0 0 0
+		0 2 0
+		0 1 0
+		0.5 1 0
+		0.5 0.5 0
+		0 0.5 0
+		0.5 0 0
 		;
 createNode transform -n "comma";
-	setAttr ".rp" -type "double3" 26 0 0 ;
-	setAttr ".sp" -type "double3" 26 0 0 ;
 createNode nurbsCurve -n "commaShape" -p "comma";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 1 0 no 3
 		2 0 1
 		2
-		26 0 0
-		26 -0.2516783676397859 0
+		0 0 0
+		0 -0.2516783676397859 0
 		;
 createNode transform -n "full_stop";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 27 0 0 ;
-	setAttr ".sp" -type "double3" 27 0 0 ;
 createNode nurbsCurve -n "full_stopShape" -p "full_stop";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		26.900000000000002 0.10000000000000001 0
-		27.100000000000001 -0.10000000000000001 0
-		27 0 0
-		27.100000000000001 0.10000000000000001 0
-		26.900000000000002 -0.10000000000000001 0
+		-0.099999999999997868 0.10000000000000001 0
+		0.10000000000000142 -0.10000000000000001 0
+		0 0 0
+		0.10000000000000142 0.10000000000000001 0
+		-0.099999999999997868 -0.10000000000000001 0
 		;
 createNode transform -n "hyphen";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 28 0 0 ;
-	setAttr ".sp" -type "double3" 28 0 0 ;
 createNode nurbsCurve -n "hyphenShape" -p "hyphen";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 1 0 no 3
 		2 0 1
 		2
-		28 0.5 0
-		28.5 0.5 0
+		0 0.5 0
+		0.5 0.5 0
 		;
 createNode transform -n "left_bracket";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 29 0 0 ;
-	setAttr ".sp" -type "double3" 29 0 0 ;
 createNode nurbsCurve -n "left_bracketShape" -p "left_bracket";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 2 0 no 3
 		3 0 1 2
 		3
-		29.322262519169168 0 0
-		29 0.5 0
-		29.322262519169168 1 0
+		0.32226251916916837 0 0
+		0 0.5 0
+		0.32226251916916837 1 0
 		;
 createNode transform -n "right_bracet";
-	setAttr ".t" -type "double3" 1 0 0 ;
-	setAttr ".rp" -type "double3" 30 0 1.2246467991473532e-16 ;
-	setAttr ".sp" -type "double3" 30 0 1.2246467991473532e-16 ;
+	setAttr ".rp" -type "double3" 0 0 1.2246467991473532e-16 ;
+	setAttr ".sp" -type "double3" 0 0 1.2246467991473532e-16 ;
 createNode nurbsCurve -n "right_bracetShape" -p "right_bracet";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 2 0 no 3
 		3 0 1 2
 		3
-		30 0 1.2246467991473532e-16
-		30.322262519169168 0.5 1.2246467991473532e-16
-		30 1 1.2246467991473532e-16
+		0 0 1.2246467991473532e-16
+		0.32226251916916837 0.5 1.2246467991473532e-16
+		0 1 1.2246467991473532e-16
 		;
 createNode transform -n "underscore";
-	setAttr ".rp" -type "double3" 31 0 0 ;
-	setAttr ".sp" -type "double3" 31 0 0 ;
 createNode nurbsCurve -n "underscoreShape" -p "underscore";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 1 0 no 3
 		2 0 1
 		2
-		31 0 0
-		31.5 0 0
+		0 0 0
+		0.5 0 0
 		;
 createNode transform -n "curve1";
-	setAttr ".t" -type "double3" 0 1 0 ;
-	setAttr ".rp" -type "double3" 0 -4 0 ;
-	setAttr ".sp" -type "double3" 0 -4 0 ;
 createNode nurbsCurve -n "curveShape1" -p "curve1";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 1 0 no 3
 		2 0 1
 		2
-		0 -4 0
-		0 -3 0
+		0 0 0
+		0 1 0
 		;
 createNode transform -n "curve2";
-	setAttr ".t" -type "double3" 0 1 0 ;
-	setAttr ".rp" -type "double3" 1 -4 0 ;
-	setAttr ".sp" -type "double3" 1 -4 0 ;
 createNode nurbsCurve -n "curveShape2" -p "curve2";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		1 -3 0
-		1.5 -3 0
-		1.5 -3.456632666360103 0
-		1 -4 0
-		1.5 -4 0
+		0 1 0
+		0.5 1 0
+		0.5 0.54336733363989698 0
+		0 0 0
+		0.5 0 0
 		;
 createNode transform -n "curve3";
-	setAttr ".t" -type "double3" -1 1 0 ;
-	setAttr ".rp" -type "double3" 3 -4 0 ;
-	setAttr ".sp" -type "double3" 3 -4 0 ;
 createNode nurbsCurve -n "curveShape3" -p "curve3";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 5 0 no 3
 		6 0 1 2 3 4 5
 		6
-		3 -3 0
-		3.5 -3 0
-		3 -3.5 0
-		3.5 -3.5 0
-		3.5 -4 0
-		3 -4 0
+		0 1 0
+		0.5 1 0
+		0 0.5 0
+		0.5 0.5 0
+		0.5 0 0
+		0 0 0
 		;
 createNode transform -n "curve4";
-	setAttr ".t" -type "double3" -2 1 0 ;
-	setAttr ".rp" -type "double3" 5 -4 0 ;
-	setAttr ".sp" -type "double3" 5 -4 0 ;
 createNode nurbsCurve -n "curveShape4" -p "curve4";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		5 -3 0
-		5 -4 0
-		5 -3.5 0
-		5.5 -3.5 0
-		5.5 -3 0
+		0 1 0
+		0 0 0
+		0 0.5 0
+		0.5 0.5 0
+		0.5 1 0
 		;
 createNode transform -n "curve5";
-	setAttr ".t" -type "double3" -3 1 0 ;
-	setAttr ".rp" -type "double3" 7 -4 0 ;
-	setAttr ".sp" -type "double3" 7 -4 0 ;
 createNode nurbsCurve -n "curveShape5" -p "curve5";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 5 0 no 3
 		6 0 1 2 3 4 5
 		6
-		7.5 -3 0
-		7 -3 0
-		7 -3.5 0
-		7.5 -3.5 0
-		7.5 -4 0
-		7 -4 0
+		0.5 1 0
+		0 1 0
+		0 0.5 0
+		0.5 0.5 0
+		0.5 0 0
+		0 0 0
 		;
 createNode transform -n "curve6";
-	setAttr ".t" -type "double3" -4 1 0 ;
-	setAttr ".rp" -type "double3" 9 -4 0 ;
-	setAttr ".sp" -type "double3" 9 -4 0 ;
 createNode nurbsCurve -n "curveShape6" -p "curve6";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 5 0 no 3
 		6 0 1 2 3 4 5
 		6
-		9.5 -3 0
-		9 -3 0
-		9 -4 0
-		9.5 -4 0
-		9.5 -3.5 0
-		9 -3.5 0
+		0.5 1 0
+		0 1 0
+		0 0 0
+		0.5 0 0
+		0.5 0.5 0
+		0 0.5 0
 		;
 createNode transform -n "curve7";
-	setAttr ".t" -type "double3" -5 1 0 ;
-	setAttr ".rp" -type "double3" 11 -4 0 ;
-	setAttr ".sp" -type "double3" 11 -4 0 ;
 createNode nurbsCurve -n "curveShape7" -p "curve7";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 2 0 no 3
 		3 0 1 2
 		3
-		11 -3 0
-		11.5 -3 0
-		11 -4 0
+		0 1 0
+		0.5 1 0
+		0 0 0
 		;
 createNode transform -n "curve8";
-	setAttr ".t" -type "double3" -6 1 0 ;
-	setAttr ".rp" -type "double3" 13 -4 0 ;
-	setAttr ".sp" -type "double3" 13 -4 0 ;
 createNode nurbsCurve -n "curveShape8" -p "curve8";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 6 0 no 3
 		7 0 1 2 3 4 5 6
 		7
-		13.5 -3 0
-		13 -3 0
-		13 -4 0
-		13.5 -4 0
-		13.5 -3 0
-		13.5 -3.5 0
-		13 -3.5 0
+		0.5 1 0
+		0 1 0
+		0 0 0
+		0.5 0 0
+		0.5 1 0
+		0.5 0.5 0
+		0 0.5 0
 		;
 createNode transform -n "curve9";
-	setAttr ".t" -type "double3" -7 1 0 ;
-	setAttr ".rp" -type "double3" 15 -4 0 ;
-	setAttr ".sp" -type "double3" 15 -4 0 ;
 createNode nurbsCurve -n "curveShape9" -p "curve9";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 5 0 no 3
 		6 0 1 2 3 4 5
 		6
-		15.5 -3.5 0
-		15 -3.5 0
-		15 -3 0
-		15.5 -3 0
-		15.5 -4 0
-		15 -4 0
+		0.5 0.5 0
+		0 0.5 0
+		0 1 0
+		0.5 1 0
+		0.5 0 0
+		0 0 0
 		;
 createNode transform -n "curve10";
-	setAttr ".t" -type "double3" -8 1 0 ;
-	setAttr ".rp" -type "double3" 17 -4 0 ;
-	setAttr ".sp" -type "double3" 17 -4 0 ;
 createNode nurbsCurve -n "curveShape10" -p "curve10";
 	setAttr -k off ".v";
 	setAttr ".cc" -type "nurbsCurve" 
 		1 5 0 no 3
 		6 0 1 2 3 4 5
 		6
-		17.5 -3 0
-		17 -3 0
-		17 -4 0
-		17.5 -4 0
-		17.5 -3 0
-		17 -4 0
+		0.5 1 0
+		0 1 0
+		0 0 0
+		0.5 0 0
+		0.5 1 0
+		0 0 0
+		;
+createNode transform -n "curve11";
+createNode nurbsCurve -n "curveShape11" -p "curve11";
+	setAttr -k off ".v";
+	setAttr ".cc" -type "nurbsCurve" 
+		1 1 0 no 3
+		2 0 1
+		2
+		0 0 0
+		0.5 0 0
 		;
 createNode lightLinker -s -n "lightLinker1";
 	setAttr -s 2 ".lnk";
