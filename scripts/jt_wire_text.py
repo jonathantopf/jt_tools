@@ -113,8 +113,10 @@ def create(text):
             curser_pos += 0.7
 
     cmds.select(letter_curve_list, r=True)
-    cmds.group()
+    text_group = cmds.group()
     cmds.xform(os=True, piv=(0,0,0))
+
+    return text_group
 
 
 
