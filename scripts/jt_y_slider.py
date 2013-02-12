@@ -133,12 +133,26 @@ def create_y_slider(name, low=0, high=1, init=0, attribute=False):
                      ( 0.13,   0.05, 0),
                      (-0.13,   0.05, 0),
                      (-0.13,  -0.05, 0)]
-    
-    rail   = cmds.curve(d=1, p=rail_points,   n=name + '_rail')
-    frame  = cmds.curve(d=1, p=frame_points,  n=name + '_frame')
+
+    text = jt_wire_text.create(name)
+    cmds.setAttr(text + '.scaleX', 0.26)
+    cmds.setAttr(text + '.scaleY', 0.26)
+    cmds.setAttr(text + '.scaleZ', 0.26)
+    text_length = cmds.xform(text, q=True, bb=True)[3]
+    print text_length
+    if text_length > 1.0:
+        cmds.scale( 1/text_length, 1, 1, r=True)
+    cmds.setAttr(text + '.translateX', 0.13)
+    cmds.setAttr(text + '.rotateZ', 90)
+
+    frame = cmds.curve(d=1, p=frame_points,  n=name + '_frame')
     slider = cmds.curve(d=1, p=slider_points, n=name + '_slider')
 
-    for item in (frame, rail):
+    cmds.setAttr(slider + '.overrideEnabled', 1)
+    cmds.setAttr(slider + '.overrideColor', 13)
+
+
+    for item in (frame, text):
         cmds.setAttr(item + '.overrideEnabled', 1)
         cmds.setAttr(item + '.overrideDisplayType', 1)
 
@@ -154,7 +168,7 @@ def create_y_slider(name, low=0, high=1, init=0, attribute=False):
     cmds.setAttr(slider_group + '.translateY', - (low * normalise_coeff))
     cmds.setAttr(slider + '.scaleY', 1.0 / normalise_coeff)
 
-    cmds.select(rail, frame, slider_group, r=True)
+    cmds.select(text, frame, slider_group, r=True)
     cmds.parent()
     
     cmds.move(-0.15, 1.07, 0, slider_group + '.scalePivot', slider_group + '.rotatePivot', ws=True, a=True)
