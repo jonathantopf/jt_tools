@@ -1,6 +1,6 @@
 //Maya ASCII 2013 scene
 //Name: jt_wire_text_shapes.ma
-//Last modified: Tue, Feb 12, 2013 01:21:41 PM
+//Last modified: Tue, Feb 12, 2013 02:13:02 PM
 //Codeset: UTF-8
 requires maya "2013";
 requires "stereoCamera" "10.0";
@@ -13,7 +13,7 @@ fileInfo "osv" "Mac OS X 10.8.2";
 fileInfo "license" "student";
 createNode transform -s -n "persp";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 1.2903442927810986 3.6220094270774572 19.427065891224519 ;
+	setAttr ".t" -type "double3" 1.2903442927810986 3.6220094270774577 19.427065891224519 ;
 	setAttr ".r" -type "double3" -10.538352729602378 3.7999999999999696 0 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
@@ -39,16 +39,16 @@ createNode camera -s -n "topShape" -p "top";
 	setAttr ".o" yes;
 createNode transform -s -n "front";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 10.334958568811999 -3.0431584805839069 100.1 ;
+	setAttr ".t" -type "double3" 2.8103030057358027 1.125588311035451 100.1 ;
 createNode camera -s -n "frontShape" -p "front";
 	setAttr -k off ".v" no;
 	setAttr ".rnd" no;
 	setAttr ".coi" 100.1;
-	setAttr ".ow" 28.726070715092391;
+	setAttr ".ow" 12.754833323555008;
 	setAttr ".imn" -type "string" "front";
 	setAttr ".den" -type "string" "front_depth";
 	setAttr ".man" -type "string" "front_mask";
-	setAttr ".tp" -type "double3" 18.140233494595538 0.22426079484345895 0 ;
+	setAttr ".tp" -type "double3" 18.140233494595535 0.22426079484345895 0 ;
 	setAttr ".hc" -type "string" "viewSet -f %camera";
 	setAttr ".o" yes;
 createNode transform -s -n "side";
@@ -145,11 +145,11 @@ createNode nurbsCurve -n "fShape" -p "f";
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		0.5 1 0
-		0 1 0
-		0 -1 0
+		0.5 2 0
+		0 2 0
 		0 0 0
-		0.5 0 0
+		0 1 0
+		0.5 1 0
 		;
 createNode transform -n "g" -p "group2";
 createNode nurbsCurve -n "gShape" -p "g";
@@ -158,12 +158,12 @@ createNode nurbsCurve -n "gShape" -p "g";
 		1 5 0 no 3
 		6 0 1 2 3 4 5
 		6
+		0.5 1 0
+		0 1 0
+		0 2 0
+		0.5 2 0
 		0.5 0 0
 		0 0 0
-		0 1 0
-		0.5 1 0
-		0.5 -1 0
-		0 -1 0
 		;
 createNode transform -n "h" -p "group2";
 createNode nurbsCurve -n "hShape" -p "h";
@@ -195,9 +195,9 @@ createNode nurbsCurve -n "jShape" -p "j";
 		1 2 0 no 3
 		3 0 1 2
 		3
-		0.024064206055834703 -0.47856933218949427 0
-		0.5 0 0
-		0.5 1 0
+		0 0 0
+		0.5 0.47856933218949427 0
+		0.5 1.4785693321894944 0
 		;
 createNode transform -n "l" -p "group2";
 createNode nurbsCurve -n "lShape" -p "l";
@@ -254,11 +254,11 @@ createNode nurbsCurve -n "pShape" -p "p";
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		0 -1 0
-		0 1 0
-		0.5 1 0
-		0.5 0 0
 		0 0 0
+		0 2 0
+		0.5 2 0
+		0.5 1 0
+		0 1 0
 		;
 createNode transform -n "q" -p "group2";
 createNode nurbsCurve -n "qShape" -p "q";
@@ -267,11 +267,11 @@ createNode nurbsCurve -n "qShape" -p "q";
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		0.5 -1 0
-		0.5 1 0
-		0 1 0
-		0 0 0
 		0.5 0 0
+		0.5 2 0
+		0 2 0
+		0 1 0
+		0.5 1 0
 		;
 createNode transform -n "r" -p "group2";
 createNode nurbsCurve -n "rShape" -p "r";
@@ -368,12 +368,12 @@ createNode nurbsCurve -n "yShape" -p "y";
 		1 5 0 no 3
 		6 0 1 2 3 4 5
 		6
+		0 2 0
 		0 1 0
-		0 0 0
-		0.5 0 0
 		0.5 1 0
-		0.5 -1 0
-		0 -1 0
+		0.5 2 0
+		0.5 0 0
+		0 0 0
 		;
 createNode transform -n "z" -p "group2";
 createNode nurbsCurve -n "zShape" -p "z";
@@ -409,8 +409,8 @@ createNode nurbsCurve -n "commaShape" -p "comma";
 		1 1 0 no 3
 		2 0 1
 		2
-		0 0 0
-		0 -0.2516783676397859 0
+		0 0.25 0
+		0 -0.0016783676397859049 0
 		;
 createNode transform -n "full_stop";
 createNode nurbsCurve -n "full_stopShape" -p "full_stop";
@@ -419,11 +419,11 @@ createNode nurbsCurve -n "full_stopShape" -p "full_stop";
 		1 4 0 no 3
 		5 0 1 2 3 4
 		5
-		-0.099999999999997868 0.10000000000000001 0
-		0.10000000000000142 -0.10000000000000001 0
-		0 0 0
-		0.10000000000000142 0.10000000000000001 0
-		-0.099999999999997868 -0.10000000000000001 0
+		-0.099999999999997868 0.20479163168535083 0
+		0.10000000000000142 0.0047916316853508223 0
+		0 0.10479163168535083 0
+		0.10000000000000142 0.20479163168535083 0
+		-0.099999999999997868 0.0047916316853508223 0
 		;
 createNode transform -n "hyphen";
 createNode nurbsCurve -n "hyphenShape" -p "hyphen";
@@ -810,8 +810,6 @@ select -ne :defaultHardwareRenderGlobals;
 	setAttr -k on ".nds";
 	setAttr ".fn" -type "string" "im";
 	setAttr ".res" -type "string" "ntsc_4d 646 485 1.333";
-select -ne :ikSystem;
-	setAttr -s 4 ".sol";
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
