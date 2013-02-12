@@ -164,6 +164,7 @@ def create_y_slider(name, low=0, high=1, init=0, attribute=False):
         cmds.setAttr(slider + '.' + attr, keyable=False, channelBox=False)
         
     cmds.select(slider_group, r=True)
+    cmds.scale(10,10,10, r=True)
 
     if attribute:
         cmds.connectAttr(slider + '.translateY', attribute, f=True)
