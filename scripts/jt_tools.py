@@ -105,6 +105,15 @@ reload(jt_y_slider)
 jt_y_slider.load_ui()
 """])
 
+#--------------------------------------------------------------------------------------------------
+# jt_wire_text.
+#--------------------------------------------------------------------------------------------------
+button_list.append(['jt_wire_text', 'jt_wire_text.png', 'python', """
+import jt_wire_text
+reload(jt_wire_text)
+jt_wire_text.load_ui()
+"""])
+
 
 def add_shelf_buton(shelf_name, button_name, icon, type, command):
 
