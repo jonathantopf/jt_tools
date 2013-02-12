@@ -44,6 +44,8 @@ jt_autorig.load_ui()
 button_list.append(['jt_jitter', 'jt_jitter.png', 'python', """
 import maya.cmds as cmds
 selection = cmds.ls(sl=True)
+if not cmds.pluginInfo('jt_jitter.py', query=True, loaded=True):
+    cmds.loadPlugin('jt_jitter.py')
 if selection:    
     jitter_deformer = cmds.deformer(selection[0], type='jt_jitter')[0]
     cmds.connectAttr('time1.outTime', jitter_deformer + '.seed')
