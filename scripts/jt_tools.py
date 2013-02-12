@@ -96,6 +96,15 @@ reload(jt_copy_skin)
 jt_copy_skin.load_ui()
 """])
 
+#--------------------------------------------------------------------------------------------------
+# jt_y_slider.
+#--------------------------------------------------------------------------------------------------
+button_list.append(['jt_y_slider', 'jt_y_slider.png', 'python', """
+import jt_y_slider
+reload(jt_y_slider)
+jt_y_slider.load_ui()
+"""])
+
 
 def add_shelf_buton(shelf_name, button_name, icon, type, command):
 
