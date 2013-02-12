@@ -7,15 +7,22 @@ To install open the `open_me_to_install.ma` file and a jt_tools shelf will be ad
 
 Give me a shout if anything is broken
 
+
 scripts
 =======
 
 jt_autorig.py
+
 jt_copy_script.py
+
 jt_ctl_curve.py
+
 jt_locator_at_selection.py
+
 jt_weight_slider.py
+
 jt_y_slider.py
+
 
 plugins
 =======
