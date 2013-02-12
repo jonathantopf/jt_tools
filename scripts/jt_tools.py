@@ -116,8 +116,6 @@ jt_wire_text.load_ui()
 
 
 def add_shelf_buton(shelf_name, button_name, icon, type, command):
-
-    print icon
     cmds.shelfButton(button_name, p=shelf_name, i=icon, c=command, stp=type)
 
 
