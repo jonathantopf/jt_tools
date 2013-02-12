@@ -94,14 +94,14 @@ def ui_create_out():
 
 def ui_auto_select():
     
-selection = cmds.ls(sl=True)
-if selection:
-    shapes = cmds.listRelatives(selection[0], s=True)
-    print shapes
-    for shape in shapes:
-        connections = cmds.listConnections(shape, t='blendShape', s=True, d=False)
-        if connections:
-            cmds.textField('jt_pass_through_bs_node_name_text', e=True, tx=connections[0])
+    selection = cmds.ls(sl=True)
+    if selection:
+        shapes = cmds.listRelatives(selection[0], s=True)
+        print shapes
+        for shape in shapes:
+            connections = cmds.listConnections(shape, t='blendShape', s=True, d=False)
+            if connections:
+                cmds.textField('jt_pass_through_bs_node_name_text', e=True, tx=connections[0])
 
 
 
