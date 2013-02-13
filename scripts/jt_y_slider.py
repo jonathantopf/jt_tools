@@ -180,7 +180,7 @@ def create_y_slider(name, low=0, high=1, init=0, attribute=False):
     
     # lock and hide attributes
     for attr in ('tx', 'tz', 'rx', 'ry', 'rz', 'sx', 'sy', 'sz', 'v'):
-        cmds.setAttr(slider + '.' + attr, keyable=False, channelBox=False)
+        cmds.setAttr(slider + '.' + attr, keyable=False, channelBox=False, lock=True)
         
     cmds.select(slider_group, r=True)
     cmds.scale(10,10,10, r=True)
