@@ -1,4 +1,3 @@
-
 #
 # Copyright (c) 2013 Jonathan Topf
 #
@@ -35,11 +34,22 @@ def load_ui():
     window = cmds.loadUI(uiFile=os.path.join(current_script_path, 'jt_weight_slider.ui'))
     cmds.showWindow(window)
 
+def get_bone(jointnumb):
+
+    selected_joints = cmds.ls(sl=True, typ='joint')
+	if len(selected_joints) > 1:
+		jointtext = ["joint_disp_" + str(jointnumb), "joint_disp_" + str(1 - jointnumb)]
+		cmds.textField(jointtext[0], e=True, tx=selected_joints[0])
+		cmds.textField(jointtext[1], e=True, tx=selected_joints[1])
+	else:
+		jointtext = "joint_disp_" + str(jointnumb)
+		cmds.textField(jointtext, e=True, tx=selected_joints[0])
+	
 
 def get_skinCluster(joints):
 
     if len(joints) is not 0:
-        skin_clusters = cmds.listConnections(joints[0], t='skinCluster')
+        skin_clusters = cmds.listConnections(joints, t='skinCluster')
         if len(skin_clusters) is not 0:
             return skin_clusters[0]
 
@@ -50,30 +60,35 @@ def get_skinCluster(joints):
 def set_weights():
 
     slider_value = cmds.intSlider('jt_weight_slider_slider', query=True, v=True) / 100.0
-    selected_joints = cmds.ls(sl=True, typ='joint')
+    cmds.textField('weightpercent', e=True, tx=slider_value )
+    stored_joints = [cmds.textField('joint_disp_0', q=True, tx=True), cmds.textField('joint_disp_1', q=True, tx=True)]
+    stored_joints = filter(None, stored_joints)
     selected_verts = cmds.filterExpand(sm=31)
-
-    if len(selected_joints) == 0:
-        cmds.warning('No joints selected')
+    skincluster = get_skinCluster(stored_joints[0])
     
+    if len(stored_joints) == 1:
+    	cmds.skinPercent(skincluster, tv=(stored_joints[0], 1 - slider_value))
+    	cmds.skinPercent(skincluster, pruneWeights=0.01 )
+    	
     else:
-        skincluster = get_skinCluster(selected_joints)
-        cmds.skinPercent(skincluster, tv=(selected_joints[0], slider_value))
+    	cmds.skinPercent(skincluster, tv=[(stored_joints[0], 1 - slider_value),(stored_joints[1], slider_value)])
+    	cmds.skinPercent(skincluster, pruneWeights=0.01 )
+    #print(slider_value)
+    #print(inv_slider_value)
 
 
 def modify_weights(num):
 
-    selected_joints = cmds.ls(sl=True, typ='joint')
+    stored_joints = [cmds.textField('joint_disp_0', q=True, tx=True), cmds.textField('joint_disp_1', q=True, tx=True)]
+    stored_joints = filter(None, stored_joints)
     selected_verts = cmds.filterExpand(sm=31)
+    skincluster = get_skinCluster(stored_joints)
 
-    if len(selected_joints) == 0:
-        cmds.warning('No joints selected')
+    if len(stored_joints) == 1:
+        cmds.skinPercent(skincluster, tv=(stored_joints[0], num), r=True)
     
     else:
-        skincluster = get_skinCluster(selected_joints)
-        cmds.skinPercent(skincluster, tv=(selected_joints[0], num), r=True)
-
-
+        cmds.skinPercent(skincluster, tv=[(stored_joints[0],- num), (stored_joints[1], num)], r=True)
 
 
 
