@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>315</width>
-    <height>309</height>
+    <width>314</width>
+    <height>430</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -123,7 +123,92 @@
        <string>create</string>
       </property>
       <property name="+c" stdset="0">
-       <string>'import jt_ctl_curve;jt_ctl_curve.create_from_ui()'</string>
+       <string>'import jt_ctl_curve;jt_ctl_curve.ui_create()'</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="text">
+       <string>replace</string>
+      </property>
+      <property name="+c" stdset="0">
+       <string>'import jt_ctl_curve;jt_ctl_curve.ui_replace()'</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="Line" name="line_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>re-orient curve  </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="jt_ctl_curve_ui_re_orient_combo">
+        <item>
+         <property name="text">
+          <string>X + 90</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X - 90</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Y + 90</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Y - 90</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Z + 90</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Z - 90</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="text">
+       <string>re-orient</string>
+      </property>
+      <property name="+c" stdset="0">
+       <string>'import jt_ctl_curve;jt_ctl_curve.ui_re_orient()'</string>
       </property>
      </widget>
     </item>
