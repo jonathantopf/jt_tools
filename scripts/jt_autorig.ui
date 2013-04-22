@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>706</width>
-    <height>731</height>
+    <width>641</width>
+    <height>713</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,14 +43,45 @@
     <item row="3" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="Base">
        <attribute name="title">
         <string>Base</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <item row="3" column="1">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_38">
+            <property name="text">
+             <string>cog</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="jt_autorig_base_cog_select_text">
+            <property name="text">
+             <string>cog</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>430</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_10">
           <item>
            <spacer name="horizontalSpacer_10">
@@ -87,33 +118,6 @@
           </item>
          </layout>
         </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="jt_autorig_base_cog_select_text">
-          <property name="text">
-           <string>cog</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_38">
-          <property name="text">
-           <string>cog</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <spacer name="verticalSpacer_7">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>430</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="Spine">
@@ -121,42 +125,7 @@
         <string>Spine</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6">
-        <item row="6" column="0">
-         <widget class="QLabel" name="label_45">
-          <property name="text">
-           <string>spine_4</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_43">
-          <property name="text">
-           <string>spine_2</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_47">
-          <property name="text">
-           <string>pelvis</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="label_46">
-          <property name="text">
-           <string>neck</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLineEdit" name="jt_autorig_pelvis_spine_2_select_text">
-          <property name="text">
-           <string>spine_2</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
+        <item row="11" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout_9">
           <item>
            <spacer name="horizontalSpacer_9">
@@ -193,42 +162,7 @@
           </item>
          </layout>
         </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="jt_autorig_pelvis_cog_select_text">
-          <property name="text">
-           <string>cog</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="jt_autorig_pelvis_pelvis_select_text">
-          <property name="text">
-           <string>pelvis</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLineEdit" name="jt_autorig_pelvis_spine_1_select_text">
-          <property name="text">
-           <string>spine_1</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QLineEdit" name="jt_autorig_pelvis_spine_4_select_text">
-          <property name="text">
-           <string>spine_4</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QLineEdit" name="jt_autorig_pelvis_spine_3_select_text">
-          <property name="text">
-           <string>spine_3</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
+        <item row="10" column="1">
          <spacer name="verticalSpacer_6">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -241,33 +175,107 @@
           </property>
          </spacer>
         </item>
-        <item row="7" column="1">
-         <widget class="QLineEdit" name="jt_autorig_pelvis_neck_select_text">
-          <property name="text">
-           <string>neck</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_44">
-          <property name="text">
-           <string>spine_3</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_41">
-          <property name="text">
-           <string>cog</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_42">
-          <property name="text">
-           <string>spine_1</string>
-          </property>
-         </widget>
+        <item row="8" column="1">
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_44">
+            <property name="text">
+             <string>spine_3</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_41">
+            <property name="text">
+             <string>cog</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLineEdit" name="jt_autorig_pelvis_cog_select_text">
+            <property name="text">
+             <string>cog</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLineEdit" name="jt_autorig_pelvis_pelvis_select_text">
+            <property name="text">
+             <string>pelvis</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_47">
+            <property name="text">
+             <string>pelvis</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLineEdit" name="jt_autorig_pelvis_spine_1_select_text">
+            <property name="text">
+             <string>spine_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLineEdit" name="jt_autorig_pelvis_spine_2_select_text">
+            <property name="text">
+             <string>spine_2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLineEdit" name="jt_autorig_pelvis_spine_3_select_text">
+            <property name="text">
+             <string>spine_3</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="2">
+           <widget class="QLineEdit" name="jt_autorig_pelvis_spine_4_select_text">
+            <property name="text">
+             <string>spine_4</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="2">
+           <widget class="QLineEdit" name="jt_autorig_pelvis_neck_select_text">
+            <property name="text">
+             <string>neck</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="label_46">
+            <property name="text">
+             <string>neck</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_42">
+            <property name="text">
+             <string>spine_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_43">
+            <property name="text">
+             <string>spine_2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="label_45">
+            <property name="text">
+             <string>spine_4</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -275,71 +283,103 @@
        <attribute name="title">
         <string>Arms</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="7" column="0">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>hand</string>
-          </property>
-         </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_10">
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>shoulder</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>clavicle</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>elbow</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>forearm</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>wrist</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>hand</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="jt_autorig_arms_wrist_select_text">
+            <property name="text">
+             <string>L_wrist</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="jt_autorig_arms_hand_select_text">
+            <property name="text">
+             <string>L_hand</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="jt_autorig_arms_shoulder_select_text">
+            <property name="text">
+             <string>L_shoulder</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="jt_autorig_arms_clavicle_select_text">
+            <property name="text">
+             <string>L_clavicle</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="jt_autorig_arms_elbow_select_text">
+            <property name="text">
+             <string>L_elbow</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="jt_autorig_arms_forearm_select_text">
+            <property name="text">
+             <string>L_forearm</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Select bones from either side of the rig, bone names must start with 'L' or 'R'</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Select bones from either side of the rig, bone names must start with 'L' or 'R'</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>wrist</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QLineEdit" name="jt_autorig_arms_forearm_select_text">
-          <property name="text">
-           <string>L_forearm</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLineEdit" name="jt_autorig_arms_shoulder_select_text">
-          <property name="text">
-           <string>L_shoulder</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLineEdit" name="jt_autorig_arms_elbow_select_text">
-          <property name="text">
-           <string>L_elbow</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_6">
-          <property name="text">
-           <string>elbow</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>shoulder</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>clavicle</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QCheckBox" name="jt_autorig_arms_rig_L">
@@ -376,35 +416,7 @@
           </item>
          </layout>
         </item>
-        <item row="7" column="1">
-         <widget class="QLineEdit" name="jt_autorig_arms_hand_select_text">
-          <property name="text">
-           <string>L_hand</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QLineEdit" name="jt_autorig_arms_wrist_select_text">
-          <property name="text">
-           <string>L_wrist</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>forearm</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="jt_autorig_arms_clavicle_select_text">
-          <property name="text">
-           <string>L_clavicle</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
+        <item>
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -417,7 +429,7 @@
           </property>
          </spacer>
         </item>
-        <item row="10" column="1">
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <spacer name="horizontalSpacer">
@@ -460,170 +472,124 @@
        <attribute name="title">
         <string>Hands</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_7">
-        <item row="5" column="1">
-         <widget class="QLineEdit" name="jt_autorig_hand_middle_base_select_text">
-          <property name="text">
-           <string>L_middle_1</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_50">
-          <property name="text">
-           <string>hand</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="jt_autorig_hand_ring_cup_select_text">
-          <property name="text">
-           <string>L_ring_cup</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_52">
-          <property name="text">
-           <string>pinky cup</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QLineEdit" name="jt_autorig_hand_ring_base_select_text">
-          <property name="text">
-           <string>L_ring_1</string>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayout_12">
-          <item>
-           <spacer name="horizontalSpacer_12">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_9">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_54">
             <property name="text">
-             <string>remove</string>
-            </property>
-            <property name="+c" stdset="0">
-             <string>'import jt_autorig;jt_autorig.ui_remove_hand_rig()'</string>
+             <string>index base</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_10">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_50">
             <property name="text">
-             <string>create</string>
+             <string>hand</string>
             </property>
-            <property name="+c" stdset="0">
-             <string>'import jt_autorig;jt_autorig.ui_create_hand_rig()'</string>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_52">
+            <property name="text">
+             <string>pinky cup</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_51">
+            <property name="text">
+             <string>ring cup</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_53">
+            <property name="text">
+             <string>thumb base</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_55">
+            <property name="text">
+             <string>middle base</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_56">
+            <property name="text">
+             <string>ring base</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="label_57">
+            <property name="text">
+             <string>pinky base</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="jt_autorig_hand_ring_cup_select_text">
+            <property name="text">
+             <string>L_ring_cup</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="jt_autorig_hand_middle_base_select_text">
+            <property name="text">
+             <string>L_middle_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="jt_autorig_hand_hand_select_text">
+            <property name="text">
+             <string>L_hand</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="jt_autorig_hand_index_base_select_text">
+            <property name="text">
+             <string>L_index_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="jt_autorig_hand_pinky_cup_select_text">
+            <property name="text">
+             <string>L_pinky_cup</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="jt_autorig_hand_thumb_base_select_text">
+            <property name="text">
+             <string>L_thumb_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="jt_autorig_hand_ring_base_select_text">
+            <property name="text">
+             <string>L_ring_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLineEdit" name="jt_autorig_hand_pinky_base_select_text">
+            <property name="text">
+             <string>L_pinky_1</string>
             </property>
            </widget>
           </item>
          </layout>
         </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="jt_autorig_hand_hand_select_text">
-          <property name="text">
-           <string>L_hand</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
-         <spacer name="verticalSpacer_9">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>130</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="7" column="1">
-         <widget class="QLineEdit" name="jt_autorig_hand_pinky_base_select_text">
-          <property name="text">
-           <string>L_pinky_1</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLineEdit" name="jt_autorig_hand_thumb_base_select_text">
-          <property name="text">
-           <string>L_thumb_1</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_51">
-          <property name="text">
-           <string>ring cup</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="label_56">
-          <property name="text">
-           <string>ring base</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="jt_autorig_hand_pinky_cup_select_text">
-          <property name="text">
-           <string>L_pinky_cup</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLineEdit" name="jt_autorig_hand_index_base_select_text">
-          <property name="text">
-           <string>L_index_1</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_53">
-          <property name="text">
-           <string>thumb base</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="label_57">
-          <property name="text">
-           <string>pinky base</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_54">
-          <property name="text">
-           <string>index base</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_55">
-          <property name="text">
-           <string>middle base</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <widget class="QCheckBox" name="jt_autorig_hands_rig_L">
@@ -657,6 +623,56 @@
              </size>
             </property>
            </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_9">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>130</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item>
+           <spacer name="horizontalSpacer_12">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_9">
+            <property name="text">
+             <string>remove</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_remove_hand_rig()'</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_10">
+            <property name="text">
+             <string>create</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_create_hand_rig()'</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -1144,8 +1160,26 @@
        <attribute name="title">
         <string>Head</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_5">
-        <item row="2" column="2">
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="jt_autorig_head_head_select_text">
+            <property name="text">
+             <string>head</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_49">
+            <property name="text">
+             <string>head</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
          <spacer name="verticalSpacer_8">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -1158,14 +1192,7 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label_49">
-          <property name="text">
-           <string>head</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_11">
           <item>
            <spacer name="horizontalSpacer_11">
@@ -1201,13 +1228,6 @@
            </widget>
           </item>
          </layout>
-        </item>
-        <item row="1" column="2">
-         <widget class="QLineEdit" name="jt_autorig_head_head_select_text">
-          <property name="text">
-           <string>head</string>
-          </property>
-         </widget>
         </item>
        </layout>
       </widget>
@@ -1254,6 +1274,28 @@
   <tabstop>jt_autorig_hands_rig_R</tabstop>
   <tabstop>pushButton_9</tabstop>
   <tabstop>pushButton_10</tabstop>
+  <tabstop>jt_autorig_legs_pelvis_select_text</tabstop>
+  <tabstop>pushButton_11</tabstop>
+  <tabstop>jt_autorig_legs_hip_select_text</tabstop>
+  <tabstop>pushButton_12</tabstop>
+  <tabstop>jt_autorig_legs_knee_select_text</tabstop>
+  <tabstop>pushButton_13</tabstop>
+  <tabstop>jt_autorig_legs_ankle_select_text</tabstop>
+  <tabstop>pushButton_14</tabstop>
+  <tabstop>jt_autorig_legs_ball_select_text</tabstop>
+  <tabstop>pushButton_15</tabstop>
+  <tabstop>jt_autorig_legs_toes_select_text</tabstop>
+  <tabstop>pushButton_16</tabstop>
+  <tabstop>jt_autorig_legs_reverse_foot_root_select_text</tabstop>
+  <tabstop>pushButton_17</tabstop>
+  <tabstop>jt_autorig_legs_reverse_foot_heel_select_text</tabstop>
+  <tabstop>pushButton_18</tabstop>
+  <tabstop>jt_autorig_legs_reverse_foot_ball_select_text</tabstop>
+  <tabstop>pushButton_19</tabstop>
+  <tabstop>jt_autorig_legs_reverse_foot_toes_select_text</tabstop>
+  <tabstop>pushButton_20</tabstop>
+  <tabstop>jt_autorig_legs_reverse_foot_ankle_select_text</tabstop>
+  <tabstop>pushButton_21</tabstop>
   <tabstop>jt_autorig_legs_roll_combo</tabstop>
   <tabstop>jt_autorig_legs_pitch_combo</tabstop>
   <tabstop>jt_autorig_legs_yaw_combo</tabstop>
