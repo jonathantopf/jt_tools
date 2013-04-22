@@ -43,7 +43,7 @@
     <item row="3" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="Base">
        <attribute name="title">
@@ -1103,6 +1103,65 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>jt_autorig_base_name_select_text</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>jt_autorig_base_cog_select_text</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>jt_autorig_pelvis_pelvis_select_text</tabstop>
+  <tabstop>jt_autorig_pelvis_cog_select_text</tabstop>
+  <tabstop>jt_autorig_pelvis_spine_1_select_text</tabstop>
+  <tabstop>jt_autorig_pelvis_spine_2_select_text</tabstop>
+  <tabstop>jt_autorig_pelvis_spine_3_select_text</tabstop>
+  <tabstop>jt_autorig_pelvis_spine_4_select_text</tabstop>
+  <tabstop>jt_autorig_pelvis_neck_select_text</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>jt_autorig_arms_clavicle_select_text</tabstop>
+  <tabstop>jt_autorig_arms_shoulder_select_text</tabstop>
+  <tabstop>jt_autorig_arms_elbow_select_text</tabstop>
+  <tabstop>jt_autorig_arms_forearm_select_text</tabstop>
+  <tabstop>jt_autorig_arms_wrist_select_text</tabstop>
+  <tabstop>jt_autorig_arms_hand_select_text</tabstop>
+  <tabstop>jt_autorig_arms_rig_L</tabstop>
+  <tabstop>jt_autorig_arms_rig_R</tabstop>
+  <tabstop>jt_autorig_arms_go_2</tabstop>
+  <tabstop>jt_autorig_arms_go</tabstop>
+  <tabstop>jt_autorig_hand_hand_select_text</tabstop>
+  <tabstop>jt_autorig_hand_ring_cup_select_text</tabstop>
+  <tabstop>jt_autorig_hand_pinky_cup_select_text</tabstop>
+  <tabstop>jt_autorig_hand_thumb_base_select_text</tabstop>
+  <tabstop>jt_autorig_hand_index_base_select_text</tabstop>
+  <tabstop>jt_autorig_hand_middle_base_select_text</tabstop>
+  <tabstop>jt_autorig_hand_ring_base_select_text</tabstop>
+  <tabstop>jt_autorig_hand_pinky_base_select_text</tabstop>
+  <tabstop>jt_autorig_hands_rig_L</tabstop>
+  <tabstop>jt_autorig_hands_rig_R</tabstop>
+  <tabstop>pushButton_9</tabstop>
+  <tabstop>pushButton_10</tabstop>
+  <tabstop>jt_autorig_legs_pelvis_select_text</tabstop>
+  <tabstop>jt_autorig_legs_hip_select_text</tabstop>
+  <tabstop>jt_autorig_legs_knee_select_text</tabstop>
+  <tabstop>jt_autorig_legs_ankle_select_text</tabstop>
+  <tabstop>jt_autorig_legs_ball_select_text</tabstop>
+  <tabstop>jt_autorig_legs_toes_select_text</tabstop>
+  <tabstop>jt_autorig_legs_reverse_foot_root_select_text</tabstop>
+  <tabstop>jt_autorig_legs_reverse_foot_heel_select_text</tabstop>
+  <tabstop>jt_autorig_legs_reverse_foot_toes_select_text</tabstop>
+  <tabstop>jt_autorig_legs_reverse_foot_ball_select_text</tabstop>
+  <tabstop>jt_autorig_legs_reverse_foot_ankle_select_text</tabstop>
+  <tabstop>jt_autorig_legs_roll_combo</tabstop>
+  <tabstop>jt_autorig_legs_pitch_combo</tabstop>
+  <tabstop>jt_autorig_legs_yaw_combo</tabstop>
+  <tabstop>jt_autorig_leg_rig_L</tabstop>
+  <tabstop>jt_autorig_leg_rig_R</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>jt_autorig_head_head_select_text</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>pushButton_8</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
