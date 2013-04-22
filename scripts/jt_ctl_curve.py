@@ -56,6 +56,66 @@ def load_ui():
 
     cmds.showWindow(window)
 
+
+def ui_create():
+    if cmds.textScrollList('jt_ctl_curve_ui_list', q=True, si=True) is None:
+        curve_name = 'circle'
+    else:
+        curve_name = cmds.textScrollList('jt_ctl_curve_ui_list', q=True, si=True)[0]
+
+    object = cmds.ls(sl=True)
+    if object == []:
+        object = None
+    else:
+        object = object[0]
+
+    create(object,
+            curve_name,
+            cmds.checkBox('jt_ctl_curve_ui_parent_curve', q=True, value=True),
+            cmds.checkBox('jt_ctl_curve_ui_rotX', q=True, value=True),
+            cmds.checkBox('jt_ctl_curve_ui_rotY', q=True, value=True),
+            cmds.checkBox('jt_ctl_curve_ui_rotZ', q=True, value=True),
+            cmds.checkBox('jt_ctl_curve_ui_scaleX', q=True, value=True),
+            cmds.checkBox('jt_ctl_curve_ui_scaleY', q=True, value=True),
+            cmds.checkBox('jt_ctl_curve_ui_scaleZ', q=True, value=True),
+            cmds.checkBox('jt_ctl_curve_ui_transformX', q=True, value=True),
+            cmds.checkBox('jt_ctl_curve_ui_transformY', q=True, value=True),
+            cmds.checkBox('jt_ctl_curve_ui_transformZ', q=True, value=True))
+
+def ui_replace():
+    # jt_ctl_curve_ui_re_orient_combo
+    pass
+
+
+def ui_re_orient():
+    
+    print 'started'
+    selection = cmds.ls(sl=True)
+    if len(selection) == 0:
+        cmds.warning('nothign selected')
+        return
+
+    orient_direction = cmds.optionMenu('jt_ctl_curve_ui_re_orient_combo', q=True, v=True)
+
+    menu_states = [('X + 90', ( 90,  0 ,  0 )),
+                   ('X - 90', (-90,  0 ,  0 )),
+                   ('Y + 90', ( 0 ,  90,  0 )),
+                   ('Y - 90', ( 0 , -90,  0 )),
+                   ('Z + 90', ( 0 ,  0 ,  90)),
+                   ('Z - 90', ( 0 ,  0 , -90))]
+
+    rotation_value = (0,0,0)
+
+    for menu_state in menu_states:
+        if menu_state[0] == orient_direction:
+            rotation_value = menu_state[1]
+
+    cmds.rotate(rotation_value[0], rotation_value[1], rotation_value[2], selection[0], r=True, os=True)
+    cmds.makeIdentity(selection[0], apply=True, t=0, r=1, s=0, n=0)
+    print 'ended'
+
+
+
 def create(object=None, curve_name='circle', parent_ctl=True, xrot=False, yrot=False, zrot=False, xscale=False, yscale=False, zscale=False, xtrans=False, ytrans=False, ztrans=False, align=True, lock_unused=True):
 
     if curve_name == None:
@@ -160,28 +220,4 @@ def create(object=None, curve_name='circle', parent_ctl=True, xrot=False, yrot=F
     return(curve_name, group_name)
 
 
-def create_from_ui():
-    if cmds.textScrollList('jt_ctl_curve_ui_list', q=True, si=True) is None:
-        curve_name = 'circle'
-    else:
-        curve_name = cmds.textScrollList('jt_ctl_curve_ui_list', q=True, si=True)[0]
-
-    object = cmds.ls(sl=True)
-    if object == []:
-        object = None
-    else:
-        object = object[0]
-
-    create(object,
-            curve_name,
-            cmds.checkBox('jt_ctl_curve_ui_parent_curve', q=True, value=True),
-            cmds.checkBox('jt_ctl_curve_ui_rotX', q=True, value=True),
-            cmds.checkBox('jt_ctl_curve_ui_rotY', q=True, value=True),
-            cmds.checkBox('jt_ctl_curve_ui_rotZ', q=True, value=True),
-            cmds.checkBox('jt_ctl_curve_ui_scaleX', q=True, value=True),
-            cmds.checkBox('jt_ctl_curve_ui_scaleY', q=True, value=True),
-            cmds.checkBox('jt_ctl_curve_ui_scaleZ', q=True, value=True),
-            cmds.checkBox('jt_ctl_curve_ui_transformX', q=True, value=True),
-            cmds.checkBox('jt_ctl_curve_ui_transformY', q=True, value=True),
-            cmds.checkBox('jt_ctl_curve_ui_transformZ', q=True, value=True))
 
