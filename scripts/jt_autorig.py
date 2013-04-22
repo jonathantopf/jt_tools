@@ -677,7 +677,7 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, 
     cmds.connectAttr(ik_fk_switch_curve + '.ik_visibility', foot_curve_group + '.visibility', f=True)
 
     # add reverse foot attrs to foot curve
-    for attr in ('foot_break', 'foot_roll', 'heel_pivot', 'toe_pivot', 'heel', 'ball', 'toe'):
+    for attr in ('foot_break', 'foot_roll', 'heel_pivot', 'toes_pivot', 'heel', 'ball', 'toes'):
         add_keyable_attr(foot_curve, attr, 'float')
 
     # initialise foot break
@@ -692,14 +692,22 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, 
     ball_clamp = create_clamp(foot_curve + '.foot_roll', side + '_ball_clamp', 0, foot_curve + '.foot_break')
     toes_clamp  = create_clamp(toe_offset + '.output1D', side + '_toe_clamp' , 0, 360)
 
-    # add foot roll utilities to base curve rig nodes attr
-    add_node_to_rig_nodes(base_curve, rig_region_name, (inverse_foot_break, toe_offset, heel_clamp, ball_clamp, toes_clamp))
+    # create sum nodes for foot roll override attrs
+    heel_sum = create_add(heel_clamp + '.outputR', side + '_heel_sum', foot_curve + '.heel')
+    ball_sum = create_add(ball_clamp + '.outputR', side + '_ball_sum', foot_curve + '.ball')
+    toes_sum = create_add(toes_clamp + '.outputR', side + '_toes_sum', foot_curve + '.toes')
 
-    # connect up attrs
-    print '??', yaw
-    cmds.connectAttr(heel_clamp + '.outputR', reverse_foot_heel + '.rotate' + yaw, f=True)
-    cmds.connectAttr(ball_clamp + '.outputR', reverse_foot_ball + '.rotate' + yaw, f=True)
-    cmds.connectAttr(toes_clamp + '.outputR', reverse_foot_toes + '.rotate' + yaw, f=True)
+    # add foot roll utilities to base curve rig nodes attr
+    add_node_to_rig_nodes(base_curve, rig_region_name, (inverse_foot_break, toe_offset, heel_clamp, ball_clamp, toes_clamp, heel_sum, ball_sum, toes_sum))
+
+    # connect up sum nodes and remaninig attrs to bones attrs
+    cmds.connectAttr(heel_sum + '.output1D', reverse_foot_heel + '.rotate' + yaw, f=True)
+    cmds.connectAttr(ball_sum + '.output1D', reverse_foot_ball + '.rotate' + yaw, f=True)
+    cmds.connectAttr(toes_sum + '.output1D', reverse_foot_toes + '.rotate' + yaw, f=True)
+    cmds.connectAttr(foot_curve + '.heel_pivot', reverse_foot_heel + '.rotate' + pitch, f=True)
+    cmds.connectAttr(foot_curve + '.toes_pivot', reverse_foot_toes + '.rotate' + pitch, f=True)
+
+
 
     # parent ik foot ctl to leg group
     cmds.select(foot_curve_group, leg_group, r=True)
