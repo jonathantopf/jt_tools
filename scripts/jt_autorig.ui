@@ -823,6 +823,116 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="3">
+           <widget class="QPushButton" name="pushButton_11">
+            <property name="text">
+             <string>select</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_pelvis_select_text&quot;)'</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QPushButton" name="pushButton_12">
+            <property name="text">
+             <string>select</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_hip_select_text&quot;)'</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QPushButton" name="pushButton_13">
+            <property name="text">
+             <string>select</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_knee_select_text&quot;)'</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QPushButton" name="pushButton_14">
+            <property name="text">
+             <string>select</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_ankle_select_text&quot;)'</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3">
+           <widget class="QPushButton" name="pushButton_15">
+            <property name="text">
+             <string>select</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_ball_select_text&quot;)'</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="3">
+           <widget class="QPushButton" name="pushButton_16">
+            <property name="text">
+             <string>select</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_toes_select_text&quot;)'</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="3">
+           <widget class="QPushButton" name="pushButton_17">
+            <property name="text">
+             <string>select</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_reverse_foot_root_select_text&quot;)'</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="3">
+           <widget class="QPushButton" name="pushButton_18">
+            <property name="text">
+             <string>select</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_reverse_foot_heel_select_text&quot;)'</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="3">
+           <widget class="QPushButton" name="pushButton_19">
+            <property name="text">
+             <string>select</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_reverse_foot_ball_select_text&quot;)'</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="3">
+           <widget class="QPushButton" name="pushButton_20">
+            <property name="text">
+             <string>select</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_reverse_foot_toes_select_text&quot;)'</string>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="3">
+           <widget class="QPushButton" name="pushButton_21">
+            <property name="text">
+             <string>select</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_reverse_foot_ankle_select_text&quot;)'</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>

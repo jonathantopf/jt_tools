@@ -298,6 +298,16 @@ def ui_create_leg_rig():
         rig_region_name = 'R_leg'
         create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, toes, reverse_foot_root, reverse_foot_heel, reverse_foot_toes, reverse_foot_ball, reverse_foot_ankle, roll, yaw, pitch, 'R')
 
+def ui_select_leg_rig_joint(text_field):
+    
+    selection = cmds.ls(sl=True, typ='joint')
+    if len(selection) == 0:
+        cmds.warning('no joint selected')
+        return
+
+    selection_name = selection[0]
+    cmds.textField(text_field, e=True, tx=selection_name)
+
 
 def ui_remove_leg_rig():
 
