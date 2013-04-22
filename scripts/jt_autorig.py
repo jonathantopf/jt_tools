@@ -287,13 +287,16 @@ def ui_create_leg_rig():
     reverse_foot_ankle = cmds.textField('jt_autorig_legs_reverse_foot_ankle_select_text', q=True, tx=True)
     rig_l    = cmds.checkBox('jt_autorig_leg_rig_L', q=True, value=True)
     rig_r    = cmds.checkBox('jt_autorig_leg_rig_R', q=True, value=True)
+    roll     = cmds.optionMenu('jt_autorig_legs_roll_combo', q=True, v=True)
+    yaw      = cmds.optionMenu('jt_autorig_legs_yaw_combo', q=True, v=True)
+    pitch    = cmds.optionMenu('jt_autorig_legs_pitch_combo', q=True, v=True)
 
     if rig_l:
         rig_region_name = 'L_leg'
-        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, toes, reverse_foot_root, reverse_foot_heel, reverse_foot_toes, reverse_foot_ball, reverse_foot_ankle, 'L')
+        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, toes, reverse_foot_root, reverse_foot_heel, reverse_foot_toes, reverse_foot_ball, reverse_foot_ankle, roll, yaw, pitch, 'L')
     if rig_r:
         rig_region_name = 'R_leg'
-        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, toes, reverse_foot_root, reverse_foot_heel, reverse_foot_toes, reverse_foot_ball, reverse_foot_ankle, 'R')
+        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, toes, reverse_foot_root, reverse_foot_heel, reverse_foot_toes, reverse_foot_ball, reverse_foot_ankle, roll, yaw, pitch, 'R')
 
 
 def ui_remove_leg_rig():
@@ -554,7 +557,7 @@ def create_arm_rig(base_curve, rig_region_name, clavicle, shoulder, elbow, forea
     add_node_to_rig_nodes(base_curve, rig_region_name, forearm_split_multiply_node)
 
 
-def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, toes, reverse_foot_root, reverse_foot_heel, reverse_foot_toes, reverse_foot_ball, reverse_foot_ankle, side):
+def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, toes, reverse_foot_root, reverse_foot_heel, reverse_foot_toes, reverse_foot_ball, reverse_foot_ankle, roll, yaw, pitch, side):
 
     # create group to contain all rigging nodes
     cmds.select(cl=True)
@@ -693,9 +696,10 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, 
     add_node_to_rig_nodes(base_curve, rig_region_name, (inverse_foot_break, toe_offset, heel_clamp, ball_clamp, toes_clamp))
 
     # connect up attrs
-    cmds.connectAttr(heel_clamp + '.outputR', reverse_foot_heel + '.rotateX', f=True)
-    cmds.connectAttr(ball_clamp + '.outputR', reverse_foot_ball + '.rotateX', f=True)
-    cmds.connectAttr(toes_clamp + '.outputR', reverse_foot_toes + '.rotateX', f=True)
+    print '??', yaw
+    cmds.connectAttr(heel_clamp + '.outputR', reverse_foot_heel + '.rotate' + yaw, f=True)
+    cmds.connectAttr(ball_clamp + '.outputR', reverse_foot_ball + '.rotate' + yaw, f=True)
+    cmds.connectAttr(toes_clamp + '.outputR', reverse_foot_toes + '.rotate' + yaw, f=True)
 
     # parent ik foot ctl to leg group
     cmds.select(foot_curve_group, leg_group, r=True)
