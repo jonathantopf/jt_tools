@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>736</width>
-    <height>713</height>
+    <height>747</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -790,13 +790,6 @@
             </property>
            </widget>
           </item>
-          <item row="9" column="2">
-           <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_toes_select_text">
-            <property name="text">
-             <string>L_reverse_foot_toes</string>
-            </property>
-           </widget>
-          </item>
           <item row="4" column="2">
            <widget class="QLineEdit" name="jt_autorig_legs_ball_select_text">
             <property name="text">
@@ -818,14 +811,14 @@
             </property>
            </widget>
           </item>
-          <item row="8" column="2">
+          <item row="9" column="2">
            <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_ball_select_text">
             <property name="text">
              <string>L_reverse_foot_ball</string>
             </property>
            </widget>
           </item>
-          <item row="10" column="2">
+          <item row="11" column="2">
            <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_ankle_select_text">
             <property name="text">
              <string>L_reverse_foot_ankle</string>
@@ -860,7 +853,7 @@
             </property>
            </widget>
           </item>
-          <item row="8" column="0">
+          <item row="9" column="0">
            <widget class="QLabel" name="label_18">
             <property name="text">
              <string>reverse foot ball</string>
@@ -881,14 +874,7 @@
             </property>
            </widget>
           </item>
-          <item row="9" column="0">
-           <widget class="QLabel" name="label_17">
-            <property name="text">
-             <string>reverse foot toes</string>
-            </property>
-           </widget>
-          </item>
-          <item row="10" column="0">
+          <item row="11" column="0">
            <widget class="QLabel" name="label_19">
             <property name="text">
              <string>reverse foot ankle</string>
@@ -975,7 +961,7 @@
             </property>
            </widget>
           </item>
-          <item row="8" column="3">
+          <item row="9" column="3">
            <widget class="QPushButton" name="pushButton_19">
             <property name="text">
              <string>select</string>
@@ -985,7 +971,24 @@
             </property>
            </widget>
           </item>
-          <item row="9" column="3">
+          <item row="11" column="3">
+           <widget class="QPushButton" name="pushButton_21">
+            <property name="text">
+             <string>select</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_reverse_foot_ankle_select_text&quot;)'</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_17">
+            <property name="text">
+             <string>reverse foot toes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="3">
            <widget class="QPushButton" name="pushButton_20">
             <property name="text">
              <string>select</string>
@@ -995,13 +998,10 @@
             </property>
            </widget>
           </item>
-          <item row="10" column="3">
-           <widget class="QPushButton" name="pushButton_21">
+          <item row="8" column="2">
+           <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_toes_select_text">
             <property name="text">
-             <string>select</string>
-            </property>
-            <property name="+c" stdset="0">
-             <string>'import jt_autorig;jt_autorig.ui_select_leg_rig_joint(&quot;jt_autorig_legs_reverse_foot_ankle_select_text&quot;)'</string>
+             <string>L_reverse_foot_toes</string>
             </property>
            </widget>
           </item>
@@ -1355,8 +1355,6 @@
   <tabstop>pushButton_18</tabstop>
   <tabstop>jt_autorig_legs_reverse_foot_ball_select_text</tabstop>
   <tabstop>pushButton_19</tabstop>
-  <tabstop>jt_autorig_legs_reverse_foot_toes_select_text</tabstop>
-  <tabstop>pushButton_20</tabstop>
   <tabstop>jt_autorig_legs_reverse_foot_ankle_select_text</tabstop>
   <tabstop>pushButton_21</tabstop>
   <tabstop>jt_autorig_legs_roll_combo</tabstop>
