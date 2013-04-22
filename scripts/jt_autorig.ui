@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>863</width>
-    <height>621</height>
+    <width>734</width>
+    <height>661</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,7 +43,7 @@
     <item row="3" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="Base">
        <attribute name="title">
@@ -667,21 +667,21 @@
         <string>Legs</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="5" column="1">
+        <item row="6" column="1">
          <widget class="QLineEdit" name="jt_autorig_legs_toes_select_text">
           <property name="text">
            <string>L_toes</string>
           </property>
          </widget>
         </item>
-        <item row="7" column="0">
+        <item row="8" column="0">
          <widget class="QLabel" name="label_16">
           <property name="text">
            <string>reverse foot heel</string>
           </property>
          </widget>
         </item>
-        <item row="14" column="1">
+        <item row="18" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
            <spacer name="horizontalSpacer_6">
@@ -718,21 +718,21 @@
           </item>
          </layout>
         </item>
-        <item row="2" column="0">
+        <item row="3" column="0">
          <widget class="QLabel" name="label_12">
           <property name="text">
            <string>knee</string>
           </property>
          </widget>
         </item>
-        <item row="8" column="1">
+        <item row="9" column="1">
          <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_toes_select_text">
           <property name="text">
            <string>L_reverse_foot_toes</string>
           </property>
          </widget>
         </item>
-        <item row="13" column="1">
+        <item row="17" column="1">
          <spacer name="verticalSpacer_3">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -745,49 +745,49 @@
           </property>
          </spacer>
         </item>
-        <item row="7" column="1">
+        <item row="8" column="1">
          <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_heel_select_text">
           <property name="text">
            <string>L_reverse_foot_heel</string>
           </property>
          </widget>
         </item>
-        <item row="10" column="1">
+        <item row="11" column="1">
          <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_ankle_select_text">
           <property name="text">
            <string>L_reverse_foot_ankle</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
+        <item row="6" column="0">
          <widget class="QLabel" name="label_15">
           <property name="text">
            <string>toes</string>
           </property>
          </widget>
         </item>
-        <item row="9" column="1">
+        <item row="10" column="1">
          <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_ball_select_text">
           <property name="text">
            <string>L_reverse_foot_ball</string>
           </property>
          </widget>
         </item>
-        <item row="9" column="0">
+        <item row="10" column="0">
          <widget class="QLabel" name="label_18">
           <property name="text">
            <string>reverse foot ball</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
+        <item row="2" column="1">
          <widget class="QLineEdit" name="jt_autorig_legs_hip_select_text">
           <property name="text">
            <string>L_hip</string>
           </property>
          </widget>
         </item>
-        <item row="12" column="1">
+        <item row="15" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout_7">
           <item>
            <widget class="QCheckBox" name="jt_autorig_leg_rig_L">
@@ -824,87 +824,203 @@
           </item>
          </layout>
         </item>
-        <item row="1" column="0">
+        <item row="2" column="0">
          <widget class="QLabel" name="label_11">
           <property name="text">
            <string>hip</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
+        <item row="4" column="1">
          <widget class="QLineEdit" name="jt_autorig_legs_ankle_select_text">
           <property name="text">
            <string>L_ankle</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="1" column="1">
          <widget class="QLineEdit" name="jt_autorig_legs_pelvis_select_text">
           <property name="text">
            <string>pelvis</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
+        <item row="5" column="1">
          <widget class="QLineEdit" name="jt_autorig_legs_ball_select_text">
           <property name="text">
            <string>L_ball</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
+        <item row="5" column="0">
          <widget class="QLabel" name="label_14">
           <property name="text">
            <string>ball</string>
           </property>
          </widget>
         </item>
-        <item row="8" column="0">
+        <item row="9" column="0">
          <widget class="QLabel" name="label_17">
           <property name="text">
            <string>reverse foot toes</string>
           </property>
          </widget>
         </item>
-        <item row="10" column="0">
+        <item row="11" column="0">
          <widget class="QLabel" name="label_19">
           <property name="text">
            <string>reverse foot ankle</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="4" column="0">
          <widget class="QLabel" name="label_13">
           <property name="text">
            <string>ankle</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
+        <item row="1" column="0">
          <widget class="QLabel" name="label_10">
           <property name="text">
            <string>pelvis</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="3" column="1">
          <widget class="QLineEdit" name="jt_autorig_legs_knee_select_text">
           <property name="text">
            <string>L_knee</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="1">
+        <item row="7" column="1">
          <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_root_select_text">
           <property name="text">
            <string>L_reverse_foot_root</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="0">
+        <item row="7" column="0">
          <widget class="QLabel" name="label_20">
           <property name="text">
            <string>reverse foot root</string>
+          </property>
+         </widget>
+        </item>
+        <item row="13" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_21">
+            <property name="text">
+             <string>roll</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="jt_autorig_legs_roll_combo">
+            <item>
+             <property name="text">
+              <string>X</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Y</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Z</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>pitch</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="jt_autorig_legs_pitch_combo">
+            <item>
+             <property name="text">
+              <string>Z</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>X</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Y</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>yaw</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="jt_autorig_legs_yaw_combo">
+            <item>
+             <property name="text">
+              <string>Y</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>X</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Z</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="12" column="1">
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="1">
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="16" column="1">
+         <widget class="Line" name="line_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
