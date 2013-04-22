@@ -82,14 +82,46 @@ def ui_create():
             cmds.checkBox('jt_ctl_curve_ui_transformY', q=True, value=True),
             cmds.checkBox('jt_ctl_curve_ui_transformZ', q=True, value=True))
 
+
 def ui_replace():
-    # jt_ctl_curve_ui_re_orient_combo
-    pass
+
+    selection = cmds.ls(sl=True, typ='transform')
+    if len(selection) == 0:
+        cmds.warning('no transform selected')
+        return
+
+    to_transform = selection[0]
+
+    if cmds.textScrollList('jt_ctl_curve_ui_list', q=True, si=True) is None:
+        curve_name = 'circle'
+    else:
+        curve_name = cmds.textScrollList('jt_ctl_curve_ui_list', q=True, si=True)[0]
+
+    replace(curve_name, to_transform)
+
+
+def replace(curve_key, to_transform):
+
+    curve_children = cmds.listRelatives(to_transform, type='nurbsCurve')
+    if len(curve_children) == 0:
+        cmds.warning('no curve selected')
+        return
+
+    shape_to_replace = curve_children[0]
+    from_transform = cmds.curve(degree=1, p=shapes[curve_key])
+    from_shape = cmds.listRelatives(from_transform, type='nurbsCurve')[0]
+
+
+    cmds.delete(shape_to_replace)
+    cmds.parent(from_shape, to_transform, add=True, s=True)
+    cmds.delete(from_transform)
+
+    cmds.select(to_transform, r=True)
+
 
 
 def ui_re_orient():
     
-    print 'started'
     selection = cmds.ls(sl=True)
     if len(selection) == 0:
         cmds.warning('nothign selected')
@@ -112,7 +144,6 @@ def ui_re_orient():
 
     cmds.rotate(rotation_value[0], rotation_value[1], rotation_value[2], selection[0], r=True, os=True)
     cmds.makeIdentity(selection[0], apply=True, t=0, r=1, s=0, n=0)
-    print 'ended'
 
 
 
