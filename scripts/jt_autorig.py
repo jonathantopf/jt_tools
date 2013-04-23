@@ -320,7 +320,7 @@ def ui_select_leg_rig_joint(text_field):
         cmds.warning('no joint selected')
         return
 
-    selection_name = selection[0]
+    selection_name = selection[0].replace('L', '<prefix>').replace('R', '<prefix>')
     cmds.textField(text_field, e=True, tx=selection_name)
 
 
