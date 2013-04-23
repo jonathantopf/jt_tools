@@ -90,14 +90,14 @@ def ui_replace():
         cmds.warning('no transform selected')
         return
 
-    to_transform = selection[0]
-
     if cmds.textScrollList('jt_ctl_curve_ui_list', q=True, si=True) is None:
         curve_name = 'circle'
     else:
         curve_name = cmds.textScrollList('jt_ctl_curve_ui_list', q=True, si=True)[0]
 
-    replace(curve_name, to_transform)
+    for select in selection:
+        to_transform = select
+        replace(curve_name, to_transform)
 
 
 def replace(curve_key, to_transform):
