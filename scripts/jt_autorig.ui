@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>736</width>
-    <height>747</height>
+    <width>898</width>
+    <height>774</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,7 +43,7 @@
     <item row="3" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="Base">
        <attribute name="title">
@@ -741,147 +741,147 @@
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <layout class="QGridLayout" name="gridLayout_9">
-          <item row="1" column="2">
+          <item row="4" column="2">
            <widget class="QLineEdit" name="jt_autorig_legs_hip_select_text">
             <property name="text">
-             <string>L_hip</string>
+             <string>&lt;prefix&gt;_hip</string>
             </property>
            </widget>
           </item>
-          <item row="7" column="2">
+          <item row="10" column="2">
            <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_heel_select_text">
             <property name="text">
-             <string>L_reverse_foot_heel</string>
+             <string>&lt;prefix&gt;_reverse_foot_heel</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="label_12">
             <property name="text">
              <string>knee</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
+          <item row="3" column="2">
            <widget class="QLineEdit" name="jt_autorig_legs_pelvis_select_text">
             <property name="text">
              <string>pelvis</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="label_10">
             <property name="text">
              <string>pelvis</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="2">
+          <item row="5" column="2">
            <widget class="QLineEdit" name="jt_autorig_legs_knee_select_text">
             <property name="text">
-             <string>L_knee</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="2">
-           <widget class="QLineEdit" name="jt_autorig_legs_ankle_select_text">
-            <property name="text">
-             <string>L_ankle</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="2">
-           <widget class="QLineEdit" name="jt_autorig_legs_ball_select_text">
-            <property name="text">
-             <string>L_ball</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="2">
-           <widget class="QLineEdit" name="jt_autorig_legs_toes_select_text">
-            <property name="text">
-             <string>L_toes</string>
+             <string>&lt;prefix&gt;_knee</string>
             </property>
            </widget>
           </item>
           <item row="6" column="2">
-           <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_root_select_text">
+           <widget class="QLineEdit" name="jt_autorig_legs_ankle_select_text">
             <property name="text">
-             <string>L_reverse_foot_root</string>
+             <string>&lt;prefix&gt;_ankle</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="2">
+           <widget class="QLineEdit" name="jt_autorig_legs_ball_select_text">
+            <property name="text">
+             <string>&lt;prefix&gt;_ball</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="2">
+           <widget class="QLineEdit" name="jt_autorig_legs_toes_select_text">
+            <property name="text">
+             <string>&lt;prefix&gt;_toes</string>
             </property>
            </widget>
           </item>
           <item row="9" column="2">
+           <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_root_select_text">
+            <property name="text">
+             <string>&lt;prefix&gt;_reverse_foot_root</string>
+            </property>
+           </widget>
+          </item>
+          <item row="12" column="2">
            <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_ball_select_text">
             <property name="text">
-             <string>L_reverse_foot_ball</string>
+             <string>&lt;prefix&gt;_reverse_foot_ball</string>
             </property>
            </widget>
           </item>
-          <item row="11" column="2">
+          <item row="14" column="2">
            <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_ankle_select_text">
             <property name="text">
-             <string>L_reverse_foot_ankle</string>
+             <string>&lt;prefix&gt;_reverse_foot_ankle</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="label_13">
             <property name="text">
              <string>ankle</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="0">
+          <item row="9" column="0">
            <widget class="QLabel" name="label_20">
             <property name="text">
              <string>reverse foot root</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="label_11">
             <property name="text">
              <string>hip</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
+          <item row="7" column="0">
            <widget class="QLabel" name="label_14">
             <property name="text">
              <string>ball</string>
             </property>
            </widget>
           </item>
-          <item row="9" column="0">
+          <item row="12" column="0">
            <widget class="QLabel" name="label_18">
             <property name="text">
              <string>reverse foot ball</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
+          <item row="8" column="0">
            <widget class="QLabel" name="label_15">
             <property name="text">
              <string>toes</string>
             </property>
            </widget>
           </item>
-          <item row="7" column="0">
+          <item row="10" column="0">
            <widget class="QLabel" name="label_16">
             <property name="text">
              <string>reverse foot heel</string>
             </property>
            </widget>
           </item>
-          <item row="11" column="0">
+          <item row="14" column="0">
            <widget class="QLabel" name="label_19">
             <property name="text">
              <string>reverse foot ankle</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="3">
+          <item row="3" column="3">
            <widget class="QPushButton" name="pushButton_11">
             <property name="text">
              <string>select</string>
@@ -891,7 +891,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="3">
+          <item row="4" column="3">
            <widget class="QPushButton" name="pushButton_12">
             <property name="text">
              <string>select</string>
@@ -901,7 +901,7 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="3">
+          <item row="5" column="3">
            <widget class="QPushButton" name="pushButton_13">
             <property name="text">
              <string>select</string>
@@ -911,7 +911,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="3">
+          <item row="6" column="3">
            <widget class="QPushButton" name="pushButton_14">
             <property name="text">
              <string>select</string>
@@ -921,7 +921,7 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="3">
+          <item row="7" column="3">
            <widget class="QPushButton" name="pushButton_15">
             <property name="text">
              <string>select</string>
@@ -931,7 +931,7 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="3">
+          <item row="8" column="3">
            <widget class="QPushButton" name="pushButton_16">
             <property name="text">
              <string>select</string>
@@ -941,7 +941,7 @@
             </property>
            </widget>
           </item>
-          <item row="6" column="3">
+          <item row="9" column="3">
            <widget class="QPushButton" name="pushButton_17">
             <property name="text">
              <string>select</string>
@@ -951,7 +951,7 @@
             </property>
            </widget>
           </item>
-          <item row="7" column="3">
+          <item row="10" column="3">
            <widget class="QPushButton" name="pushButton_18">
             <property name="text">
              <string>select</string>
@@ -961,7 +961,7 @@
             </property>
            </widget>
           </item>
-          <item row="9" column="3">
+          <item row="12" column="3">
            <widget class="QPushButton" name="pushButton_19">
             <property name="text">
              <string>select</string>
@@ -971,7 +971,7 @@
             </property>
            </widget>
           </item>
-          <item row="11" column="3">
+          <item row="14" column="3">
            <widget class="QPushButton" name="pushButton_21">
             <property name="text">
              <string>select</string>
@@ -981,14 +981,14 @@
             </property>
            </widget>
           </item>
-          <item row="8" column="0">
+          <item row="11" column="0">
            <widget class="QLabel" name="label_17">
             <property name="text">
              <string>reverse foot toes</string>
             </property>
            </widget>
           </item>
-          <item row="8" column="3">
+          <item row="11" column="3">
            <widget class="QPushButton" name="pushButton_20">
             <property name="text">
              <string>select</string>
@@ -998,17 +998,99 @@
             </property>
            </widget>
           </item>
-          <item row="8" column="2">
+          <item row="11" column="2">
            <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_toes_select_text">
             <property name="text">
-             <string>L_reverse_foot_toes</string>
+             <string>&lt;prefix&gt;_reverse_foot_toes</string>
             </property>
            </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_78">
+            <property name="text">
+             <string>prefix</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QCheckBox" name="jt_autorig_leg_rig_L">
+              <property name="text">
+               <string>L</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="jt_autorig_leg_rig_R">
+              <property name="text">
+               <string>R</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="jt_autorig_leg_rig_none">
+              <property name="text">
+               <string>none</string>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_79">
+            <property name="text">
+             <string>override region name</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_22">
+            <item>
+             <widget class="QCheckBox" name="jt_autorig_leg_rig_override_region_check">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="jt_autorig_leg_rig_override_region_text">
+              <property name="text">
+               <string>&lt;prefix&gt;_front_leg</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="Line" name="line_2">
+         <widget class="Line" name="line_26">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -1096,50 +1178,6 @@
           </item>
           <item>
            <spacer name="horizontalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="Line" name="line_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_7">
-          <item>
-           <widget class="QCheckBox" name="jt_autorig_leg_rig_L">
-            <property name="text">
-             <string>L</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="jt_autorig_leg_rig_R">
-            <property name="text">
-             <string>R</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_7">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>

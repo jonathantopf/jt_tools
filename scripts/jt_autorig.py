@@ -273,30 +273,45 @@ def ui_remove_hand_rig():
 
 def ui_create_leg_rig():
 
-    base_curve = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True)
-    pelvis             = cmds.textField('jt_autorig_legs_pelvis_select_text', q=True, tx=True)
-    hip                = cmds.textField('jt_autorig_legs_hip_select_text', q=True, tx=True)
-    knee               = cmds.textField('jt_autorig_legs_knee_select_text', q=True, tx=True)
-    ankle              = cmds.textField('jt_autorig_legs_ankle_select_text', q=True, tx=True)
-    ball               = cmds.textField('jt_autorig_legs_ball_select_text', q=True, tx=True)
-    toes               = cmds.textField('jt_autorig_legs_toes_select_text', q=True, tx=True)
-    reverse_foot_root  = cmds.textField('jt_autorig_legs_reverse_foot_root_select_text', q=True, tx=True)
-    reverse_foot_heel  = cmds.textField('jt_autorig_legs_reverse_foot_heel_select_text', q=True, tx=True)
-    reverse_foot_toes  = cmds.textField('jt_autorig_legs_reverse_foot_toes_select_text', q=True, tx=True)
-    reverse_foot_ball  = cmds.textField('jt_autorig_legs_reverse_foot_ball_select_text', q=True, tx=True)
-    reverse_foot_ankle = cmds.textField('jt_autorig_legs_reverse_foot_ankle_select_text', q=True, tx=True)
-    rig_l    = cmds.checkBox('jt_autorig_leg_rig_L', q=True, value=True)
-    rig_r    = cmds.checkBox('jt_autorig_leg_rig_R', q=True, value=True)
-    roll     = cmds.optionMenu('jt_autorig_legs_roll_combo', q=True, v=True)
-    yaw      = cmds.optionMenu('jt_autorig_legs_yaw_combo', q=True, v=True)
-    pitch    = cmds.optionMenu('jt_autorig_legs_pitch_combo', q=True, v=True)
+    base_curve            = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True)
+    pelvis                = cmds.textField('jt_autorig_legs_pelvis_select_text', q=True, tx=True)
+    hip                   = cmds.textField('jt_autorig_legs_hip_select_text', q=True, tx=True)
+    knee                  = cmds.textField('jt_autorig_legs_knee_select_text', q=True, tx=True)
+    ankle                 = cmds.textField('jt_autorig_legs_ankle_select_text', q=True, tx=True)
+    ball                  = cmds.textField('jt_autorig_legs_ball_select_text', q=True, tx=True)
+    toes                  = cmds.textField('jt_autorig_legs_toes_select_text', q=True, tx=True)
+    reverse_foot_root     = cmds.textField('jt_autorig_legs_reverse_foot_root_select_text', q=True, tx=True)
+    reverse_foot_heel     = cmds.textField('jt_autorig_legs_reverse_foot_heel_select_text', q=True, tx=True)
+    reverse_foot_toes     = cmds.textField('jt_autorig_legs_reverse_foot_toes_select_text', q=True, tx=True)
+    reverse_foot_ball     = cmds.textField('jt_autorig_legs_reverse_foot_ball_select_text', q=True, tx=True)
+    reverse_foot_ankle    = cmds.textField('jt_autorig_legs_reverse_foot_ankle_select_text', q=True, tx=True)
+    override_region_name  = cmds.textField('jt_autorig_leg_rig_override_region_text', q=True, tx=True)
+    l_prefix              = cmds.checkBox('jt_autorig_leg_rig_L', q=True, value=True)
+    r_prefix              = cmds.checkBox('jt_autorig_leg_rig_R', q=True, value=True)
+    none_prefix           = cmds.checkBox('jt_autorig_leg_rig_none', q=True, value=True)
+    override_region_check = cmds.checkBox('jt_autorig_leg_rig_override_region_check', q=True, value=True)
+    roll                  = cmds.optionMenu('jt_autorig_legs_roll_combo', q=True, v=True)
+    yaw                   = cmds.optionMenu('jt_autorig_legs_yaw_combo', q=True, v=True)
+    pitch                 = cmds.optionMenu('jt_autorig_legs_pitch_combo', q=True, v=True)
 
-    if rig_l:
-        rig_region_name = 'L_leg'
+    rig_region_name = override_region_name
+
+    if l_prefix:
+        if not override_region_check:
+            rig_region_name = 'L_leg'
         create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, toes, reverse_foot_root, reverse_foot_heel, reverse_foot_toes, reverse_foot_ball, reverse_foot_ankle, roll, yaw, pitch, 'L')
-    if rig_r:
-        rig_region_name = 'R_leg'
+
+    if r_prefix:
+        if not override_region_check:
+            rig_region_name = 'R_leg'
         create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, toes, reverse_foot_root, reverse_foot_heel, reverse_foot_toes, reverse_foot_ball, reverse_foot_ankle, roll, yaw, pitch, 'R')
+
+    if none_prefix:
+        if not override_region_check:
+            cmds.warning('set overide region name')
+            return
+        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, toes, reverse_foot_root, reverse_foot_heel, reverse_foot_toes, reverse_foot_ball, reverse_foot_ankle, roll, yaw, pitch, 'R')
+
 
 def ui_select_leg_rig_joint(text_field):
     
@@ -313,13 +328,45 @@ def ui_remove_leg_rig():
 
     base_curve = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True)
     hip        = cmds.textField('jt_autorig_legs_hip_select_text', q=True, tx=True)
-    rig_l      = cmds.checkBox('jt_autorig_leg_rig_L', q=True, value=True)
-    rig_r      = cmds.checkBox('jt_autorig_leg_rig_R', q=True, value=True)
+    override_region_name  = cmds.textField('jt_autorig_leg_rig_override_region_text', q=True, tx=True)
+    l_prefix              = cmds.checkBox('jt_autorig_leg_rig_L', q=True, value=True)
+    r_prefix              = cmds.checkBox('jt_autorig_leg_rig_R', q=True, value=True)
+    none_prefix           = cmds.checkBox('jt_autorig_leg_rig_none', q=True, value=True)
+    override_region_check = cmds.checkBox('jt_autorig_leg_rig_override_region_check', q=True, value=True)
+    reverse_foot_root     = cmds.textField('jt_autorig_legs_reverse_foot_root_select_text', q=True, tx=True)
 
-    if rig_l:
-        de_rig_element(base_curve, 'L_leg', change_prefix(hip, 'L'))
-    if rig_r:
-        de_rig_element(base_curve, 'R_leg', change_prefix(hip, 'R'))
+    rig_region_name = override_region_name
+
+    if l_prefix:
+        if not override_region_check:
+            rig_region_name = 'L_leg'
+
+        l_hip_name = hip.replace('<prefix>', 'L')
+        de_rig_element(base_curve, rig_region_name.replace('<prefix>', 'L'), l_hip_name)
+
+        cmds.select(reverse_foot_root.replace('<prefix>', 'L'), hi=True, r=True)
+        for object in cmds.ls(sl=True):
+            cmds.setAttr(object + '.visibility', 1)
+
+    if r_prefix:
+        if not override_region_check:
+            rig_region_name = 'R_leg'
+
+        r_hip_name = hip.replace('<prefix>', 'R')
+        de_rig_element(base_curve, rig_region_name.replace('<prefix>', 'R'), r_hip_name)
+
+        cmds.select(reverse_foot_root.replace('<prefix>', 'R'), hi=True, r=True)
+        for object in cmds.ls(sl=True):
+            cmds.setAttr(object + '.visibility', 1)
+
+    if none_prefix:
+        de_rig_element(base_curve, rig_region_name, hip)
+
+        cmds.select(reverse_foot_root, hi=True, r=True)
+        for object in cmds.ls(sl=True):
+            cmds.setAttr(object + '.visibility', 1)
+
+    cmds.select(cl=True)
 
 
 def ui_create_spine_rig():
@@ -567,7 +614,9 @@ def create_arm_rig(base_curve, rig_region_name, clavicle, shoulder, elbow, forea
     add_node_to_rig_nodes(base_curve, rig_region_name, forearm_split_multiply_node)
 
 
-def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, toes, reverse_foot_root, reverse_foot_heel, reverse_foot_toes, reverse_foot_ball, reverse_foot_ankle, roll, yaw, pitch, side):
+def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, toes, reverse_foot_root, reverse_foot_heel, reverse_foot_toes, reverse_foot_ball, reverse_foot_ankle, roll, yaw, pitch, prefix):
+
+    rig_region_name = rig_region_name.replace('<prefix>', prefix)
 
     # create group to contain all rigging nodes
     cmds.select(cl=True)
@@ -578,22 +627,23 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, 
     # add the leg group node to the base curve rig nodes attr
     add_node_to_rig_nodes(base_curve, rig_region_name, leg_group)
 
-    hip                = change_prefix(hip, side)
-    knee               = change_prefix(knee, side)
-    ankle              = change_prefix(ankle, side)
-    ball               = change_prefix(ball, side)
-    toes               = change_prefix(toes, side)
-    reverse_foot_root  = change_prefix(reverse_foot_root, side)
-    reverse_foot_heel  = change_prefix(reverse_foot_heel, side)
-    reverse_foot_toes  = change_prefix(reverse_foot_toes, side)
-    reverse_foot_ball  = change_prefix(reverse_foot_ball, side)
-    reverse_foot_ankle = change_prefix(reverse_foot_ankle, side)
+    pelvis             = pelvis.replace('<prefix>', prefix)
+    hip                = hip.replace('<prefix>', prefix)
+    knee               = knee.replace('<prefix>', prefix)
+    ankle              = ankle.replace('<prefix>', prefix)
+    ball               = ball.replace('<prefix>', prefix)
+    toes               = toes.replace('<prefix>', prefix)
+    reverse_foot_root  = reverse_foot_root.replace('<prefix>', prefix)
+    reverse_foot_heel  = reverse_foot_heel.replace('<prefix>', prefix)
+    reverse_foot_toes  = reverse_foot_toes.replace('<prefix>', prefix)
+    reverse_foot_ball  = reverse_foot_ball.replace('<prefix>', prefix)
+    reverse_foot_ankle = reverse_foot_ankle.replace('<prefix>', prefix)
 
     # add ik/fk switch handle
     ik_fk_switch_curve, ik_fk_switch_group = jt_ctl_curve.create(hip, 'paddle_3', True)
     cmds.select(ik_fk_switch_curve)
     cmds.rotate(90,0,90, os=True)
-    if side == 'R':
+    if prefix == 'R':
         cmds.scale(1,1,-1, r=True)
     cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
 
@@ -643,14 +693,14 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, 
 
     # parent constrain ik and fk bones to skeleton
     cmds.select(ik_hip, r=True)
-    ik_hip_group = cmds.group(n=side + '_ik_leg_bones')
+    ik_hip_group = cmds.group(n=rig_region_name + '_ik_leg_bones')
     cmds.select(pelvis, ik_hip_group, r=True)
     cmds.parentConstraint(mo=True, weight=1)
     cmds.scaleConstraint(mo=True, weight=1)
     cmds.connectAttr(ik_fk_switch_curve + '.bone_visibility', ik_hip_group + '.visibility', f=True)
 
     cmds.select(fk_hip, r=True)
-    fk_hip_group = cmds.group(n=side + '_fk_leg_bones')
+    fk_hip_group = cmds.group(n=rig_region_name + '_fk_leg_bones')
     cmds.select(pelvis, fk_hip_group, r=True)
     cmds.parentConstraint(mo=True, weight=1)
     cmds.scaleConstraint(mo=True, weight=1)
@@ -681,7 +731,7 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, 
     cmds.makeIdentity(apply=True, t=1, r=1, s=1, n=0)
     cmds.setAttr(foot_curve + '.rotatePivot', 0,0,0)
     cmds.setAttr(foot_curve + '.scalePivot', 0,0,0)
-    if side == 'R':
+    if prefix == 'R':
         cmds.setAttr(foot_curve + '.scale', 1,-1,1)
         cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
     cmds.connectAttr(ik_fk_switch_curve + '.ik_visibility', foot_curve_group + '.visibility', f=True)
@@ -694,18 +744,18 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, 
     cmds.setAttr(foot_curve + '.foot_break', 20)
 
     # ofset toe roll
-    inverse_foot_break = create_mult(foot_curve + '.foot_break', side + '_inverse_foor_break', -1)
-    toe_offset = create_add(foot_curve + '.foot_roll', side + '_toe_offset', inverse_foot_break + '.outputX')
+    inverse_foot_break = create_mult(foot_curve + '.foot_break', rig_region_name + '_inverse_foor_break', -1)
+    toe_offset = create_add(foot_curve + '.foot_roll', rig_region_name + '_toe_offset', inverse_foot_break + '.outputX')
 
     # create clamp nodes
-    heel_clamp = create_clamp(foot_curve + '.foot_roll', side + '_heel_clamp', -360, 0)
-    ball_clamp = create_clamp(foot_curve + '.foot_roll', side + '_ball_clamp', 0, foot_curve + '.foot_break')
-    toes_clamp  = create_clamp(toe_offset + '.output1D', side + '_toe_clamp' , 0, 360)
+    heel_clamp = create_clamp(foot_curve + '.foot_roll', rig_region_name + '_heel_clamp', -360, 0)
+    ball_clamp = create_clamp(foot_curve + '.foot_roll', rig_region_name + '_ball_clamp', 0, foot_curve + '.foot_break')
+    toes_clamp  = create_clamp(toe_offset + '.output1D', rig_region_name + '_toe_clamp' , 0, 360)
 
     # create sum nodes for foot roll override attrs
-    heel_sum = create_add(heel_clamp + '.outputR', side + '_heel_sum', foot_curve + '.heel')
-    ball_sum = create_add(ball_clamp + '.outputR', side + '_ball_sum', foot_curve + '.ball')
-    toes_sum = create_add(toes_clamp + '.outputR', side + '_toes_sum', foot_curve + '.toes')
+    heel_sum = create_add(heel_clamp + '.outputR', rig_region_name + '_heel_sum', foot_curve + '.heel')
+    ball_sum = create_add(ball_clamp + '.outputR', rig_region_name + '_ball_sum', foot_curve + '.ball')
+    toes_sum = create_add(toes_clamp + '.outputR', rig_region_name + '_toes_sum', foot_curve + '.toes')
 
     # add foot roll utilities to base curve rig nodes attr
     add_node_to_rig_nodes(base_curve, rig_region_name, (inverse_foot_break, toe_offset, heel_clamp, ball_clamp, toes_clamp, heel_sum, ball_sum, toes_sum))
@@ -716,8 +766,6 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, ball, 
     cmds.connectAttr(toes_sum + '.output1D', reverse_foot_toes + '.rotate' + yaw, f=True)
     cmds.connectAttr(foot_curve + '.heel_pivot', reverse_foot_heel + '.rotate' + pitch, f=True)
     cmds.connectAttr(foot_curve + '.toes_pivot', reverse_foot_toes + '.rotate' + pitch, f=True)
-
-
 
     # parent ik foot ctl to leg group
     cmds.select(foot_curve_group, leg_group, r=True)
