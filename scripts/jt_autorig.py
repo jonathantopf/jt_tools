@@ -187,6 +187,29 @@ def create_add(attr, name, add_value):
 # ui functions.
 #--------------------------------------------------------------------------------------------------
 
+def ui_create_proxy_skeleton():
+    create_proxy_skeleton()
+
+
+def ui_create_skeleton_from_proxy():
+    
+    dial_response = cmds.confirmDialog(message='would you like to save a copy of this scene before creating a skeleton', button=['cancel', 'no', 'yes'])
+    if dial_response == 'cancel':
+        return
+    elif dial_response == 'yes':
+
+        initial_file_path = cmds.file(q=True, sn=True)
+        bone_file_path = initial_file_path.replace('.ma', '').replace('.mb', '') + '_bones.ma'
+
+        cmds.file(rename=bone_file_path)
+        cmds.file(force=True, save=True, type='mayaAscii')
+
+        cmds.file(rename=initial_file_path)
+        cmds.file(force=True, save=True, type='mayaAscii')
+
+    create_skeleton_from_proxy()
+
+
 def ui_create_base_rig():
 
     cog = cmds.textField('jt_autorig_base_cog_select_text', q=True, tx=True)
@@ -411,6 +434,14 @@ def ui_remove_head_rig():
 #--------------------------------------------------------------------------------------------------
 # rigging and de-rigging functions.
 #--------------------------------------------------------------------------------------------------
+
+def create_proxy_skeleton():
+    pass
+
+
+def create_skeleton_from_proxy():
+    pass
+    
 
 def create_base_rig(cog, rig_region_name):
     # create curve and scale it to the correct size
