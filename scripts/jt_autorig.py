@@ -182,6 +182,37 @@ def create_add(attr, name, add_value):
     return node
 
 
+def create_joint_proxy(joint_name):
+
+    root_curve = jt_ctl_curve.create_shape(joint_name, 'sphere')
+
+    cmds.setAttr(root_curve + '.overrideEnabled', 1)
+    cmds.setAttr(root_curve + '.overrideColor', 16)
+
+    x_arrow = jt_ctl_curve.create_shape(joint_name + '_x_arrow', 'arrow')
+    y_arrow = jt_ctl_curve.create_shape(joint_name + '_y_arrow', 'arrow')
+    z_arrow = jt_ctl_curve.create_shape(joint_name + '_z_arrow', 'arrow')
+
+    cmds.setAttr(x_arrow + '.overrideColor', 13)
+    cmds.rotate(0,0,-90, x_arrow, r=True, os=True)
+
+    cmds.setAttr(y_arrow + '.overrideColor', 14)
+
+    cmds.setAttr(z_arrow + '.overrideColor', 6)
+    cmds.rotate(90,0,0, z_arrow, r=True, os=True)
+
+    for item in (x_arrow, y_arrow, z_arrow):
+        cmds.setAttr(item + '.overrideEnabled', 1)
+
+        for attr in ('rotate', 'translate', 'scale'):
+            cmds.setAttr(item + '.' + attr, lock=True, keyable=False, channelBox=False)
+
+    cmds.parent(x_arrow, y_arrow, z_arrow, root_curve)
+
+    return joint_name
+
+
+
 
 #--------------------------------------------------------------------------------------------------
 # ui functions.
@@ -441,7 +472,7 @@ def create_proxy_skeleton():
 
 def create_skeleton_from_proxy():
     pass
-    
+
 
 def create_base_rig(cog, rig_region_name):
     # create curve and scale it to the correct size
