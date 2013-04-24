@@ -148,6 +148,9 @@ def ui_re_orient():
     cmds.makeIdentity(selection[0], apply=True, t=0, r=1, s=0, n=0)
 
 
+def create_shape(name, curve_key):
+    return cmds.curve(n=name, degree=1, p=shapes[curve_key])
+
 
 def create(object=None, curve_name='circle', parent_ctl=True, xrot=False, yrot=False, zrot=False, xscale=False, yscale=False, zscale=False, xtrans=False, ytrans=False, ztrans=False, align=True, lock_unused=True):
 
