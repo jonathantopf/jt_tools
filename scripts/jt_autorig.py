@@ -182,7 +182,7 @@ def create_add(attr, name, add_value):
     return node
 
 
-def create_joint_proxy(joint_name):
+def create_joint_proxy(joint_name='locator'):
 
     root_curve = jt_ctl_curve.create_shape(joint_name, 'sphere')
 
@@ -209,7 +209,9 @@ def create_joint_proxy(joint_name):
 
     cmds.parent(x_arrow, y_arrow, z_arrow, root_curve)
 
-    return joint_name
+    cmds.select(root_curve)
+
+    return root_curve
 
 
 #--------------------------------------------------------------------------------------------------
