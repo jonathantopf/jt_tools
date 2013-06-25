@@ -116,6 +116,15 @@ reload(jt_wire_text)
 jt_wire_text.load_ui()
 """])
 
+#--------------------------------------------------------------------------------------------------
+# jt_copy_ae_positions.
+#--------------------------------------------------------------------------------------------------
+button_list.append(['jt_copy_ae_positions', 'jt_copy_ae_positions.png', 'python', """
+import jt_copy_ae_positions
+reload(jt_copy_ae_positions)
+jt_copy_ae_positions.load_ui()
+"""])
+
 
 def add_shelf_buton(shelf_name, button_name, icon, type, command):
     cmds.shelfButton(button_name, p=shelf_name, i=icon, c=command, stp=type)
