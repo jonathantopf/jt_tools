@@ -27,7 +27,7 @@
     </item>
     <item>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="2" column="3">
+      <item row="3" column="3">
        <widget class="QPushButton" name="pushButton">
         <property name="text">
          <string>apply</string>
@@ -37,7 +37,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <widget class="QCheckBox" name="jt_copy_ae_positions_start_is_origin_check">
         <property name="text">
          <string>start position is origin</string>
@@ -61,7 +61,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="2">
+      <item row="3" column="2">
        <spacer name="horizontalSpacer_3">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -73,6 +73,16 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="jt_copy_ae_positions_maintain_offset">
+        <property name="text">
+         <string>maintain offset</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

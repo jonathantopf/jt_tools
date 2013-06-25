@@ -45,16 +45,19 @@ def ui_set_positions():
 
     ae_text = cmds.scrollField('jt_copy_ae_positions_text_box', q=True, tx=True)
     start_is_origin = cmds.checkBox('jt_copy_ae_positions_start_is_origin_check', q=True, value=True)
+    maintain_offset = cmds.checkBox('jt_copy_ae_positions_maintain_offset', q=True, value=True)
     unit_scale = cmds.textField('jt_copy_ae_positions_unit_scale', q=True, tx=True)
-    set_positions_from_text(transform, ae_text, start_is_origin, float(unit_scale))
+    set_positions_from_text(transform, ae_text, start_is_origin, float(unit_scale), maintain_offset)
 
 
-def set_positions_from_text(transform, position_text, start_is_origin, unit_scale):
+def set_positions_from_text(transform, position_text, start_is_origin, unit_scale, maintain_offset):
 
     start_marker = 'Position'
     position_data = position_text.split(start_marker)[1] # split off ehader data
     position_data = position_data.split('\n') # transform to list of lines
     position_data = position_data[2:-4] # split off start and end trailing lines
+
+    start_position = cmds.getAttr(transform + '.translate')[0]
 
     for i in range(len(position_data)):
         position_data[i] = position_data[i].split('\t')[1:-1]
@@ -62,17 +65,23 @@ def set_positions_from_text(transform, position_text, start_is_origin, unit_scal
         for n in range(4):
             position_data[i][n] = float(position_data[i][n])
 
+    # apply unit scale
     for i in range(len(position_data)):
         for n in (1,2,3):
             position_data[i][n] = position_data[i][n] * unit_scale
 
+    # negate start position
     if start_is_origin:
         origin = position_data[0][:]  
         for i in range(len(position_data)):
             for n in (1,2,3):
-                position_data[i][n] = origin[n] - position_data[i][n]
+                position_data[i][n] = position_data[i][n] - origin[n]
 
-
+    # add offset
+    if maintain_offset:
+        for i in range(len(position_data)):
+            for n in (1,2,3):
+                position_data[i][n] = position_data[i][n] + start_position[n-1]
 
     set_positions(transform, position_data)
 
