@@ -45,6 +45,7 @@ def ui_set_positions():
 
     ae_text = cmds.scrollField('jt_copy_ae_positions_text_box', q=True, tx=True)
     start_is_origin = cmds.checkBox('jt_copy_ae_positions_start_is_origin_check', q=True, value=True)
+
     set_positions_from_text(transform, ae_text, start_is_origin)
 
 
@@ -61,11 +62,13 @@ def set_positions_from_text(transform, position_text, start_is_origin=True):
         for n in range(4):
             position_data[i][n] = float(position_data[i][n])
 
+    origin = position_data[0]
+
     if start_is_origin:
-        origin = position_data[0]
-        for row in position_data:
-            for i in (1,2,3):
-                row[i] = row[i] - origin[i]
+        origin = position_data[0][:]  
+        for i in range(len(position_data)):
+            for n in (1,2,3):
+                position_data[i][n] = position_data[i][n] - origin[n]
 
     set_positions(transform, position_data)
 
@@ -75,7 +78,7 @@ def set_positions(transform, positions):
     start_time = cmds.currentTime(q=True)
 
     for row in positions:
-        cmds.currentTime(row[0])
+        cmds.currentTime(row[0], u=False)
         cmds.setAttr(transform + '.translate', row[1], row[2], row[3])
         cmds.setKeyframe(transform + '.translate')
 
