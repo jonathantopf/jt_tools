@@ -26,8 +26,18 @@
      <widget class="QTextEdit" name="jt_copy_ae_positions_text_box"/>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="2" column="3">
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>apply</string>
+        </property>
+        <property name="+c" stdset="0">
+         <string>&quot;import jt_copy_ae_positions; jt_copy_ae_positions.ui_set_positions()&quot;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
        <widget class="QCheckBox" name="jt_copy_ae_positions_start_is_origin_check">
         <property name="text">
          <string>start position is origin</string>
@@ -37,8 +47,22 @@
         </property>
        </widget>
       </item>
-      <item>
-       <spacer name="horizontalSpacer">
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="jt_copy_ae_positions_unit_scale">
+        <property name="text">
+         <string>0.1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>unit scale</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <spacer name="horizontalSpacer_3">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -49,16 +73,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>apply</string>
-        </property>
-        <property name="+c" stdset="0">
-         <string>&quot;import jt_copy_ae_positions; jt_copy_ae_positions.ui_set_positions()&quot;</string>
-        </property>
-       </widget>
       </item>
      </layout>
     </item>
