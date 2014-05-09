@@ -125,6 +125,19 @@ reload(jt_copy_ae_positions)
 jt_copy_ae_positions.load_ui()
 """])
 
+#--------------------------------------------------------------------------------------------------
+# jt_squiggle.
+#--------------------------------------------------------------------------------------------------
+button_list.append(['jt_squiggle', 'jt_squiggle.png', 'python', """
+import jt_squiggle
+reload(jt_squiggle)
+import maya.cmds as cmds
+if (cmds.window('jt_squiggle', exists=True)):
+    cmds.deleteUI('jt_squiggle')
+window = jt_squiggle.SquiggleUI()
+window.show()
+"""])
+
 
 def add_shelf_buton(shelf_name, button_name, icon, type, command):
     cmds.shelfButton(button_name, p=shelf_name, i=icon, c=command, stp=type)
