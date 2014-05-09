@@ -148,7 +148,9 @@ def populate_shelf(shelf_name, button_list):
         add_shelf_buton(shelf_name, button[0], button[1], button[2], button[3])
 
 
-def create_shelf(shelf_name):
+def create_shelf():
+
+    shelf_name = 'jt_tools'
 
     if cmds.shelfLayout(shelf_name, exists=True, q=True):
         cmds.deleteUI(shelf_name)
