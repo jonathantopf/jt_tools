@@ -332,8 +332,6 @@ def ui_create_leg_rig():
     hip                   = cmds.textField('jt_autorig_legs_hip_select_text', q=True, tx=True)
     knee                  = cmds.textField('jt_autorig_legs_knee_select_text', q=True, tx=True)
     ankle                 = cmds.textField('jt_autorig_legs_ankle_select_text', q=True, tx=True)
-    reverse_foot_root     = cmds.textField('jt_autorig_legs_reverse_foot_root_select_text', q=True, tx=True)
-    reverse_foot_heel     = cmds.textField('jt_autorig_legs_reverse_foot_heel_select_text', q=True, tx=True)
     override_region_name  = cmds.textField('jt_autorig_leg_rig_override_region_text', q=True, tx=True)
     l_prefix              = cmds.checkBox('jt_autorig_leg_rig_L', q=True, value=True)
     r_prefix              = cmds.checkBox('jt_autorig_leg_rig_R', q=True, value=True)
@@ -345,18 +343,18 @@ def ui_create_leg_rig():
     if l_prefix:
         if not override_region_check:
             rig_region_name = 'L_leg'
-        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, reverse_foot_root, reverse_foot_heel, 'L')
+        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, 'L')
 
     if r_prefix:
         if not override_region_check:
             rig_region_name = 'R_leg'
-        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, reverse_foot_root, reverse_foot_heel, 'R')
+        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, 'R')
 
     if none_prefix:
         if not override_region_check:
             cmds.warning('set overide region name')
             return
-        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, reverse_foot_root, reverse_foot_heel, 'R')
+        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, 'R')
 
 
 def ui_select_leg_rig_joint(text_field):
@@ -379,8 +377,6 @@ def ui_remove_leg_rig():
     r_prefix              = cmds.checkBox('jt_autorig_leg_rig_R', q=True, value=True)
     none_prefix           = cmds.checkBox('jt_autorig_leg_rig_none', q=True, value=True)
     override_region_check = cmds.checkBox('jt_autorig_leg_rig_override_region_check', q=True, value=True)
-    reverse_foot_root     = cmds.textField('jt_autorig_legs_reverse_foot_root_select_text', q=True, tx=True)
-    reverse_foot_heel     = cmds.textField('jt_autorig_legs_reverse_foot_heel_select_text', q=True, tx=True)
 
     rig_region_name = override_region_name
 
@@ -391,10 +387,6 @@ def ui_remove_leg_rig():
         l_hip_name = hip.replace('<prefix>', 'L')
         de_rig_element(base_curve, rig_region_name.replace('<prefix>', 'L'), l_hip_name)
 
-        cmds.select(reverse_foot_root.replace('<prefix>', 'L'), hi=True, r=True)
-        for object in cmds.ls(sl=True):
-            cmds.setAttr(object + '.visibility', 1)
-
     if r_prefix:
         if not override_region_check:
             rig_region_name = 'R_leg'
@@ -402,16 +394,9 @@ def ui_remove_leg_rig():
         r_hip_name = hip.replace('<prefix>', 'R')
         de_rig_element(base_curve, rig_region_name.replace('<prefix>', 'R'), r_hip_name)
 
-        cmds.select(reverse_foot_root.replace('<prefix>', 'R'), hi=True, r=True)
-        for object in cmds.ls(sl=True):
-            cmds.setAttr(object + '.visibility', 1)
-
     if none_prefix:
         de_rig_element(base_curve, rig_region_name, hip)
 
-        cmds.select(reverse_foot_root, hi=True, r=True)
-        for object in cmds.ls(sl=True):
-            cmds.setAttr(object + '.visibility', 1)
 
     cmds.select(cl=True)
 
@@ -708,7 +693,7 @@ def create_arm_rig(base_curve, rig_region_name, clavicle, shoulder, elbow, forea
     add_node_to_rig_nodes(base_curve, rig_region_name, forearm_split_multiply_node)
 
 
-def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, reverse_foot_root, reverse_foot_heel, prefix):
+def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, prefix):
 
     rig_region_name = rig_region_name.replace('<prefix>', prefix)
 
@@ -725,8 +710,6 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, revers
     hip                = hip.replace('<prefix>', prefix)
     knee               = knee.replace('<prefix>', prefix)
     ankle              = ankle.replace('<prefix>', prefix)
-    reverse_foot_root  = reverse_foot_root.replace('<prefix>', prefix)
-    reverse_foot_heel  = reverse_foot_heel.replace('<prefix>', prefix)
 
     # add ik/fk switch handle
     ik_fk_switch_curve, ik_fk_switch_group = jt_ctl_curve.create(hip, 'paddle_3', True)
@@ -795,23 +778,15 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, revers
     # add blend nodes to base curve rig nodes attr
     add_node_to_rig_nodes(base_curve, rig_region_name, (hip_blend, knee_blend, ankle_blend))
 
-    # create foot ctl curve
-    foot_curve, foot_curve_group = jt_ctl_curve.create(reverse_foot_heel, 'square', False, lock_unused=False)
-    cmds.select(foot_curve)
-    cmds.setAttr(foot_curve + '.rotate', 90, 0, 0)
-    cmds.setAttr(foot_curve + '.scale', 0.6, 1, 1.2)
-    cmds.setAttr(foot_curve + '.translate', 0.2, 11,0)
-    cmds.makeIdentity(apply=True, t=1, r=1, s=1, n=0)
-    cmds.setAttr(foot_curve + '.rotatePivot', 0,0,0)
-    cmds.setAttr(foot_curve + '.scalePivot', 0,0,0)
-    if prefix == 'R':
-        cmds.setAttr(foot_curve + '.scale', 1,-1,1)
-        cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
-    cmds.connectAttr(ik_fk_switch_curve + '.ik_visibility', foot_curve_group + '.visibility', f=True)
+    # create ik ankle ctl curve
+    ik_ankle_curve, ik_ankle_curve_group = jt_ctl_curve.create(ik_ankle, 'diamond', False, lock_unused=False)
+    cmds.setAttr(ik_ankle_curve + '.scale', 0.5, 0.5, 0.5)
+    cmds.makeIdentity(ik_ankle_curve, apply=True, t=0, r=1, s=1, n=0)
+    cmds.connectAttr(ik_fk_switch_curve + '.ik_visibility', ik_ankle_curve_group + '.visibility', f=True)
 
 
-    # parent ik foot ctl to leg group
-    cmds.select(foot_curve_group, leg_group, r=True)
+    # parent ik ik_ankle ctl to leg group
+    cmds.select(ik_ankle_curve_group, leg_group, r=True)
     cmds.parent()
 
     # create ik handles for leg
@@ -819,19 +794,15 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, revers
     hip_ankle_ik_handle, hip_ankle_ik_effector = cmds.ikHandle(sol='ikRPsolver')
     cmds.connectAttr(ik_fk_switch_curve + '.bone_visibility', hip_ankle_ik_handle + '.visibility', force=True)
 
-    # parent_ik_handle to foot group
+    # parent_ik_handle to ik_ankls group
     cmds.select(hip_ankle_ik_handle, leg_group, r=True)
     cmds.parent()
 
-    # constrain ik ankle and ik handle to foor ctl
-    cmds.select(foot_curve, hip_ankle_ik_handle, r=True)
+    # constrain ik ankle to ankle ctl
+    cmds.select(ik_ankle_curve, hip_ankle_ik_handle)
     cmds.parentConstraint(mo=True, weight=1)
     cmds.scaleConstraint(mo=True, weight=1)
-
-    cmds.select(foot_curve, reverse_foot_root)
-    cmds.parentConstraint(mo=True, weight=1)
-    cmds.scaleConstraint(mo=True, weight=1)
-
+    
     # create pole vecotor ctl
     pole_vector_curve, pole_vector_curve_group = jt_ctl_curve.create(ik_knee, 'cube', False, lock_unused=False)
     cmds.select(pole_vector_curve, r=True)
@@ -841,7 +812,7 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, revers
     cmds.poleVectorConstraint(weight=1)
     cmds.connectAttr(ik_fk_switch_curve + '.ik_visibility', pole_vector_curve_group + '.visibility', f=True)
 
-    # parent ik foot ctl to leg group
+    # parent ik pole vector ctl to leg group
     cmds.select(pole_vector_curve_group, leg_group, r=True)
     cmds.parent()
 

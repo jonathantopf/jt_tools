@@ -1030,27 +1030,6 @@
             </item>
            </layout>
           </item>
-          <item row="10" column="0">
-           <widget class="QLabel" name="label_14">
-            <property name="text">
-             <string>Reverse foot heel</string>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="2">
-           <widget class="Line" name="line_66">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="0">
-           <widget class="Line" name="line_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_10">
             <property name="text">
@@ -1090,13 +1069,6 @@
            <widget class="QLineEdit" name="jt_autorig_legs_ankle_select_text">
             <property name="text">
              <string>&lt;prefix&gt;_ankle</string>
-            </property>
-           </widget>
-          </item>
-          <item row="10" column="2">
-           <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_heel_select_text">
-            <property name="text">
-             <string>&lt;prefix&gt;_reverse_foot_heel</string>
             </property>
            </widget>
           </item>
@@ -1154,126 +1126,10 @@
             </property>
            </widget>
           </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="label_20">
-            <property name="text">
-             <string>Reverse foot root</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="2">
-           <widget class="QLineEdit" name="jt_autorig_legs_reverse_foot_root_select_text">
-            <property name="text">
-             <string>&lt;prefix&gt;_reverse_foot_root</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item>
          <widget class="Line" name="line_26">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QLabel" name="label_21">
-            <property name="text">
-             <string>roll</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="jt_autorig_legs_roll_combo">
-            <item>
-             <property name="text">
-              <string>X</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Y</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Z</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>pitch</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="jt_autorig_legs_pitch_combo">
-            <item>
-             <property name="text">
-              <string>Y</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Z</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>X</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>yaw</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="jt_autorig_legs_yaw_combo">
-            <item>
-             <property name="text">
-              <string>Z</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Y</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>X</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="Line" name="line_4">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -1961,9 +1817,6 @@
   <tabstop>pushButton_13</tabstop>
   <tabstop>jt_autorig_legs_ankle_select_text</tabstop>
   <tabstop>pushButton_14</tabstop>
-  <tabstop>jt_autorig_legs_roll_combo</tabstop>
-  <tabstop>jt_autorig_legs_pitch_combo</tabstop>
-  <tabstop>jt_autorig_legs_yaw_combo</tabstop>
   <tabstop>jt_autorig_leg_rig_L</tabstop>
   <tabstop>jt_autorig_leg_rig_R</tabstop>
   <tabstop>pushButton_3</tabstop>
