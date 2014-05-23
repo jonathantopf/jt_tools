@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>819</width>
-    <height>1071</height>
+    <width>784</width>
+    <height>821</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,7 +43,7 @@
     <item row="3" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>5</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1194,27 +1194,6 @@
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
          <layout class="QGridLayout" name="gridLayout_8">
-          <item row="8" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_reverse_toe_3">
-            <property name="text">
-             <string>&lt;prefix&gt;_reverse_foot_toe_03</string>
-            </property>
-           </widget>
-          </item>
-          <item row="22" column="0">
-           <widget class="QLabel" name="label_75">
-            <property name="text">
-             <string>G</string>
-            </property>
-           </widget>
-          </item>
-          <item row="17" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_toe_D_select_text">
-            <property name="text">
-             <string>&lt;prefix&gt;_toe_D_01</string>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="0">
            <widget class="Line" name="line_35">
             <property name="orientation">
@@ -1222,7 +1201,7 @@
             </property>
            </widget>
           </item>
-          <item row="12" column="0">
+          <item row="7" column="0">
            <widget class="Line" name="line_62">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -1236,198 +1215,19 @@
             </property>
            </widget>
           </item>
-          <item row="17" column="0">
-           <widget class="QLabel" name="label_28">
-            <property name="text">
-             <string>D</string>
-            </property>
-           </widget>
-          </item>
-          <item row="16" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_toe_C_select_text">
-            <property name="text">
-             <string>&lt;prefix&gt;_toe_C_01</string>
-            </property>
-           </widget>
-          </item>
-          <item row="21" column="0">
-           <widget class="QLabel" name="label_32">
-            <property name="text">
-             <string>F</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_171">
-            <property name="text">
-             <string>Reverse Lock Bones</string>
-            </property>
-           </widget>
-          </item>
-          <item row="23" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_toe_H_select_text">
-            <property name="text">
-             <string>&lt;prefix&gt;_toe_H_01</string>
-            </property>
-           </widget>
-          </item>
-          <item row="13" column="0">
+          <item row="8" column="0">
            <widget class="QLabel" name="label_24">
             <property name="text">
-             <string>Reverse Lock Toes</string>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_reverse_toe_4">
-            <property name="text">
-             <string>&lt;prefix&gt;_reverse_foot_toe_04</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="label_172">
-            <property name="text">
-             <string>Root</string>
-            </property>
-           </widget>
-          </item>
-          <item row="11" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_reverse_ankle">
-            <property name="text">
-             <string>&lt;prefix&gt;_reverse_foot_ankle</string>
-            </property>
-           </widget>
-          </item>
-          <item row="25" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_toe_J_select_text">
-            <property name="text">
-             <string>&lt;prefix&gt;_toe_J_01</string>
-            </property>
-           </widget>
-          </item>
-          <item row="14" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_toe_A_select_text">
-            <property name="text">
-             <string>&lt;prefix&gt;_toe_A_01</string>
-            </property>
-           </widget>
-          </item>
-          <item row="24" column="0">
-           <widget class="QLabel" name="label_34">
-            <property name="text">
-             <string>I</string>
-            </property>
-           </widget>
-          </item>
-          <item row="15" column="0">
-           <widget class="QLabel" name="label_26">
-            <property name="text">
-             <string>B</string>
-            </property>
-           </widget>
-          </item>
-          <item row="21" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_toe_F_select_text">
-            <property name="text">
-             <string>&lt;prefix&gt;_toe_F_01</string>
-            </property>
-           </widget>
-          </item>
-          <item row="15" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_toe_B_select_text">
-            <property name="text">
-             <string>&lt;prefix&gt;_toe_B_01</string>
-            </property>
-           </widget>
-          </item>
-          <item row="20" column="0">
-           <widget class="QLabel" name="label_31">
-            <property name="text">
-             <string>Forward Toes</string>
-            </property>
-           </widget>
-          </item>
-          <item row="25" column="0">
-           <widget class="QLabel" name="label_93">
-            <property name="text">
-             <string>J</string>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="0">
-           <widget class="QLabel" name="label_174">
-            <property name="text">
-             <string>Toe 04</string>
+             <string>Toes</string>
             </property>
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_reverse_root">
-            <property name="text">
-             <string>&lt;prefix&gt;_reverse_foot_root</string>
+           <widget class="Line" name="line_67">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
-          </item>
-          <item row="10" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_reversetoe_1">
-            <property name="text">
-             <string>&lt;prefix&gt;_reverse_foot_toe_01</string>
-            </property>
-           </widget>
-          </item>
-          <item row="13" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout_14">
-            <item>
-             <widget class="QLabel" name="label_30">
-              <property name="text">
-               <string>Primary toe</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="jt_autorig_foot_pimary_reverse_toe">
-              <item>
-               <property name="text">
-                <string>A</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>B</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>C</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>D</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>E</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_15">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
           </item>
           <item row="0" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_19">
@@ -1452,7 +1252,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="jt_autorig_feet_rig_artbitrary"/>
+             <widget class="QLineEdit" name="jt_autorig_feet_rig_arbitrary"/>
             </item>
             <item>
              <spacer name="horizontalSpacer_20">
@@ -1469,66 +1269,17 @@
             </item>
            </layout>
           </item>
-          <item row="18" column="0">
-           <widget class="QLabel" name="label_29">
-            <property name="text">
-             <string>E</string>
-            </property>
-           </widget>
-          </item>
-          <item row="14" column="0">
-           <widget class="QLabel" name="label_25">
-            <property name="text">
-             <string>A</string>
-            </property>
-           </widget>
-          </item>
-          <item row="24" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_toe_I_select_text">
-            <property name="text">
-             <string>&lt;prefix&gt;_toe_I_01</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
+          <item row="4" column="1">
            <widget class="QLineEdit" name="jt_autorig_feet_reverse_heel">
             <property name="text">
              <string>&lt;prefix&gt;_reverse_foot_heel</string>
             </property>
            </widget>
           </item>
-          <item row="18" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_toe_E_select_text">
-            <property name="text">
-             <string>&lt;prefix&gt;_toe_E_01</string>
-            </property>
-           </widget>
-          </item>
-          <item row="12" column="1">
+          <item row="7" column="1">
            <widget class="Line" name="line_63">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="16" column="0">
-           <widget class="QLabel" name="label_27">
-            <property name="text">
-             <string>C</string>
-            </property>
-           </widget>
-          </item>
-          <item row="23" column="0">
-           <widget class="QLabel" name="label_76">
-            <property name="text">
-             <string>H</string>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="0">
-           <widget class="QLabel" name="label_176">
-            <property name="text">
-             <string>Toe 02</string>
             </property>
            </widget>
           </item>
@@ -1546,24 +1297,10 @@
             </property>
            </widget>
           </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="label_175">
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="jt_autorig_feet_ik_ankle_ctl">
             <property name="text">
-             <string>Toe 03</string>
-            </property>
-           </widget>
-          </item>
-          <item row="10" column="0">
-           <widget class="QLabel" name="label_177">
-            <property name="text">
-             <string>Toe 01</string>
-            </property>
-           </widget>
-          </item>
-          <item row="22" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_toe_G_select_text">
-            <property name="text">
-             <string>&lt;prefix&gt;_toe_G_01</string>
+             <string>&lt;prefix&gt;_ankle_ik_ctl</string>
             </property>
            </widget>
           </item>
@@ -1588,38 +1325,345 @@
             </property>
            </widget>
           </item>
-          <item row="9" column="1">
-           <widget class="QLineEdit" name="jt_autorig_feet_reverse_toe_2">
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_173">
             <property name="text">
-             <string>&lt;prefix&gt;_reverse_foot_toe_02</string>
+             <string>Reverse Lock Heel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="Line" name="line_66">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
           <item row="6" column="0">
-           <widget class="QLabel" name="label_173">
+           <widget class="QLabel" name="label_174">
             <property name="text">
-             <string>Heel</string>
+             <string>IK ankle controll</string>
             </property>
            </widget>
           </item>
-          <item row="11" column="0">
-           <widget class="QLabel" name="label_178">
+         </layout>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout_26">
+          <item row="5" column="3">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_E_reverse_lock_check">
             <property name="text">
-             <string>Ankle</string>
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
-          <item row="19" column="0">
-           <widget class="Line" name="line_64">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>A base</string>
             </property>
            </widget>
           </item>
-          <item row="19" column="1">
-           <widget class="Line" name="line_65">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="jt_autorig_feet_toe_C_base_name">
+            <property name="text">
+             <string>&lt;prefix&gt;_toe_C_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_25">
+            <property name="text">
+             <string>E base</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="label_27">
+            <property name="text">
+             <string>G base</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_D_reverse_lock_check">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLineEdit" name="jt_autorig_feet_toe_G_base_name">
+            <property name="text">
+             <string>&lt;prefix&gt;_toe_G_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="jt_autorig_feet_toe_E_base_name">
+            <property name="text">
+             <string>&lt;prefix&gt;_toe_E_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="jt_autorig_feet_toe_F_base_name">
+            <property name="text">
+             <string>&lt;prefix&gt;_toe_F_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="jt_autorig_feet_toe_D_base_name">
+            <property name="text">
+             <string>&lt;prefix&gt;_toe_D_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="3">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_G_reverse_lock_check">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_26">
+            <property name="text">
+             <string>F base</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_20">
+            <property name="text">
+             <string>C base</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="jt_autorig_feet_toe_B_base_name">
+            <property name="text">
+             <string>&lt;prefix&gt;_toe_B_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_A_reverse_lock_check">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_14">
+            <property name="text">
+             <string>B base</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_B_reverse_lock_check">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="jt_autorig_feet_toe_A_base_name">
+            <property name="text">
+             <string>&lt;prefix&gt;_toe_A_1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Reverse Lock</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_21">
+            <property name="text">
+             <string>D base</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_C_reverse_lock_check">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="3">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_F_reverse_lock_check">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QRadioButton" name="jt_autorig_feet_toe_A_primary_radio">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QRadioButton" name="jt_autorig_feet_toe_B_primary_radio">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="4">
+           <widget class="QRadioButton" name="jt_autorig_feet_toe_C_primary_radio">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="4">
+           <widget class="QRadioButton" name="jt_autorig_feet_toe_D_primary_radio">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="4">
+           <widget class="QRadioButton" name="jt_autorig_feet_toe_E_primary_radio">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="4">
+           <widget class="QRadioButton" name="jt_autorig_feet_toe_F_primary_radio">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="4">
+           <widget class="QRadioButton" name="jt_autorig_feet_toe_G_primary_radio">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QLabel" name="label_28">
+            <property name="text">
+             <string>Primary</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_15">
+            <property name="text">
+             <string>Enable</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_A_enable">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_B_enable">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_C_enable">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_D_enable">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_E_enable">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="2">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_F_enable">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="2">
+           <widget class="QCheckBox" name="jt_autorig_feet_toe_G_enable">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
             </property>
            </widget>
           </item>

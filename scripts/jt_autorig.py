@@ -48,7 +48,8 @@ def duplicate_joint_without_children(joint, postfix):
     new_joint_name = joint + postfix
     cmds.select(joint, r=True)
     cmds.duplicate(n=new_joint_name)
-    cmds.parent(w=True)
+    if cmds.listRelatives(ap=True) is not None:
+        cmds.parent(w=True)
     if cmds.listRelatives(new_joint_name, ad=True, fullPath=True):
         cmds.delete(cmds.listRelatives(new_joint_name, ad=True, fullPath=True))
     return new_joint_name
@@ -402,42 +403,51 @@ def ui_remove_leg_rig():
 
 
 def ui_create_foot_rig():
-    base_curve       = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True)
-    l_prefix         = cmds.checkBox('jt_autorig_feet_rig_L', q=True, value=True)
-    l_prefix         = cmds.checkBox('jt_autorig_feet_rig_L', q=True, value=True)
-    arbitrary_prefix = cmds.textField('jt_autorig_feet_rig_arbitrary', q=True, tx=True)
-    ankle            = cmds.textField('jt_autorig_feet_ankle')
-    primary_toe      = cmds.optionMenu('jt_autorig_foot_primary_reverse_toe', q=True, v=True)
 
-    roll             = cmds.optionMenu('jt_autorig_feet_roll_combo', q=True, v=True)
-    yaw              = cmds.optionMenu('jt_autorig_feet_yaw_combo', q=True, v=True)
-    pitch            = cmds.optionMenu('jt_autorig_feet_pitch_combo', q=True, v=True)
+    base_curve        = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True)
+    l_prefix          = cmds.checkBox('jt_autorig_feet_rig_L', q=True, value=True)
+    r_prefix          = cmds.checkBox('jt_autorig_feet_rig_R', q=True, value=True)
+    arbitrary_prefix  = cmds.textField('jt_autorig_feet_rig_arbitrary', q=True, tx=True)
+    ankle             = cmds.textField('jt_autorig_feet_ankle', q=True, tx=True)
+    ik_ankle_ctl      = cmds.textField('jt_autorig_feet_ik_ankle_ctl', q=True, tx=True)
+    reverse_lock_heel = cmds.textField('jt_autorig_feet_reverse_heel', q=True, tx=True)
 
     rig_region_name  = 'feet'
 
-    reverse_lock_toes = []
-    for prefix in ['A', 'B', 'C', 'D', 'E']:
-        text = cmds.textField('jt_autorig_feet_toe_{0}_select_text'.format(prefix))
-        if text != "":
-            reverse_lock_toes.append(cmds.textField(text, q=True, tx=True))
+    toes = []
 
-    forward_toes = []
-    for prefix in ['F', 'G', 'H', 'I', 'J']:
-        text = cmds.textField('jt_autorig_feet_toe_{0}_select_text'.format(prefix))
-        if text != "":
-            forward_toes.append(cmds.textField('jt_autorig_feet_toe_{0}_select_text'.format(prefix), q=True, tx=True))
+    for letter in ['A', 'B', 'C', 'D', 'E', 'F', 'G']:
+        if cmds.checkBox('jt_autorig_feet_toe_{0}_enable'.format(letter), q=True, value=True):
+            toes.append([
+                cmds.textField('jt_autorig_feet_toe_{0}_base_name'.format(letter), q=True, tx=True),
+                cmds.checkBox('jt_autorig_feet_toe_{0}_reverse_lock_check'.format(letter), q=True, value=True),
+                cmds.radioButton('jt_autorig_feet_toe_{0}_primary_radio'.format(letter), q=True, sl=True)
+                ])
 
     prefixes = []
     if l_prefix: prefixes.append('L')
-    if l_prefix: prefixes.append('R')
-    if arbitrary_prefix != "": prefixes.append(arbitrary_prefix)
+    if r_prefix: prefixes.append('R')
+    if arbitrary_prefix != "":
+        prefixes.append(arbitrary_prefix)
     for prefix in prefixes:
-        create_foot_rig(base_curve, rig_region_name, ankle, primary_toe, roll, pitch, yaw, prefix, reverse_lock_toes=[], forward_toes=[])
+        create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lock_heel, toes, prefix)
 
 
 def ui_remove_foot_rig():
     base_curve = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True)
-    de_rig_element(base_curve, 'feet')
+    l_prefix          = cmds.checkBox('jt_autorig_feet_rig_L', q=True, value=True)
+    r_prefix          = cmds.checkBox('jt_autorig_feet_rig_R', q=True, value=True)
+    arbitrary_prefix  = cmds.textField('jt_autorig_feet_rig_arbitrary', q=True, tx=True)
+
+    rig_region_name  = 'feet'
+
+    prefixes = []
+    if l_prefix: prefixes.append('L')
+    if r_prefix: prefixes.append('R')
+    if arbitrary_prefix != "":
+        prefixes.append(arbitrary_prefix)
+    for prefix in prefixes:
+        de_rig_element(base_curve, '{0}_{1}'.format(prefix, rig_region_name))
 
 
 def ui_create_spine_rig():
@@ -802,7 +812,7 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, prefix
     cmds.select(ik_ankle_curve, hip_ankle_ik_handle)
     cmds.parentConstraint(mo=True, weight=1)
     cmds.scaleConstraint(mo=True, weight=1)
-    
+
     # create pole vecotor ctl
     pole_vector_curve, pole_vector_curve_group = jt_ctl_curve.create(ik_knee, 'cube', False, lock_unused=False)
     cmds.select(pole_vector_curve, r=True)
@@ -836,7 +846,14 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, prefix
     cmds.parent()
 
 
-def create_foot_rig(base_curve, rig_region_name, ankle, primary_toe, roll, pitch, yaw, reverse_lock_toes=[], forward_toes=[]):
+
+
+
+
+
+def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lock_heel, toes, prefix):
+
+    rig_region_name = prefix + '_' + rig_region_name
 
     # create group to contain all rigging nodes
     cmds.select(cl=True)
@@ -846,6 +863,75 @@ def create_foot_rig(base_curve, rig_region_name, ankle, primary_toe, roll, pitch
 
     # add the leg group node to the base curve rig nodes attr
     add_node_to_rig_nodes(base_curve, rig_region_name, foot_group)
+
+    ankle                = ankle.replace('<prefix>', prefix)
+    ik_ankle_ctl         = ik_ankle_ctl.replace('<prefix>', prefix)
+    reverse_lock_heel    = reverse_lock_heel.replace('<prefix>', prefix)
+    toes                 = [[toe[0].replace('<prefix>', prefix), toe[1], toe[2]] for toe in toes]
+
+    # create dict of orphan bones
+    bone_copies = {}
+    for section_name in ['fk', 'rl', 'rl_target']: # rl = reverse lock
+        bones = []
+        for toe in toes:
+            if toe[1] or section_name == 'fk' or section_name == 'rl': # skip non reverse lock for reverse lock target boens
+                toe_chain = []
+                for toe_num in ['1', '2', '3', '4']:
+                    toe_name = toe[0].replace('1', toe_num)
+                    toe_copy = duplicate_joint_without_children(toe_name, '_{0}'.format(section_name))
+                    toe_chain.append([toe_name, toe_copy]) # [original_bone_name, new bone name]
+                bones.append(
+                    {
+                        'chain'   : toe_chain,
+                        'reverse' : toe[1],
+                        'primary' : toe[2]
+                    })
+            bone_copies[section_name] = bones
+
+    # rebuild 2 sets of fk bones
+    # these are the bones that will later be blended 
+    for section_name in ['fk', 'rl']:
+        # create duplicate ankle joint
+        ankle_copy = duplicate_joint_without_children(ankle, '_{0}'.format(section_name))
+        # add ankle to dict
+        bone_copies['ankle_{0}'.format(section_name)] = ankle_copy
+        # parent heirarchy to foot group
+        cmds.select(ankle_copy, foot_group, r=True)
+        cmds.parent()
+        for toe_chain in bone_copies[section_name]:
+            parent_bone = ankle_copy
+            for bone in toe_chain['chain']:
+                cmds.select(bone[1], parent_bone, r=True)
+                cmds.parent()
+                parent_bone = bone[1]
+
+
+    # rebuild reverse lock target bones
+    section_name = 'rl_target'
+    target_ankle_copy = duplicate_joint_without_children(ankle, '_{0}'.format(section_name))
+    target_heel_copy = duplicate_joint_without_children(reverse_lock_heel, '_{0}'.format(section_name))
+    # add new bones to dict
+    bone_copies['ankle_{0}'.format(section_name)] = target_ankle_copy
+    bone_copies['heel_{0}'.format(section_name)] = target_heel_copy
+    # parent heirarcy to foot group
+    cmds.select(target_heel_copy, foot_group, r=True)
+    cmds.parent()
+
+    for toe_chain in bone_copies[section_name]:
+        if toe_chain['reverse']:
+            parent_bone = target_heel_copy
+            reverse_toe_chain = toe_chain['chain']
+            reverse_toe_chain.reverse()
+            for bone in reverse_toe_chain:
+                cmds.select(bone[1], parent_bone, r=True)
+                cmds.parent()
+                parent_bone = bone[1] 
+
+            if toe_chain['primary']:
+                cmds.select(target_ankle_copy, parent_bone, r=True)
+                cmds.parent()
+
+
 
 
 
