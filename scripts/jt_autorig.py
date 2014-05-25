@@ -24,6 +24,7 @@
 
 import maya.cmds as cmds
 import jt_ctl_curve
+import jt_compile_to_nodes as comp
 import os
 import inspect
 import ast
@@ -911,14 +912,13 @@ def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lo
     target_ankle_copy = duplicate_joint_without_children(ankle, '_{0}'.format(section_name))
     target_heel_copy = duplicate_joint_without_children(reverse_lock_heel, '_{0}'.format(section_name))
     # add new bones to dict
-    bone_copies['ankle_{0}'.format(section_name)] = target_ankle_copy
-    bone_copies['heel_{0}'.format(section_name)] = target_heel_copy
-    # parent heirarcy to foot group
-    cmds.select(target_heel_copy, foot_group, r=True)
-    cmds.parent()
+    bone_copies['ankle_rl_target'] = target_ankle_copy
+    bone_copies['heel_rl_target'] = target_heel_copy
+    bone_copies['primary_toe_rl_target'] = None
 
     for toe_chain in bone_copies[section_name]:
         if toe_chain['reverse']:
+            bone_copies['primary_toe_rl_target'] = toe[0]
             parent_bone = target_heel_copy
             reverse_toe_chain = toe_chain['chain']
             reverse_toe_chain.reverse()
@@ -931,16 +931,181 @@ def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lo
                 cmds.select(target_ankle_copy, parent_bone, r=True)
                 cmds.parent()
 
+    # create reverse lock foot control
+    rl_foot_ctl, rl_foot_group = jt_ctl_curve.create(bone_copies['heel_rl_target'], 'square', lock_unused=False)
+
+    # move the foot controll to a more sensible place
+    cmds.setAttr(rl_foot_ctl + '.rotateX', 90)
+    cmds.setAttr(rl_foot_ctl + '.scaleZ', 1.5)
+    cmds.select(rl_foot_ctl, r=True)
+    cmds.makeIdentity(apply=True, t=1, r=1, s=1, n=0)
+
+    # parent everything to foot ctl
+    cmds.select(rl_foot_group, foot_group, r=True)
+    cmds.parent()
+    # put reverse foot ctl under a group to allow for rotation
+    cmds.select(bone_copies['heel_rl_target'], r=True)
+    reverse_lock_group = cmds.group()
+    cmds.select(reverse_lock_group, foot_group, r=True)
+    cmds.parent()
+    # parent rl foot ctl group to foot group
+    cmds.select(rl_foot_ctl, reverse_lock_group, r=True)
+    cmds.parentConstraint(mo=True, weight=1)
+    cmds.scaleConstraint(mo=True, weight=1)
+
+    # add rl foot control attribs
+    generic_attrs = [
+        'master_roll', 
+        'master_spread', 
+        'heel_pivot', 
+        'toe_base_break',
+        'toe_mid_1_break',
+        'toe_mid_2_break',
+        'toe_end_break',
+        'toe_base_springback'
+        ]
+
+    per_toe_attrs = [
+        'roll_mult', 
+        'spread', 
+        'toe_base',
+        'toe_mid_1',
+        'toe_mid_2',
+        'toe_end']
+
+    # add generic foor attrs
+    add_label_attr(rl_foot_ctl, 'generic_attributes')
+    for attr in generic_attrs:
+        add_keyable_attr(rl_foot_ctl, attr, type='float')
+
+    # and initialise sensibly:
+    cmds.setAttr(rl_foot_ctl + '.toe_base_break',      5)
+    cmds.setAttr(rl_foot_ctl + '.toe_mid_1_break',     20)
+    cmds.setAttr(rl_foot_ctl + '.toe_mid_2_break',     25)
+    cmds.setAttr(rl_foot_ctl + '.toe_end_break',       50)
+    cmds.setAttr(rl_foot_ctl + '.toe_base_springback', 20)
+
+    # add per toe attrs
+    for toe in bone_copies['rl_target']: 
+        if toe['reverse']:
+            toe_name = toe['chain'][0][0][0:-2]
+            add_label_attr(rl_foot_ctl, toe_name)
+            for attr in per_toe_attrs:
+                add_keyable_attr(rl_foot_ctl, '{0}_{1}'.format(attr, toe_name), type='float')
+                # initialise roll mult to 1
+                if attr == 'roll_mult':
+                    cmds.setAttr('{0}.{1}_{2}'.format(rl_foot_ctl, attr, toe_name), 1)
+
+
+
+    #                             * Ankle
+    #                            /
+    #                           /
+    #                          /
+    # 4      3      2       1 /
+    #  *______*______*_______*  
+    #   \_______________________* Heel
 
 
 
 
 
 
+    # toe 1 break                     _____________________________
+    # toe end break _________________/_________/________/_________
+
+
+
+    # heel.y = heel_pivot
+    # heel.z = clamp(master_roll, 0, 180)
+
+
+    # hook up generic attributes 
+    cmds.connectAttr(rl_foot_ctl + '.heel_pivot', bone_copies['heel_rl_target'] + '.rotateZ')
+    heel_roll_attr, heel_roll_nodes = comp.Clamp(rl_foot_ctl + '.master_roll', -90, 0).compile()
+    cmds.connectAttr(heel_roll_attr, bone_copies['heel_rl_target'] + '.rotateX')
+    for node in heel_roll_nodes:
+        add_node_to_rig_nodes(base_curve, rig_region_name, node)
+
+
+    # hook up undividtal toes
+    for toe in bone_copies['rl_target']: 
+        if toe['reverse']:
+            toe_name = toe['chain'][0][0][0:-2]
+
+
+
+            toe_end_attr, toe_end_nodes = comp.Clamp(
+                                                comp.Minus(
+                                                    comp.Minus(
+                                                        comp.Minus(
+                                                            rl_foot_ctl + '.master_roll', 
+                                                            rl_foot_ctl + '.toe_mid_1_break'), 
+                                                        rl_foot_ctl + '.toe_base_break'),
+                                                    rl_foot_ctl + '.toe_mid_2_break'),
+                                                0, 
+                                                rl_foot_ctl + '.toe_end_break').compile()
+
+            cmds.connectAttr(toe_end_attr, toe['chain'][0][1] + '.rotateX')
+
+
+            toe_mid_1_attr, toe_mid_1_nodes = comp.Clamp(
+                                                    comp.Minus(
+                                                        comp.Minus(
+                                                            rl_foot_ctl + '.master_roll', 
+                                                            rl_foot_ctl + '.toe_mid_2_break'),
+                                                        rl_foot_ctl + '.toe_base_break'),
+                                                    0, 
+                                                    rl_foot_ctl + '.toe_mid_1_break').compile()
+
+            cmds.connectAttr(toe_mid_1_attr, toe['chain'][1][1] + '.rotateX')
+
+
+            toe_mid_2_attr, toe_mid_2_nodes = comp.Clamp(
+                                                    comp.Minus(
+                                                        rl_foot_ctl + '.master_roll', 
+                                                        rl_foot_ctl + '.toe_base_break'), 
+                                                    0, 
+                                                    rl_foot_ctl + '.toe_mid_2_break').compile()
+
+            cmds.connectAttr(toe_mid_2_attr, toe['chain'][2][1] + '.rotateX')
+
+
+            toe_base_attr, toe_base_nodes = comp.Minus(
+                                                    comp.Clamp( 
+                                                        rl_foot_ctl + '.master_roll', 
+                                                        0, 
+                                                        rl_foot_ctl + '.toe_base_break'),
+                                                    comp.Clamp(
+                                                        comp.Minus(
+                                                            rl_foot_ctl + '.master_roll',
+                                                            rl_foot_ctl + '.toe_base_springback'),
+                                                        0, 
+                                                        30)).compile()
+
+            cmds.connectAttr(toe_base_attr, toe['chain'][3][1] + '.rotateX')
 
 
 
 
+            for node in toe_end_nodes + toe_mid_1_nodes + toe_mid_2_nodes + toe_base_nodes:
+                add_node_to_rig_nodes(base_curve, rig_region_name, node)
+
+
+            # for i, joint in enumerate(toe['chain']):
+            #     joint_name = joint[1]
+
+            #     # clamp joint 4
+
+            #     cmds.connectAttr(rl_foot_ctl + '.master_roll', joint_name + '.rotateX')
+
+
+
+
+        # 'toe_base_break',
+        # 'toe_mid_1_break',
+        # 'toe_mid_2_break',
+        # 'toe_end_break', 
 
 
 
