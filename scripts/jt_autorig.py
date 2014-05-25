@@ -411,6 +411,7 @@ def ui_create_foot_rig():
     arbitrary_prefix  = cmds.textField('jt_autorig_feet_rig_arbitrary', q=True, tx=True)
     ankle             = cmds.textField('jt_autorig_feet_ankle', q=True, tx=True)
     ik_ankle_ctl      = cmds.textField('jt_autorig_feet_ik_ankle_ctl', q=True, tx=True)
+    hip_ctl           = cmds.textField('jt_autorig_feet_hip_ctl', q=True, tx=True)
     reverse_lock_heel = cmds.textField('jt_autorig_feet_reverse_heel', q=True, tx=True)
 
     rig_region_name  = 'feet'
@@ -431,7 +432,7 @@ def ui_create_foot_rig():
     if arbitrary_prefix != "":
         prefixes.append(arbitrary_prefix)
     for prefix in prefixes:
-        create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lock_heel, toes, prefix)
+        create_foot_rig(base_curve, rig_region_name, ankle, hip_ctl, ik_ankle_ctl, reverse_lock_heel, toes, prefix)
 
 
 def ui_remove_foot_rig():
@@ -852,7 +853,7 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, prefix
 
 
 
-def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lock_heel, toes, prefix):
+def create_foot_rig(base_curve, rig_region_name, ankle, hip_ctl, ik_ankle_ctl, reverse_lock_heel, toes, prefix):
 
     rig_region_name = prefix + '_' + rig_region_name
 
@@ -867,8 +868,13 @@ def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lo
 
     ankle                = ankle.replace('<prefix>', prefix)
     ik_ankle_ctl         = ik_ankle_ctl.replace('<prefix>', prefix)
+    hip_ctl              = hip_ctl.replace('<prefix>', prefix)
     reverse_lock_heel    = reverse_lock_heel.replace('<prefix>', prefix)
     toes                 = [[toe[0].replace('<prefix>', prefix), toe[1], toe[2]] for toe in toes]
+
+    if not cmds.objExists(hip_ctl):
+        cmds.error('{0} does not esist, you must have a valid leg rig present to rig a foot...'.format(hip_ctl))
+        return
 
     # create dict of orphan bones
     bone_copies = {}
@@ -894,6 +900,7 @@ def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lo
     for section_name in ['fk', 'rl']:
         # create duplicate ankle joint
         ankle_copy = duplicate_joint_without_children(ankle, '_{0}'.format(section_name))
+        # cmds.connectAttr(hip_ctl + '.bone_visibility', ankle_copy + '.visibility')
         # add ankle to dict
         bone_copies['ankle_{0}'.format(section_name)] = ankle_copy
         # parent heirarchy to foot group
@@ -916,6 +923,13 @@ def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lo
     bone_copies['heel_rl_target'] = target_heel_copy
     bone_copies['primary_toe_rl_target'] = None
 
+    # cmds.connectAttr(hip_ctl + '.bone_visibility', bone_copies['heel_rl_target'] + '.visibility')
+
+    # and constrain the ik handle to the ankle
+    cmds.select(bone_copies['ankle_rl_target'], ik_ankle_ctl, r=True)
+    cmds.parentConstraint(mo=True, weight=1)
+    cmds.scaleConstraint(mo=True, weight=1)
+
     for toe_chain in bone_copies[section_name]:
         if toe_chain['reverse']:
             bone_copies['primary_toe_rl_target'] = toe[0]
@@ -933,6 +947,8 @@ def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lo
 
     # create reverse lock foot control
     rl_foot_ctl, rl_foot_group = jt_ctl_curve.create(bone_copies['heel_rl_target'], 'square', lock_unused=False)
+    #connect ik visibility to ctl
+    cmds.connectAttr(hip_ctl + '.ik_visibility', rl_foot_ctl + '.visibility')
 
     # move the foot controll to a more sensible place
     cmds.setAttr(rl_foot_ctl + '.rotateX', 90)
@@ -973,7 +989,7 @@ def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lo
         'toe_mid_2',
         'toe_end']
 
-    # add generic foor attrs
+    # add generic foot attrs
     add_label_attr(rl_foot_ctl, 'generic_attributes')
     for attr in generic_attrs:
         add_keyable_attr(rl_foot_ctl, attr, type='float')
@@ -996,8 +1012,6 @@ def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lo
                 if attr == 'roll_mult':
                     cmds.setAttr('{0}.{1}_{2}'.format(rl_foot_ctl, attr, toe_name), 1)
 
-
-
     #                             * Ankle
     #                            /
     #                           /
@@ -1006,20 +1020,6 @@ def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lo
     #  *______*______*_______*  
     #   \_______________________* Heel
 
-
-
-
-
-
-    # toe 1 break                     _____________________________
-    # toe end break _________________/_________/________/_________
-
-
-
-    # heel.y = heel_pivot
-    # heel.z = clamp(master_roll, 0, 180)
-
-
     # hook up generic attributes 
     cmds.connectAttr(rl_foot_ctl + '.heel_pivot', bone_copies['heel_rl_target'] + '.rotateZ')
     heel_roll_attr, heel_roll_nodes = comp.Clamp(rl_foot_ctl + '.master_roll', -90, 0).compile()
@@ -1027,14 +1027,9 @@ def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lo
     for node in heel_roll_nodes:
         add_node_to_rig_nodes(base_curve, rig_region_name, node)
 
-
     # hook up undividtal toes
     for toe in bone_copies['rl_target']: 
         if toe['reverse']:
-            toe_name = toe['chain'][0][0][0:-2]
-
-
-
             toe_end_attr, toe_end_nodes = comp.Clamp(
                                                 comp.Minus(
                                                     comp.Minus(
@@ -1086,30 +1081,32 @@ def create_foot_rig(base_curve, rig_region_name, ankle, ik_ankle_ctl, reverse_lo
             cmds.connectAttr(toe_base_attr, toe['chain'][3][1] + '.rotateX')
 
 
-
-
+            # clean up all the annoying nodes that just got created 
             for node in toe_end_nodes + toe_mid_1_nodes + toe_mid_2_nodes + toe_base_nodes:
                 add_node_to_rig_nodes(base_curve, rig_region_name, node)
 
 
-            # for i, joint in enumerate(toe['chain']):
-            #     joint_name = joint[1]
+    # constrain rl ankle to leg ankle
+    cmds.select(ankle, bone_copies['ankle_rl'], r=True)
+    cmds.parentConstraint(mo=True, weight=1)
 
-            #     # clamp joint 4
+    # create ik handles on bones
+    for i, toe in enumerate(bone_copies['rl']): 
+        if toe['reverse']:
+            if toe['primary']:
+                # add reverse lock ankle
+                cmds.select(bone_copies['ankle_rl'], toe['chain'][0][1], r=True)
+                ik_handle, ik_effector = cmds.ikHandle(sol='ikSCsolver')
+                add_node_to_rig_nodes(base_curve, rig_region_name, ik_handle)
+                cmds.select(bone_copies['ankle_rl_target'], ik_handle, r=True)
+                cmds.parentConstraint(mo=True, weight=1)
 
-            #     cmds.connectAttr(rl_foot_ctl + '.master_roll', joint_name + '.rotateX')
-
-
-
-
-        # 'toe_base_break',
-        # 'toe_mid_1_break',
-        # 'toe_mid_2_break',
-        # 'toe_end_break', 
-
-
-
-
+            for n in [0,1,2]:          
+                cmds.select(toe['chain'][n][1], toe['chain'][n + 1][1], r=True)
+                ik_handle, ik_effector = cmds.ikHandle(sol='ikSCsolver')
+                cmds.select(bone_copies['rl_target'][0]['chain'][3 - (n + 1)][1], ik_handle, r=True)
+                cmds.parentConstraint(mo=True, weight=1)
+                add_node_to_rig_nodes(base_curve, rig_region_name, ik_handle)
 
 
 def create_spine_rig(base_curve, rig_region_name, pelvis, cog, spine_1, spine_2, spine_3, spine_4, neck):
