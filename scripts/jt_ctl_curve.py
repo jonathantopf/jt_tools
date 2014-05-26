@@ -152,7 +152,7 @@ def create_shape(name, curve_key):
     return cmds.curve(n=name, degree=1, p=shapes[curve_key])
 
 
-def create(object=None, curve_name='circle', parent_ctl=True, xrot=False, yrot=False, zrot=False, xscale=False, yscale=False, zscale=False, xtrans=False, ytrans=False, ztrans=False, align=True, lock_unused=True):
+def create(object=None, curve_name='circle', parent_ctl=True, xrot=False, yrot=False, zrot=False, xscale=False, yscale=False, zscale=False, xtrans=False, ytrans=False, ztrans=False, align=True, lock_unused=True, color=None):
 
     if curve_name == None:
         curve_key = 'circle'
@@ -172,6 +172,10 @@ def create(object=None, curve_name='circle', parent_ctl=True, xrot=False, yrot=F
     cmds.xform(os=True, piv=[0,0,0])
 
     group_name = cmds.ls(sl=True)[0]
+
+    if color is not None:
+        cmds.setAttr(curve_name + '.overrideEnabled', 1)
+        cmds.setAttr(curve_name + '.overrideColor', color)
 
     if object is not None:
         bone_world_space_rotation_axis = cmds.xform(object, ws=True, ro=True, q=True)
