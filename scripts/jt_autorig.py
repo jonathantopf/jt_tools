@@ -1,6 +1,6 @@
 
 #
-# Copyright (c) 2013 Jonathan Topf
+# Copyright (c) 2014 Jonathan Topf
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -30,6 +30,12 @@ import inspect
 import ast
 
 reload(jt_ctl_curve)
+
+
+RED = 13
+GREEN = 14
+YELLOW = 17
+WHITE = 16
 
 #--------------------------------------------------------------------------------------------------
 # helper functions.
@@ -195,10 +201,10 @@ def create_joint_proxy(joint_name='locator'):
     y_arrow = jt_ctl_curve.create_shape(joint_name + '_y_arrow', 'arrow')
     z_arrow = jt_ctl_curve.create_shape(joint_name + '_z_arrow', 'arrow')
 
-    cmds.setAttr(x_arrow + '.overrideColor', 13)
+    cmds.setAttr(x_arrow + '.overrideColor', RED)
     cmds.rotate(0,0,-90, x_arrow, r=True, os=True)
 
-    cmds.setAttr(y_arrow + '.overrideColor', 14)
+    cmds.setAttr(y_arrow + '.overrideColor', GREEN)
 
     cmds.setAttr(z_arrow + '.overrideColor', 6)
     cmds.rotate(90,0,0, z_arrow, r=True, os=True)
@@ -339,24 +345,36 @@ def ui_create_leg_rig():
     r_prefix              = cmds.checkBox('jt_autorig_leg_rig_R', q=True, value=True)
     none_prefix           = cmds.checkBox('jt_autorig_leg_rig_none', q=True, value=True)
     override_region_check = cmds.checkBox('jt_autorig_leg_rig_override_region_check', q=True, value=True)
+    reverse_lock_heel     = cmds.textField('jt_autorig_feet_reverse_heel', q=True, tx=True)
 
     rig_region_name = override_region_name
+
+    toes = []
+
+    for letter in ['A', 'B', 'C', 'D', 'E', 'F', 'G']:
+        if cmds.checkBox('jt_autorig_feet_toe_{0}_enable'.format(letter), q=True, value=True):
+            toes.append([
+                cmds.textField('jt_autorig_feet_toe_{0}_base_name'.format(letter), q=True, tx=True),
+                cmds.checkBox('jt_autorig_feet_toe_{0}_reverse_lock_check'.format(letter), q=True, value=True),
+                cmds.radioButton('jt_autorig_feet_toe_{0}_primary_radio'.format(letter), q=True, sl=True)
+                ])
 
     if l_prefix:
         if not override_region_check:
             rig_region_name = 'L_leg'
-        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, 'L')
+        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, reverse_lock_heel, toes, 'L')
 
     if r_prefix:
         if not override_region_check:
             rig_region_name = 'R_leg'
-        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, 'R')
+        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, reverse_lock_heel, toes, 'R')
 
     if none_prefix:
         if not override_region_check:
             cmds.warning('set overide region name')
             return
-        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, 'R')
+        create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, reverse_lock_heel, toes, 'R')
+
 
 
 def ui_select_leg_rig_joint(text_field):
@@ -401,55 +419,6 @@ def ui_remove_leg_rig():
 
 
     cmds.select(cl=True)
-
-
-def ui_create_foot_rig():
-
-    base_curve        = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True)
-    l_prefix          = cmds.checkBox('jt_autorig_feet_rig_L', q=True, value=True)
-    r_prefix          = cmds.checkBox('jt_autorig_feet_rig_R', q=True, value=True)
-    arbitrary_prefix  = cmds.textField('jt_autorig_feet_rig_arbitrary', q=True, tx=True)
-    ankle             = cmds.textField('jt_autorig_feet_ankle', q=True, tx=True)
-    ik_ankle_ctl      = cmds.textField('jt_autorig_feet_ik_ankle_ctl', q=True, tx=True)
-    hip_ctl           = cmds.textField('jt_autorig_feet_hip_ctl', q=True, tx=True)
-    reverse_lock_heel = cmds.textField('jt_autorig_feet_reverse_heel', q=True, tx=True)
-
-    rig_region_name  = 'feet'
-
-    toes = []
-
-    for letter in ['A', 'B', 'C', 'D', 'E', 'F', 'G']:
-        if cmds.checkBox('jt_autorig_feet_toe_{0}_enable'.format(letter), q=True, value=True):
-            toes.append([
-                cmds.textField('jt_autorig_feet_toe_{0}_base_name'.format(letter), q=True, tx=True),
-                cmds.checkBox('jt_autorig_feet_toe_{0}_reverse_lock_check'.format(letter), q=True, value=True),
-                cmds.radioButton('jt_autorig_feet_toe_{0}_primary_radio'.format(letter), q=True, sl=True)
-                ])
-
-    prefixes = []
-    if l_prefix: prefixes.append('L')
-    if r_prefix: prefixes.append('R')
-    if arbitrary_prefix != "":
-        prefixes.append(arbitrary_prefix)
-    for prefix in prefixes:
-        create_foot_rig(base_curve, rig_region_name, ankle, hip_ctl, ik_ankle_ctl, reverse_lock_heel, toes, prefix)
-
-
-def ui_remove_foot_rig():
-    base_curve = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True)
-    l_prefix          = cmds.checkBox('jt_autorig_feet_rig_L', q=True, value=True)
-    r_prefix          = cmds.checkBox('jt_autorig_feet_rig_R', q=True, value=True)
-    arbitrary_prefix  = cmds.textField('jt_autorig_feet_rig_arbitrary', q=True, tx=True)
-
-    rig_region_name  = 'feet'
-
-    prefixes = []
-    if l_prefix: prefixes.append('L')
-    if r_prefix: prefixes.append('R')
-    if arbitrary_prefix != "":
-        prefixes.append(arbitrary_prefix)
-    for prefix in prefixes:
-        de_rig_element(base_curve, '{0}_{1}'.format(prefix, rig_region_name))
 
 
 def ui_create_spine_rig():
@@ -505,7 +474,7 @@ def create_skeleton_from_proxy():
 
 def create_base_rig(cog, rig_region_name):
     # create curve and scale it to the correct size
-    base_curve, base_curve_group = jt_ctl_curve.create(None, 'star_30')
+    base_curve, base_curve_group = jt_ctl_curve.create(None, 'star_30', color=GREEN)
     cmds.select(base_curve)
     cmds.setAttr(base_curve + '.scale', 5,5,5)
     cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
@@ -551,7 +520,7 @@ def create_arm_rig(base_curve, rig_region_name, clavicle, shoulder, elbow, forea
     hand     = change_prefix(hand, side)
 
     # add clavicle ctl
-    clavicle_curve, clavicle_curve_group = jt_ctl_curve.create(clavicle, 'semicircle', True, True, True, True)
+    clavicle_curve, clavicle_curve_group = jt_ctl_curve.create(clavicle, 'semicircle', True, True, True, True, color=YELLOW)
     cmds.select(clavicle_curve, r=True)
 
     if side == 'R':
@@ -566,12 +535,12 @@ def create_arm_rig(base_curve, rig_region_name, clavicle, shoulder, elbow, forea
     cmds.parent()
 
     # add ik fk switch handle
-    ik_fk_switch_curve, ik_fk_switch_curve_group = jt_ctl_curve.create(shoulder, 'paddle_2', True)
+    ik_fk_switch_curve, ik_fk_switch_curve_group = jt_ctl_curve.create(shoulder, 'paddle_2', True, color=WHITE)
     if side == 'R':
         cmds.select(ik_fk_switch_curve, r=True)
         cmds.scale(1,-1,1, r=True)
         cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
-    cmds.rotate(140, 0, 0, r=True, os=True)
+    cmds.rotate(0, 0, 45, r=True, os=True)
 
     # parent ik fk switch curve to arm group
     cmds.select(ik_fk_switch_curve_group, arm_group, r=True)
@@ -658,7 +627,7 @@ def create_arm_rig(base_curve, rig_region_name, clavicle, shoulder, elbow, forea
     cmds.parent()
 
     # create ik controlls
-    ik_hand_ctl, ik_hand_ctl_group = jt_ctl_curve.create(ik_wrist, 'diamond', False, align=True, lock_unused=False)
+    ik_hand_ctl, ik_hand_ctl_group = jt_ctl_curve.create(ik_wrist, 'diamond', False, align=True, lock_unused=False, color=RED)
     cmds.connectAttr(ik_fk_switch_curve + '.ik_visibility', ik_hand_ctl_group + '.visibility', force=True)
     cmds.select(ik_hand_ctl, ik_wrist, r=True)
     cmds.parentConstraint(mo=True, skipTranslate=('x','y','z'), weight=1)
@@ -671,7 +640,7 @@ def create_arm_rig(base_curve, rig_region_name, clavicle, shoulder, elbow, forea
     cmds.select(ik_hand_ctl, ik_handle, r=True)
     cmds.parentConstraint(mo=True, weight=1)
 
-    pole_vector_ctl, pole_vector_ctl_group = jt_ctl_curve.create(ik_elbow, 'cube', False, align=False, lock_unused=False)
+    pole_vector_ctl, pole_vector_ctl_group = jt_ctl_curve.create(ik_elbow, 'cube', False, align=False, lock_unused=False, color=RED)
     cmds.connectAttr(ik_fk_switch_curve + '.ik_visibility', pole_vector_ctl_group + '.visibility', f=True)
     cmds.select(pole_vector_ctl, ik_handle, r=True)
     cmds.poleVectorConstraint(weight=1)
@@ -688,7 +657,7 @@ def create_arm_rig(base_curve, rig_region_name, clavicle, shoulder, elbow, forea
 
     # add fk controll curves
     for item in ((fk_shoulder, 'circle'), (fk_elbow, 'circle'), (fk_wrist, 'circle')):
-        ctl_curve, ctl_group = jt_ctl_curve.create(item[0], item[1], True, True, True, True)
+        ctl_curve, ctl_group = jt_ctl_curve.create(item[0], item[1], True, True, True, True, color=YELLOW)
         cmds.connectAttr(ik_fk_switch_curve + '.fk_visibility', ctl_group + '.visibility', f=True)
 
         # add ik handle to arm group 
@@ -705,7 +674,7 @@ def create_arm_rig(base_curve, rig_region_name, clavicle, shoulder, elbow, forea
     add_node_to_rig_nodes(base_curve, rig_region_name, forearm_split_multiply_node)
 
 
-def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, prefix):
+def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, reverse_lock_heel, toes, prefix):
 
     rig_region_name = rig_region_name.replace('<prefix>', prefix)
 
@@ -722,9 +691,11 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, prefix
     hip                = hip.replace('<prefix>', prefix)
     knee               = knee.replace('<prefix>', prefix)
     ankle              = ankle.replace('<prefix>', prefix)
+    reverse_lock_heel  = reverse_lock_heel.replace('<prefix>', prefix)
+    toes               = [[toe[0].replace('<prefix>', prefix), toe[1], toe[2]] for toe in toes]
 
     # add ik/fk switch handle
-    ik_fk_switch_curve, ik_fk_switch_group = jt_ctl_curve.create(hip, 'paddle_3', True)
+    ik_fk_switch_curve, ik_fk_switch_group = jt_ctl_curve.create(hip, 'paddle_3', True, color=WHITE)
     cmds.select(ik_fk_switch_curve)
     cmds.rotate(90,0,90, os=True)
     if prefix == 'R':
@@ -785,20 +756,23 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, prefix
     # connect up blending to attrs in handle
     hip_blend = create_blend(ik_hip + '.rotate', fk_hip + '.rotate', hip + '.rotate', ik_fk_switch_curve + '.ik_fk_blend')
     knee_blend = create_blend(ik_knee + '.rotate', fk_knee + '.rotate', knee + '.rotate', ik_fk_switch_curve + '.ik_fk_blend')
-    ankle_blend = create_blend(ik_ankle + '.rotate', fk_ankle + '.rotate', ankle + '.rotate', ik_fk_switch_curve + '.ik_fk_blend')
+    # ankle_blend = create_blend(ik_ankle + '.rotate', fk_ankle + '.rotate', ankle + '.rotate', ik_fk_switch_curve + '.ik_fk_blend')
 
     # add blend nodes to base curve rig nodes attr
-    add_node_to_rig_nodes(base_curve, rig_region_name, (hip_blend, knee_blend, ankle_blend))
+    add_node_to_rig_nodes(base_curve, rig_region_name, (hip_blend, knee_blend))
 
-    # create ik ankle ctl curve
-    ik_ankle_curve, ik_ankle_curve_group = jt_ctl_curve.create(ik_ankle, 'diamond', False, lock_unused=False)
-    cmds.setAttr(ik_ankle_curve + '.scale', 0.5, 0.5, 0.5)
-    cmds.makeIdentity(ik_ankle_curve, apply=True, t=0, r=1, s=1, n=0)
-    cmds.connectAttr(ik_fk_switch_curve + '.ik_visibility', ik_ankle_curve_group + '.visibility', f=True)
+    # create reverse lock foot control
+    rl_foot_ctl, rl_leg_group = jt_ctl_curve.create(reverse_lock_heel, 'square', lock_unused=False, color=RED)
+    #connect ik visibility to ctl
+    cmds.connectAttr(ik_fk_switch_curve + '.ik_visibility', rl_foot_ctl + '.visibility')
 
+    # move the foot controll to a more sensible place
+    cmds.setAttr(rl_foot_ctl + '.rotateX', 90)
+    cmds.setAttr(rl_foot_ctl + '.scaleZ', 1.5)
+    cmds.select(rl_foot_ctl, r=True)
+    cmds.makeIdentity(apply=True, t=1, r=1, s=1, n=0)
 
-    # parent ik ik_ankle ctl to leg group
-    cmds.select(ik_ankle_curve_group, leg_group, r=True)
+    cmds.select(rl_leg_group, leg_group, r=True)
     cmds.parent()
 
     # create ik handles for leg
@@ -810,13 +784,8 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, prefix
     cmds.select(hip_ankle_ik_handle, leg_group, r=True)
     cmds.parent()
 
-    # constrain ik ankle to ankle ctl
-    cmds.select(ik_ankle_curve, hip_ankle_ik_handle)
-    cmds.parentConstraint(mo=True, weight=1)
-    cmds.scaleConstraint(mo=True, weight=1)
-
     # create pole vecotor ctl
-    pole_vector_curve, pole_vector_curve_group = jt_ctl_curve.create(ik_knee, 'cube', False, lock_unused=False)
+    pole_vector_curve, pole_vector_curve_group = jt_ctl_curve.create(ik_knee, 'cube', False, lock_unused=False, color=RED)
     cmds.select(pole_vector_curve, r=True)
     cmds.setAttr(pole_vector_curve + '.scale', 0.2, 0.2, 0.2)
     cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
@@ -830,14 +799,14 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, prefix
 
     # add fk controll curves
     for item in ((fk_hip, 'circle'), (fk_knee, 'circle')):
-        ctl_curve, ctl_curve_group = jt_ctl_curve.create(item[0], item[1], True, True, True, True)
+        ctl_curve, ctl_curve_group = jt_ctl_curve.create(item[0], item[1], True, True, True, True, color=YELLOW)
         cmds.connectAttr(ik_fk_switch_curve + '.fk_visibility', ctl_curve_group + '.visibility', f=True)
 
         # parent ctl_curve_group to leg group
         cmds.select(ctl_curve_group, leg_group, r=True)
         cmds.parent()
 
-    fk_ankle_curve, fk_ankle_curve_group = jt_ctl_curve.create(fk_ankle, 'circle', True, True, True, True)
+    fk_ankle_curve, fk_ankle_curve_group = jt_ctl_curve.create(fk_ankle, 'circle', True, True, True, True, color=YELLOW)
     cmds.connectAttr(ik_fk_switch_curve + '.fk_visibility', fk_ankle_curve_group + '.visibility', f=True)   
     cmds.select(fk_ankle_curve, r=True)
     cmds.setAttr(fk_ankle_curve + '.rotate', 50, 0, 0)
@@ -847,34 +816,7 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, prefix
     cmds.select(fk_ankle_curve_group, leg_group, r=True)
     cmds.parent()
 
-
-
-
-
-
-
-def create_foot_rig(base_curve, rig_region_name, ankle, hip_ctl, ik_ankle_ctl, reverse_lock_heel, toes, prefix):
-
-    rig_region_name = prefix + '_' + rig_region_name
-
-    # create group to contain all rigging nodes
-    cmds.select(cl=True)
-    foot_group = cmds.group(em=True, n=rig_region_name + '_group')
-    cmds.select(foot_group, base_curve, r=True)
-    cmds.parent()
-
-    # add the leg group node to the base curve rig nodes attr
-    add_node_to_rig_nodes(base_curve, rig_region_name, foot_group)
-
-    ankle                = ankle.replace('<prefix>', prefix)
-    ik_ankle_ctl         = ik_ankle_ctl.replace('<prefix>', prefix)
-    hip_ctl              = hip_ctl.replace('<prefix>', prefix)
-    reverse_lock_heel    = reverse_lock_heel.replace('<prefix>', prefix)
-    toes                 = [[toe[0].replace('<prefix>', prefix), toe[1], toe[2]] for toe in toes]
-
-    if not cmds.objExists(hip_ctl):
-        cmds.error('{0} does not esist, you must have a valid leg rig present to rig a foot...'.format(hip_ctl))
-        return
+    # Feet ------------------------------------------------------------------------------------------------
 
     # create dict of orphan bones
     bone_copies = {}
@@ -897,21 +839,19 @@ def create_foot_rig(base_curve, rig_region_name, ankle, hip_ctl, ik_ankle_ctl, r
 
     # rebuild 2 sets of fk bones
     # these are the bones that will later be blended 
-    for section_name in ['fk', 'rl']:
-        # create duplicate ankle joint
-        ankle_copy = duplicate_joint_without_children(ankle, '_{0}'.format(section_name))
-        # cmds.connectAttr(hip_ctl + '.bone_visibility', ankle_copy + '.visibility')
-        # add ankle to dict
-        bone_copies['ankle_{0}'.format(section_name)] = ankle_copy
-        # parent heirarchy to foot group
-        cmds.select(ankle_copy, foot_group, r=True)
-        cmds.parent()
-        for toe_chain in bone_copies[section_name]:
-            parent_bone = ankle_copy
-            for bone in toe_chain['chain']:
-                cmds.select(bone[1], parent_bone, r=True)
-                cmds.parent()
-                parent_bone = bone[1]
+    for toe_chain in bone_copies['rl']:
+        parent_bone = ik_ankle
+        for bone in toe_chain['chain']:
+            cmds.select(bone[1], parent_bone, r=True)
+            cmds.parent()
+            parent_bone = bone[1]
+
+    for toe_chain in bone_copies['fk']:
+        parent_bone = fk_ankle
+        for bone in toe_chain['chain']:
+            cmds.select(bone[1], parent_bone, r=True)
+            cmds.parent()
+            parent_bone = bone[1]
 
 
     # rebuild reverse lock target bones
@@ -923,12 +863,7 @@ def create_foot_rig(base_curve, rig_region_name, ankle, hip_ctl, ik_ankle_ctl, r
     bone_copies['heel_rl_target'] = target_heel_copy
     bone_copies['primary_toe_rl_target'] = None
 
-    # cmds.connectAttr(hip_ctl + '.bone_visibility', bone_copies['heel_rl_target'] + '.visibility')
-
-    # and constrain the ik handle to the ankle
-    cmds.select(bone_copies['ankle_rl_target'], ik_ankle_ctl, r=True)
-    cmds.parentConstraint(mo=True, weight=1)
-    cmds.scaleConstraint(mo=True, weight=1)
+    cmds.connectAttr(ik_fk_switch_curve + '.bone_visibility', bone_copies['heel_rl_target'] + '.visibility')
 
     for toe_chain in bone_copies[section_name]:
         if toe_chain['reverse']:
@@ -945,24 +880,10 @@ def create_foot_rig(base_curve, rig_region_name, ankle, hip_ctl, ik_ankle_ctl, r
                 cmds.select(target_ankle_copy, parent_bone, r=True)
                 cmds.parent()
 
-    # create reverse lock foot control
-    rl_foot_ctl, rl_foot_group = jt_ctl_curve.create(bone_copies['heel_rl_target'], 'square', lock_unused=False)
-    #connect ik visibility to ctl
-    cmds.connectAttr(hip_ctl + '.ik_visibility', rl_foot_ctl + '.visibility')
-
-    # move the foot controll to a more sensible place
-    cmds.setAttr(rl_foot_ctl + '.rotateX', 90)
-    cmds.setAttr(rl_foot_ctl + '.scaleZ', 1.5)
-    cmds.select(rl_foot_ctl, r=True)
-    cmds.makeIdentity(apply=True, t=1, r=1, s=1, n=0)
-
-    # parent everything to foot ctl
-    cmds.select(rl_foot_group, foot_group, r=True)
-    cmds.parent()
     # put reverse foot ctl under a group to allow for rotation
     cmds.select(bone_copies['heel_rl_target'], r=True)
     reverse_lock_group = cmds.group()
-    cmds.select(reverse_lock_group, foot_group, r=True)
+    cmds.select(reverse_lock_group, leg_group, r=True)
     cmds.parent()
     # parent rl foot ctl group to foot group
     cmds.select(rl_foot_ctl, reverse_lock_group, r=True)
@@ -1043,7 +964,6 @@ def create_foot_rig(base_curve, rig_region_name, ankle, hip_ctl, ik_ankle_ctl, r
 
             cmds.connectAttr(toe_end_attr, toe['chain'][0][1] + '.rotateX')
 
-
             toe_mid_1_attr, toe_mid_1_nodes = comp.Clamp(
                                                     comp.Minus(
                                                         comp.Minus(
@@ -1055,7 +975,6 @@ def create_foot_rig(base_curve, rig_region_name, ankle, hip_ctl, ik_ankle_ctl, r
 
             cmds.connectAttr(toe_mid_1_attr, toe['chain'][1][1] + '.rotateX')
 
-
             toe_mid_2_attr, toe_mid_2_nodes = comp.Clamp(
                                                     comp.Minus(
                                                         rl_foot_ctl + '.master_roll', 
@@ -1064,7 +983,6 @@ def create_foot_rig(base_curve, rig_region_name, ankle, hip_ctl, ik_ankle_ctl, r
                                                     rl_foot_ctl + '.toe_mid_2_break').compile()
 
             cmds.connectAttr(toe_mid_2_attr, toe['chain'][2][1] + '.rotateX')
-
 
             toe_base_attr, toe_base_nodes = comp.Minus(
                                                     comp.Clamp( 
@@ -1080,26 +998,29 @@ def create_foot_rig(base_curve, rig_region_name, ankle, hip_ctl, ik_ankle_ctl, r
 
             cmds.connectAttr(toe_base_attr, toe['chain'][3][1] + '.rotateX')
 
-
             # clean up all the annoying nodes that just got created 
             for node in toe_end_nodes + toe_mid_1_nodes + toe_mid_2_nodes + toe_base_nodes:
                 add_node_to_rig_nodes(base_curve, rig_region_name, node)
 
 
-    # constrain rl ankle to leg ankle
-    cmds.select(ankle, bone_copies['ankle_rl'], r=True)
+    # constrain ankle ik to reverse foot ik handle
+    cmds.select(bone_copies['ankle_rl_target'], hip_ankle_ik_handle)
     cmds.parentConstraint(mo=True, weight=1)
+    cmds.scaleConstraint(mo=True, weight=1)
 
     # create ik handles on bones
     for i, toe in enumerate(bone_copies['rl']): 
         if toe['reverse']:
             if toe['primary']:
                 # add reverse lock ankle
-                cmds.select(bone_copies['ankle_rl'], toe['chain'][0][1], r=True)
+                cmds.select(ik_ankle, toe['chain'][0][1], r=True)
                 ik_handle, ik_effector = cmds.ikHandle(sol='ikSCsolver')
                 add_node_to_rig_nodes(base_curve, rig_region_name, ik_handle)
                 cmds.select(bone_copies['ankle_rl_target'], ik_handle, r=True)
                 cmds.parentConstraint(mo=True, weight=1)
+                cmds.select(ik_handle, leg_group, r=True)
+                cmds.parent()
+                cmds.connectAttr(ik_fk_switch_curve + '.bone_visibility', ik_handle + '.visibility')
 
             for n in [0,1,2]:          
                 cmds.select(toe['chain'][n][1], toe['chain'][n + 1][1], r=True)
@@ -1107,6 +1028,37 @@ def create_foot_rig(base_curve, rig_region_name, ankle, hip_ctl, ik_ankle_ctl, r
                 cmds.select(bone_copies['rl_target'][0]['chain'][3 - (n + 1)][1], ik_handle, r=True)
                 cmds.parentConstraint(mo=True, weight=1)
                 add_node_to_rig_nodes(base_curve, rig_region_name, ik_handle)
+                cmds.select(ik_handle, leg_group, r=True)
+                cmds.parent()
+                cmds.connectAttr(ik_fk_switch_curve + '.bone_visibility', ik_handle + '.visibility')
+
+    # create fk foot controls
+    for toe in bone_copies['fk']:
+        for joint in toe['chain']:
+            curve, group = jt_ctl_curve.create(joint[1], 'circle', True, True, True, True, color=YELLOW)
+            cmds.select(curve, r=True)
+            cmds.setAttr(curve + '.scale', .17, .17, .17)
+            cmds.makeIdentity(apply=True, t=0, r=0, s=1, n=0)
+            cmds.select(group, leg_group, r=True)
+            cmds.parent()
+            cmds.connectAttr(ik_fk_switch_curve + '.fk_visibility', curve + '.visibility')
+
+    # setup blend
+    blend_node = create_blend(
+                        ik_ankle + '.rotate', 
+                        fk_ankle + '.rotate', 
+                        ankle + '.rotate', 
+                        ik_fk_switch_curve + '.ik_fk_blend')
+    add_node_to_rig_nodes(base_curve, rig_region_name, blend_node)
+
+    for i, toe in enumerate(bone_copies['fk']):
+        for n, joint in enumerate(toe['chain']):
+            blend_node = create_blend(
+                                bone_copies['rl'][i]['chain'][n][1] + '.rotate', 
+                                joint[1] + '.rotate', 
+                                joint[0] + '.rotate', 
+                                ik_fk_switch_curve + '.ik_fk_blend')
+            add_node_to_rig_nodes(base_curve, rig_region_name, blend_node)
 
 
 def create_spine_rig(base_curve, rig_region_name, pelvis, cog, spine_1, spine_2, spine_3, spine_4, neck):
@@ -1120,7 +1072,7 @@ def create_spine_rig(base_curve, rig_region_name, pelvis, cog, spine_1, spine_2,
     # add the arm group node to the base curve rig nodes attr
     add_node_to_rig_nodes(base_curve, rig_region_name, spine_group)
 
-    cog_curve, cog_curve_group = jt_ctl_curve.create(cog, 'star_5', lock_unused=False)
+    cog_curve, cog_curve_group = jt_ctl_curve.create(cog, 'star_5', lock_unused=False, color=GREEN)
     cmds.setAttr(cog_curve + '.scale', 3,3,3)
     cmds.select(cog_curve, r=True)
     cmds.makeIdentity(apply=True, t=0, r=0, s=1, n=0)
@@ -1132,12 +1084,12 @@ def create_spine_rig(base_curve, rig_region_name, pelvis, cog, spine_1, spine_2,
     cmds.select(cog_curve_group, base_curve, r=True)
     cmds.parent()
 
-    pelvis_curve, pelvis_curve_group = jt_ctl_curve.create(pelvis, 'waist', True, True, True, True)
-    spine_1_curve, spine_1_curve_group = jt_ctl_curve.create(spine_1, 'circle', True, True, True, True)
-    spine_2_curve, spine_2_curve_group = jt_ctl_curve.create(spine_2, 'circle', True, True, True, True)
-    spine_3_curve, spine_3_curve_group = jt_ctl_curve.create(spine_3, 'circle', True, True, True, True)
-    spine_4_curve, spine_4_curve_group = jt_ctl_curve.create(spine_4, 'circle', True, True, True, True)
-    neck_curve, neck_curve_group = jt_ctl_curve.create(neck, 'circle', True, True, True, True)
+    pelvis_curve, pelvis_curve_group = jt_ctl_curve.create(pelvis, 'waist', True, True, True, True, color=YELLOW)
+    spine_1_curve, spine_1_curve_group = jt_ctl_curve.create(spine_1, 'circle', True, True, True, True, color=YELLOW)
+    spine_2_curve, spine_2_curve_group = jt_ctl_curve.create(spine_2, 'circle', True, True, True, True, color=YELLOW)
+    spine_3_curve, spine_3_curve_group = jt_ctl_curve.create(spine_3, 'circle', True, True, True, True, color=YELLOW)
+    spine_4_curve, spine_4_curve_group = jt_ctl_curve.create(spine_4, 'circle', True, True, True, True, color=YELLOW)
+    neck_curve, neck_curve_group = jt_ctl_curve.create(neck, 'circle', True, True, True, True, color=YELLOW)
 
     # parent fk controlls to spine group
     cmds.select(cog_curve_group, pelvis_curve_group, spine_1_curve_group, spine_2_curve_group, spine_3_curve_group, spine_4_curve_group, neck_curve_group, spine_group, r=True)
@@ -1155,7 +1107,7 @@ def create_head_rig(base_curve, rig_region_name, head):
     # add the arm group node to the base curve rig nodes attr
     add_node_to_rig_nodes(base_curve, rig_region_name, head_group)
 
-    head_curve, head_curve_group = jt_ctl_curve.create(head, 'circle', True, True, True, True)  
+    head_curve, head_curve_group = jt_ctl_curve.create(head, 'circle', True, True, True, True, color=YELLOW)  
     cmds.select(head_curve, r=True)
     cmds.setAttr(head_curve + '.scale', 1,1,1)
     cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
@@ -1266,9 +1218,9 @@ def create_hand_rig(base_curve, rig_region_name, hand, ring_cup, pinky_cup, thum
     pinky_base  = change_prefix(pinky_base, side)
 
     # create hand control curve
-    hand_curve, hand_curve_group = jt_ctl_curve.create(hand, 'paddle', True)
+    hand_curve, hand_curve_group = jt_ctl_curve.create(hand, 'paddle', True, color=WHITE)
     cmds.select(hand_curve)
-    cmds.setAttr(hand_curve + '.rotate', -90,0,0)
+    cmds.setAttr(hand_curve + '.rotate', 0,0,45)
     cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
     if side == 'R':
         cmds.setAttr(hand_curve + '.scale', 1,1,-1)
