@@ -222,6 +222,11 @@ def create_joint_proxy(joint_name='locator'):
     return root_curve
 
 
+def lock_transformations(object):
+    for attr in ['.t', '.s', '.r']:
+        cmds.setAttr(object + attr, lock=True)
+
+
 #--------------------------------------------------------------------------------------------------
 # ui functions.
 #--------------------------------------------------------------------------------------------------
@@ -552,12 +557,13 @@ def create_arm_rig(base_curve, rig_region_name, clavicle, shoulder, elbow, forea
     cmds.parent()
 
     # add ik fk switch handle
-    ik_fk_switch_curve, ik_fk_switch_curve_group = jt_ctl_curve.create(shoulder, 'paddle_2', True, color=WHITE)
+    ik_fk_switch_curve, ik_fk_switch_curve_group = jt_ctl_curve.create(shoulder, 'paddle_2', True, lock_unused=True, color=WHITE)
     if side == 'R':
-        cmds.select(ik_fk_switch_curve, r=True)
-        cmds.scale(1,-1,1, r=True)
-        cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
-    cmds.rotate(0, 0, 45, r=True, os=True)
+        cmds.rotate(0, 0, 180, r=True, os=True)
+
+    lock_transformations(ik_fk_switch_curve)
+
+
 
     # parent ik fk switch curve to arm group
     cmds.select(ik_fk_switch_curve_group, arm_group, r=True)
@@ -718,6 +724,9 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, revers
     if prefix == 'R':
         cmds.scale(1,1,-1, r=True)
     cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
+
+    lock_transformations(ik_fk_switch_curve)
+
 
     # parent ik_fk_switch_group to leg group
     cmds.select(ik_fk_switch_group, leg_group, r=True)
@@ -1237,11 +1246,14 @@ def create_hand_rig(base_curve, rig_region_name, hand, ring_cup, pinky_cup, thum
     # create hand control curve
     hand_curve, hand_curve_group = jt_ctl_curve.create(hand, 'paddle', True, color=WHITE)
     cmds.select(hand_curve)
-    cmds.setAttr(hand_curve + '.rotate', 0,0,45)
+    cmds.setAttr(hand_curve + '.rotate', 0,0,90)
     cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
     if side == 'R':
-        cmds.setAttr(hand_curve + '.scale', 1,1,-1)
+        cmds.setAttr(hand_curve + '.r', 0,0,180)
         cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
+
+    lock_transformations(hand_curve)
+
 
     # parent hand control group to hand group
     cmds.select(hand_curve_group, hand_group, r=True)
@@ -1330,6 +1342,9 @@ def create_tail_rig(base_curve, rig_region_name, tail_root, pelvis):
     cmds.select(ik_fk_switch_curve)
 
     cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
+
+    lock_transformations(ik_fk_switch_curve)
+
 
     # parent ik_fk_switch_group to leg group
     cmds.select(ik_fk_switch_group, tail_group, r=True)
@@ -1429,9 +1444,13 @@ def create_tail_rig(base_curve, rig_region_name, tail_root, pelvis):
         ctl_curve, ctl_group = jt_ctl_curve.create(cluster_handle, 'cube', color=RED)
 
         cmds.connectAttr(ik_fk_switch_curve + '.ik_visibility', ctl_curve + '.visibility')
+        cmds.connectAttr(ik_fk_switch_curve + '.ik_visibility', cluster_handle + '.visibility')
 
         # parent curves to tail_group
         cmds.select(ctl_group, tail_group, r=True)
+        cmds.parent()
+
+        cmds.select(cluster_handle, tail_group)
         cmds.parent()
 
         cmds.setAttr(ctl_group + '.translate', translate[0], translate[1], translate[2])
