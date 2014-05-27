@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>860</width>
-    <height>797</height>
+    <height>950</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,7 +43,7 @@
     <item row="3" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>5</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -210,6 +210,13 @@
          <widget class="Line" name="line_24">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_94">
+          <property name="text">
+           <string>THIS SECTION DOES NOT CURRENTLY WORK!</string>
           </property>
          </widget>
         </item>
@@ -1553,6 +1560,102 @@
             </property>
             <property name="+c" stdset="0">
              <string>'import jt_autorig;jt_autorig.ui_create_leg_rig()'</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Tail">
+       <attribute name="title">
+        <string>Tail</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_13">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_18">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_93">
+            <property name="text">
+             <string>Tail root</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="jt_autorig_tail_tail_root">
+            <property name="text">
+             <string>tail_01</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_98">
+            <property name="text">
+             <string>Tail root</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="jt_autorig_tail_pelvis">
+            <property name="text">
+             <string>pelvis</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_30">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_15">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_25">
+          <item>
+           <spacer name="horizontalSpacer_26">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_38">
+            <property name="text">
+             <string>remove</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_remove_tail_rig()'</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_39">
+            <property name="text">
+             <string>create</string>
+            </property>
+            <property name="+c" stdset="0">
+             <string>'import jt_autorig;jt_autorig.ui_create_tail_rig()'</string>
             </property>
            </widget>
           </item>

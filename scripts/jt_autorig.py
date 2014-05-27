@@ -445,8 +445,8 @@ def ui_remove_spine_rig():
 
 def ui_create_head_rig():
 
-    base_curve = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True) 
-    head    = cmds.textField('jt_autorig_head_head_select_text', q=True, tx=True)
+    base_curve      = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True) 
+    head            = cmds.textField('jt_autorig_head_head_select_text', q=True, tx=True)
 
     rig_region_name = 'head'
 
@@ -456,8 +456,25 @@ def ui_create_head_rig():
 def ui_remove_head_rig():
 
     base_curve = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True) 
-    head    = cmds.textField('jt_autorig_head_head_select_text', q=True, tx=True)
+    head       = cmds.textField('jt_autorig_head_head_select_text', q=True, tx=True)
     de_rig_element(base_curve, 'head', head)
+
+
+def ui_create_tail_rig():
+    base_curve = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True) 
+    tail_root  = cmds.textField('jt_autorig_tail_tail_root', q=True, tx=True)   
+    pelvis     = cmds.textField('jt_autorig_tail_pelvis', q=True, tx=True) 
+
+    rig_region_name = 'tail'
+
+    create_tail_rig(base_curve, rig_region_name, tail_root, pelvis)
+
+
+def ui_remove_tail_rig():
+    base_curve = cmds.textField('jt_autorig_base_name_select_text', q=True, tx=True) 
+    tail_root  = cmds.textField('jt_autorig_tail_tail_root', q=True, tx=True) 
+
+    de_rig_element(base_curve, 'tail', tail_root)
 
 
 #--------------------------------------------------------------------------------------------------
@@ -923,15 +940,15 @@ def create_leg_rig(base_curve, rig_region_name, pelvis, hip, knee, ankle, revers
     cmds.setAttr(rl_foot_ctl + '.toe_base_springback', 20)
 
     # add per toe attrs
-    for toe in bone_copies['rl_target']: 
-        if toe['reverse']:
-            toe_name = toe['chain'][0][0][0:-2]
-            add_label_attr(rl_foot_ctl, toe_name)
-            for attr in per_toe_attrs:
-                add_keyable_attr(rl_foot_ctl, '{0}_{1}'.format(attr, toe_name), type='float')
-                # initialise roll mult to 1
-                if attr == 'roll_mult':
-                    cmds.setAttr('{0}.{1}_{2}'.format(rl_foot_ctl, attr, toe_name), 1)
+    # for toe in bone_copies['rl_target']: 
+    #     if toe['reverse']:
+    #         toe_name = toe['chain'][0][0][0:-2]
+    #         add_label_attr(rl_foot_ctl, toe_name)
+    #         for attr in per_toe_attrs:
+    #             add_keyable_attr(rl_foot_ctl, '{0}_{1}'.format(attr, toe_name), type='float')
+    #             # initialise roll mult to 1
+    #             if attr == 'roll_mult':
+    #                 cmds.setAttr('{0}.{1}_{2}'.format(rl_foot_ctl, attr, toe_name), 1)
 
     #                             * Ankle
     #                            /
@@ -1296,4 +1313,96 @@ def create_hand_rig(base_curve, rig_region_name, hand, ring_cup, pinky_cup, thum
         cmds.connectAttr(hand_curve + '.' + top_attr,    finger_rig_list[i] + '.top')
         cmds.connectAttr(hand_curve + '.' + mid_attr,    finger_rig_list[i] + '.mid')
         cmds.connectAttr(hand_curve + '.' + end_attr,    finger_rig_list[i] + '.end')
+
+
+def create_tail_rig(base_curve, rig_region_name, tail_root, pelvis):
+    # create group to contain all rigging nodes
+    cmds.select(cl=True)
+    tail_group = cmds.group(em=True, n=rig_region_name + '_group')
+    cmds.select(tail_group, base_curve, r=True)
+    cmds.parent()
+
+    # add the arm group node to the base curve rig nodes attr
+    add_node_to_rig_nodes(base_curve, rig_region_name, tail_group)
+
+    # add ik/fk switch handle
+    ik_fk_switch_curve, ik_fk_switch_group = jt_ctl_curve.create(tail_root, 'paddle_3', True, color=WHITE)
+    cmds.select(ik_fk_switch_curve)
+    cmds.rotate(180,0,0, os=True)
+    cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
+
+    # parent ik_fk_switch_group to leg group
+    cmds.select(ik_fk_switch_group, tail_group, r=True)
+    cmds.parent()
+
+    add_keyable_attr(ik_fk_switch_curve, 'ik_fk_blend')
+    add_keyable_attr(ik_fk_switch_curve, 'ik_visibility', 'bool')
+    cmds.setAttr(ik_fk_switch_curve + '.ik_visibility', 1)
+    add_keyable_attr(ik_fk_switch_curve, 'fk_visibility', 'bool')
+    add_keyable_attr(ik_fk_switch_curve, 'bone_visibility', 'bool')
+
+    bone_names = ['01','02','03','04','05','06','07','08','09','end']
+    bone_names = ['tail_' + i for i in bone_names]
+
+    # duplicate joints for ik
+    ik_bones = []
+    for bone in bone_names:
+        ik_bones.append(duplicate_joint_without_children(bone, '_ik'))
+
+    # duplicate joints for fk
+    fk_bones = []
+    for bone in bone_names:
+        fk_bones.append(duplicate_joint_without_children(bone, '_fk'))
+
+    # rebuild ik bones
+    reverse_ik_list = list(reversed(ik_bones))
+    ik_parent = reverse_ik_list[0]
+    for bone in reverse_ik_list[1:]:
+        print ik_parent, bone
+        cmds.select(ik_parent, bone, r=True)
+        cmds.parent()
+        ik_parent = bone
+
+    # rebuild fk bones
+    reverse_fk_list = list(reversed(fk_bones))
+    fk_parent = reverse_fk_list[0]
+    for bone in reverse_fk_list[1:]:
+        cmds.select(fk_parent, bone, r=True)
+        cmds.parent()
+        fk_parent = bone
+
+    # parent constrain ik and fk bones to skeleton
+    cmds.select(ik_bones[0], r=True)
+    ik_tail_group = cmds.group(n=rig_region_name + '_ik_tail_bones')
+    cmds.select(pelvis, ik_tail_group, r=True)
+    cmds.parentConstraint(mo=True, weight=1)
+    cmds.scaleConstraint(mo=True, weight=1)
+    cmds.connectAttr(ik_fk_switch_curve + '.bone_visibility', ik_tail_group + '.visibility', f=True)
+
+    cmds.select(fk_bones[0], r=True)
+    fk_tail_group = cmds.group(n=rig_region_name + '_fk_tail_bones')
+    cmds.select(pelvis, fk_tail_group, r=True)
+    cmds.parentConstraint(mo=True, weight=1)
+    cmds.scaleConstraint(mo=True, weight=1)
+    cmds.connectAttr(ik_fk_switch_curve + '.bone_visibility', fk_tail_group + '.visibility', f=True)
+
+    # parent ik_tail_group and fk_tail_group to leg group
+    cmds.select([ik_tail_group, fk_tail_group], tail_group, r=True)
+    cmds.parent()
+
+
+
+
+    for i, bone in enumerate(bone_names):
+        blend_node = create_blend(
+                            ik_bones[i] + '.rotate',
+                            fk_bones[i] + '.rotate',
+                            bone_names[i] + '.rotate',
+                            ik_fk_switch_curve + '.ik_fk_blend')
+
+        add_node_to_rig_nodes(base_curve, rig_region_name, blend_node)
+
+
+
+
 
