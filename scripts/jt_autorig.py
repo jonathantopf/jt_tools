@@ -1328,7 +1328,7 @@ def create_tail_rig(base_curve, rig_region_name, tail_root, pelvis):
     # add ik/fk switch handle
     ik_fk_switch_curve, ik_fk_switch_group = jt_ctl_curve.create(tail_root, 'paddle_3', True, color=WHITE)
     cmds.select(ik_fk_switch_curve)
-    cmds.rotate(180,0,0, os=True)
+
     cmds.makeIdentity(apply=True, t=0, r=1, s=1, n=0)
 
     # parent ik_fk_switch_group to leg group
@@ -1336,9 +1336,11 @@ def create_tail_rig(base_curve, rig_region_name, tail_root, pelvis):
     cmds.parent()
 
     add_keyable_attr(ik_fk_switch_curve, 'ik_fk_blend')
+    cmds.setAttr(ik_fk_switch_curve + '.ik_fk_blend', 1)
     add_keyable_attr(ik_fk_switch_curve, 'ik_visibility', 'bool')
-    cmds.setAttr(ik_fk_switch_curve + '.ik_visibility', 1)
+    cmds.setAttr(ik_fk_switch_curve + '.ik_visibility', 0)
     add_keyable_attr(ik_fk_switch_curve, 'fk_visibility', 'bool')
+    cmds.setAttr(ik_fk_switch_curve + '.fk_visibility', 1)
     add_keyable_attr(ik_fk_switch_curve, 'bone_visibility', 'bool')
 
     bone_names = ['01','02','03','04','05','06','07','08','09','end']
@@ -1390,9 +1392,6 @@ def create_tail_rig(base_curve, rig_region_name, tail_root, pelvis):
     cmds.select([ik_tail_group, fk_tail_group], tail_group, r=True)
     cmds.parent()
 
-
-
-
     for i, bone in enumerate(bone_names):
         blend_node = create_blend(
                             ik_bones[i] + '.rotate',
@@ -1402,7 +1401,43 @@ def create_tail_rig(base_curve, rig_region_name, tail_root, pelvis):
 
         add_node_to_rig_nodes(base_curve, rig_region_name, blend_node)
 
+    # create fk tail rig
+    for joint in fk_bones[:-1]:
+        curve, group = jt_ctl_curve.create(joint, 'circle', True, True, True, True, color=YELLOW)
+        cmds.select(curve, r=True)
+        cmds.setAttr(curve + '.scale', .6, .6, .6)
+        cmds.makeIdentity(apply=True, t=0, r=0, s=1, n=0)
+        cmds.select(group, tail_group, r=True)
+        cmds.parent()
+        cmds.connectAttr(ik_fk_switch_curve + '.fk_visibility', curve + '.visibility')
 
+    # create spline ik rig
+    cmds.select(ik_bones[0], ik_bones[-1], r=True)
+    handle_name, effector_name, curve_name = cmds.ikHandle(sol='ikSplineSolver')
+    curve_name = cmds.rebuildCurve(curve_name, rt=0, s=4)[0]
+
+    cmds.connectAttr(ik_fk_switch_curve + '.bone_visibility', handle_name + '.visibility')
+    cmds.connectAttr(ik_fk_switch_curve + '.bone_visibility', curve_name + '.visibility')
+
+
+    for cvs in ['.cv[0:1]', '.cv[2]', '.cv[3]', '.cv[4]', '.cv[5:6]']:
+        cmds.select(curve_name + cvs, r=True)
+        cluster_name, cluster_handle = cmds.cluster()
+        
+        # get cluster ws pos
+        translate = cmds.xform(q=True, rp=True)    
+        ctl_curve, ctl_group = jt_ctl_curve.create(cluster_handle, 'cube', color=RED)
+
+        cmds.connectAttr(ik_fk_switch_curve + '.ik_visibility', ctl_curve + '.visibility')
+
+        # parent curves to tail_group
+        cmds.select(ctl_group, tail_group, r=True)
+        cmds.parent()
+
+        cmds.setAttr(ctl_group + '.translate', translate[0], translate[1], translate[2])
+        cmds.select(ctl_curve, cluster_handle, r=True)
+        cmds.parentConstraint(mo=True, weight=1)
+        cmds.scaleConstraint(mo=True, weight=1)
 
 
 
