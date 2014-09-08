@@ -32,49 +32,49 @@ def install():
 
     maya_app_dir = mel.eval('getenv MAYA_APP_DIR')
     jt_tools_dir = cmds.fileDialog2(fm=2, okc='Select', cap='Select jt_tools directory')
-    
+
     if jt_tools_dir is not None:
-        
+
         jt_tools_dir = jt_tools_dir[0]
-        
+
         try:
             sys.path.append(os.path.join(jt_tools_dir, 'scripts'))
-            import ms_commands
+            import jt_tools
         except:
             print 'No valid jt_tools directory found.'
             return False
-        
-        
+
+
         modules_path = os.path.join(maya_app_dir, 'modules')
-        
+
         if not os.path.exists(modules_path):
             print '{0} does not exist, creating...'.format(modules_path)
             os.makedirs(modules_path)
-            
+
             if not os.path.exists(modules_path):
                 print 'Failed to create module directory.'
                 return False
-                    
+
         module_file_path = os.path.join(modules_path, 'jt_tools.module')
-        
+
         if os.path.exists(module_file_path):
             continue_return_value = cmds.confirmDialog(m='A jt_tools module file already exists from a previous instalation, would you like to overwrite it?', button=['yes','no'])
             if continue_return_value == 'no':
                 return False
-        
+
         try:
             module_file_contents = "+ jt_tools {0} {1} \n\nicons: graphics \nscripts: scripts".format('1.0', jt_tools_dir)
             file = open(module_file_path, 'w')
             file.write(module_file_contents)
             file.close()
-            
+
         except:
             print 'Error creating the jt_tools module file'
             return False
-                
+
     return True
 
-def install_jt_tools(): 
+def install_jt_tools():
 
     if not install():
         cmds.confirmDialog(m='jt_tools was not installed. See the script editor for details.', button=['ok'])

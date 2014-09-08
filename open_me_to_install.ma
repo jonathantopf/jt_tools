@@ -5,8 +5,6 @@
 requires maya "2011";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
-fileInfo "product" "Maya 2011";
-fileInfo "version" "2011 Hotfix 3 x64";
 fileInfo "cutIdentifier" "201007130017-777584";
 fileInfo "osv" "Mac OS X 10.7.4";
 
